@@ -4,6 +4,7 @@ package com.xwtiger.devrescollect.study.javaapi;
  * Created by Busap-112 on 2017/11/1.
  */
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,7 +64,4 @@ public class PatternStudy {
      * Possessive 一般针对精确的正则；eg:".{5}+f00"(精确了具体的数字)
      *
      */
-
-
-
 }

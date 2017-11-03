@@ -3,7 +3,16 @@ package com.xwtiger.devrescollect;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.xwtiger.devrescollect.study.javaapi.LogUtils;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  *
@@ -13,11 +22,11 @@ import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
 public class TestJava {
 
 
-    public static void main(String[] args){
-        testReg1(PatternStudy.REG_GRE);
-        testReg1(PatternStudy.REG_REL);
-        testReg1(PatternStudy.REG_POS);
 
+    public static void main(String[] args){
+//        testReg1(PatternStudy.REG_GRE);
+//        testReg1(PatternStudy.REG_REL);
+//        testReg1(PatternStudy.REG_POS);
     }
 
     public static void testReg1(String reg){
