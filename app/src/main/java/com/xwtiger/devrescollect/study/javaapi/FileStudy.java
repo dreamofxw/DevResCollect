@@ -9,14 +9,65 @@ import java.io.IOException;
 
 public class FileStudy {
 
-    public void main(String[] args){
+    public static void main(String[] args){
+        //deleteDirAndFile(new File("d:\\test20171201"));
+        //makeFile();
+        //printFilePath();
+        //getCurrentProjectDir();
+        test();
+    }
 
+    public static void test(){
+        File file = new File("");
+        try {
+            makeNewFile(file.getAbsolutePath(),"createFiletest22.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
+
+    public static void printFilePath(File filesrc){
+        if(filesrc == null){
+            return;
+        }
+        try {
+            LogUtils.printString("getPath","getPath",filesrc.getPath());
+            LogUtils.printString("getCanonicalPath","getCanonicalPath",filesrc.getCanonicalPath());
+            LogUtils.printString("getAbsolutePath","getAbsolutePath",filesrc.getAbsolutePath());
+            LogUtils.printString("getName","getName",filesrc.getName());
+            LogUtils.printString("getParent","getParent",filesrc.getParent());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void printFilePath(){
+        File filenew = makeFile();
+        try {
+            LogUtils.printString("getPath","getPath",filenew.getPath());
+            LogUtils.printString("getCanonicalPath","getCanonicalPath",filenew.getCanonicalPath());
+            LogUtils.printString("getAbsolutePath","getAbsolutePath",filenew.getAbsolutePath());
+            LogUtils.printString("getName","getName",filenew.getName());
+            LogUtils.printString("getParent","getParent",filenew.getParent());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 当前项目的目录
+     */
+    public static void getCurrentProjectDir(){
+        File file = new File("");
+        printFilePath(file);
+    }
+
     public static File makeFile(){
-        String path = "d:\\test20171201\\hahah\\张三\\";
-        String filename = "2574.txt";
+        String path = "d:\\test20171103\\hahah\\张三\\";
+        String filename = "1001.txt";
         return makeNewFile(path,filename);
     }
 

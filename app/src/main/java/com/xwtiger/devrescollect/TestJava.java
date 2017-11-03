@@ -34,7 +34,6 @@ public class TestJava {
         PatternStudy.regex3(reg,"123456f005f00");
         long enttime = System.currentTimeMillis() -startTime;
         System.out.println("reg = "+reg);
-        //System.out.println("regex = "+regex);
         System.out.println("enttime = "+enttime);
         System.out.println("------分割线--------");
     }
