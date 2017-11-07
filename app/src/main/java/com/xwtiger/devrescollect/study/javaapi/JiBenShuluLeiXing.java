@@ -1,6 +1,7 @@
 package com.xwtiger.devrescollect.study.javaapi;
 
 /**
+ * (一)
  * Created by Busap-112 on 2017/11/1.
  * java 基本数据类型
  * 第一类:逻辑型boolean
@@ -17,6 +18,13 @@ package com.xwtiger.devrescollect.study.javaapi;
  *float        4
  *double       8
  *long         8
+ *
+ *
+ * (二 )
+ * 在java 1.5的java.util.concurrent.atomic包下提供了一些原子操作类，
+ * 即对基本数据类型的 自增（加1操作），自减（减1操作）、以及加法操作（加一个数），
+ * 减法操作（减一个数）进行了封装，保证这些操作是原子性操作
+ *
  *
  */
 

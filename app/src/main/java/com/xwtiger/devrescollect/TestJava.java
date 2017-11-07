@@ -27,7 +27,15 @@ public class TestJava {
 //        testReg1(PatternStudy.REG_GRE);
 //        testReg1(PatternStudy.REG_REL);
 //        testReg1(PatternStudy.REG_POS);
+
+//        Thread[] allThreads = findAllThreads();
+//        for (int i=0;i<allThreads.length;i++){
+//
+//            System.out.println("threadName ="+allThreads[i].getName());
+//        }
+
     }
+
 
     public static void testReg1(String reg){
         long startTime = System.currentTimeMillis();
@@ -37,5 +45,8 @@ public class TestJava {
         System.out.println("enttime = "+enttime);
         System.out.println("------分割线--------");
     }
+
+
+
 
 }

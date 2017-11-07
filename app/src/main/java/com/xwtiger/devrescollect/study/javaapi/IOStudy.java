@@ -37,6 +37,9 @@ public class IOStudy {
 
     }
 
+
+
+
     public static void io_RandomAccessFile(){
         File filesrc = new File("local.properties");
         File file = new File("");
@@ -46,7 +49,7 @@ public class IOStudy {
             RandomAccessFile randomAccessFile_write = new RandomAccessFile(filedest,"rw");
             byte[] bytes = new byte[1024];
             int length;
-            if(-1 != (length =randomAccessFile_read.read(bytes,0,bytes.length))){
+            while(-1 != (length =randomAccessFile_read.read(bytes,0,bytes.length))){
                 randomAccessFile_write.write(bytes,0,length);
             }
             randomAccessFile_read.close();
