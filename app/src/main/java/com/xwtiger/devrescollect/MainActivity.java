@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_start:
-                AnmitorStudy.testAnmitor(textView);
+                AnmitorStudy.test2(textView);
                 break;
             case R.id.btn_reversal:
 

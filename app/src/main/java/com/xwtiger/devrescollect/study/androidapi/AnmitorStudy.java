@@ -3,9 +3,12 @@ package com.xwtiger.devrescollect.study.androidapi;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.transition.Transition;
 import android.util.Log;
+import android.util.Property;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -16,6 +19,7 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 
 /**
  * Created by Busap-112 on 2017/11/8.
@@ -51,6 +55,10 @@ import android.view.animation.LinearInterpolator;
  *
  *
  * setTranslationY();是添加了坐标位移但是控件本身的y坐标还是在原来的位置
+ *
+ *
+ * 下面这个网站可以设置自己的曲线函数，
+ * http://inloop.github.io/interpolator/
  */
 
 public class AnmitorStudy {
@@ -63,6 +71,45 @@ public class AnmitorStudy {
      * View.SCALE_Y.getName()
      *
      */
+
+    public static void test3(View target){
+
+//        ObjectAnimator.ofInt(target, new Property<View, Integer>("","x") {
+//            @Override
+//            public Integer get(View object) {
+//                return null;
+//            }
+//        },target.getX(),target.getX()+target.getWidth());
+
+
+
+    }
+
+
+    public static void test2(View target){
+
+        PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat("x", target.getX()+target.getWidth());
+        PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat("y", target.getY()+target.getHeight());
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(target, pvhX, pvhY);
+        objectAnimator.start();
+        Log.d("testobjectAnimator",objectAnimator.toString());
+    }
+
+
+
+    public static void test1(View target){
+        //myView.animate().x(50f).y(100f);
+        //target.animate().x(target.getX()+target.getWidth());
+        target.animate().x(target.getX()+target.getWidth()).scaleX(2.0f).alpha(1).setDuration(1000);
+    }
+
+
+    public static void testNoValue(View target){
+        ObjectAnimator animator = ObjectAnimator.ofFloat(target,View.X.getName(),target.getX()+target.getWidth());
+        animator.setInterpolator(new OvershootInterpolator());
+        animator.setDuration(1000);
+        animator.start();
+    }
 
     public static void test(){
         Log.d("testProperty","x ="+View.X.getName());
@@ -169,9 +216,7 @@ public class AnmitorStudy {
         //animatorSet.playSequentially(valueAnimator,valueAnimatory);
         animatorSet.playSequentially(valueAnimatory,valueAnimator);
         animatorSet.setInterpolator(new LinearInterpolator());
-
         animatorSet.start();
-
 
     }
 
