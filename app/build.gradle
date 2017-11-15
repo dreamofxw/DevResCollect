@@ -40,12 +40,11 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    //compile 'com.android.support:appcompat-v7:24.2.1'
     compile "com.android.support:recyclerview-v7:${android_need_version}"
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
-    //compile 'com.android.support:design:24.0.0'
+    compile 'com.android.support:design:25.3.1'
 
 
     /*

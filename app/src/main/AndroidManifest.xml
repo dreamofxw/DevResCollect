@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.xwtiger.devrescollect.study.androidapi.img.ImgActivity">
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.behavoir.BehaviorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
