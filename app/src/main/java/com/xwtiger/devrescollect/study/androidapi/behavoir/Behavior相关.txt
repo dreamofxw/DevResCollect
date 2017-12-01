@@ -1,0 +1,49 @@
+
+
+app:layout_scrollFlags
+1.scroll:值设为scroll的View会跟随滚动事件一起发生移动；
+ 所有想滚动出屏幕的view都需要设置这个flag，没有设置这个flag的view将被固定在屏幕顶部。
+2.enterAlways:值设为enterAlways的View,当ScrollView往下滚动时
+该View会直接往下滚动，而不用考虑ScrollView是否在滚动；
+3.exitUntilCollapsed:值设为exitUntilCollapsed的View，
+当这个View要往上逐渐“消逝”时，会一直往上滑动，
+直到剩下的的高度达到它的最小高度后，再响应ScrollView的内部滑动事件
+
+4.enterAlwaysCollapsed:是enterAlways的附加选项，
+一般跟enterAlways一起使用，它是指，View在往下“出现”的时候，
+首先是enterAlways效果，当View的高度达到最小高度时(注意你的view需要设置minHeight属性)，
+View就暂时不去往下滚动，直到ScrollView滑动到顶部不再滑动时，View再继续往下滑动，直到滑到View的顶部结束。
+需要注意的是，3和4两种模式基本只有在CollapsingToolbarLayout才有用
+
+
+app:layout_collapseMode="pin"（子布局设置折叠模式）
+有两种“pin”：固定模式，在折叠的时候最后固定在顶端；
+“parallax”：视差模式，在折叠的时候会有个视差折叠的效果
+------------------------
+自定义behavior
+1.某个view需要根据监听另一个的行为来控制自己的行为，这个时候我们需要重写2个方法：
+public boolean layoutDependsOn(CoordinatorLayout parent, V child, View dependency) {  
+           return false;  
+       }  
+public boolean onDependentViewChanged(CoordinatorLayout parent, V child, View dependency) {  
+           return false;  
+       } 
+	 
+-------------------	 
+	 
+2，我们的view需要根据监听CoordinatorLayout中的子view的滚动行为来改变自己的状态
+，现在我们就需要重写下面的方法了：
+public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout,  
+        V child, View directTargetChild, View target, int nestedScrollAxes) {  
+    return false;  
+} 
+public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, V child, View target,  
+        int dx, int dy, int[] consumed) {  
+    // Do nothing  
+} 
+------------------
+
+
+
+
+  

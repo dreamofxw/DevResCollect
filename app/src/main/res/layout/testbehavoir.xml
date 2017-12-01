@@ -5,56 +5,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="haha"
-            android:layout_centerInParent="true"
-            />
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test1"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test12"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test13"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test14"
-            />
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    </LinearLayout>
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingtoolbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="haha"
-            />
-    </LinearLayout>
+           <!-- <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="test"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax"
+                >
+                <View
+                    android:id="@+id/view_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="#ffffff"
+                    >
+
+                </View>
+                <View
+                    android:id="@+id/view_divideline"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#ff0000"
+                    android:layout_below="@id/view_top"
+                    >
+
+                </View>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/view_divideline"
+                    android:src="@mipmap/icon_exchangegold_bg"
+                    android:scaleType="fitXY"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="112dp"
+                android:gravity="top"
+                android:minHeight="56dp"
+                app:layout_collapseMode="pin"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="toolbar"
+                    android:textColor="#ff0000"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#ffffff"
+                    />
+            </RelativeLayout>
+
+            <!--app:titleMarginTop="15dp"-->
+            <!--<android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="112dp"
+                android:gravity="top"
+                android:minHeight="56dp"
+                app:layout_collapseMode="pin"
+                app:contentInsetStart="0dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="toolbar"
+                    android:textColor="#ff0000"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#ffffff"
+                    />
+            </android.support.v7.widget.Toolbar>-->
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="bottom"
+                android:background="#ff0000"
+                />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
