@@ -33,6 +33,7 @@ public class TestJava {
 //
 //            System.out.println("threadName ="+allThreads[i].getName());
 //        }
+        System.out.println(Double.MIN_NORMAL);
         testRateForHouse();
 
     }
