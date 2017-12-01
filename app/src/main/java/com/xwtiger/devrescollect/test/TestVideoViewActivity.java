@@ -8,14 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.VideoView;
 
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.test.view.FullScreenVideoView;
-
-import rx.internal.schedulers.NewThreadScheduler;
 
 /**
  * Created by Busap-112 on 2017/12/1.
@@ -30,7 +26,6 @@ public class TestVideoViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_testvideoview);
