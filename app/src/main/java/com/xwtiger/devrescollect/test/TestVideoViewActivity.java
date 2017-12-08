@@ -3,17 +3,15 @@ package com.xwtiger.devrescollect.test;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.MediaController;
 
 import com.xwtiger.devrescollect.R;
-import com.xwtiger.devrescollect.test.view.FullScreenVideoView;
+import com.xwtiger.devrescollect.view.FullScreenVideoView;
 
 /**
  * Created by Busap-112 on 2017/12/1.

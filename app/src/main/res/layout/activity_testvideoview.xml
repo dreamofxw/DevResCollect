@@ -12,7 +12,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         />
-    <com.xwtiger.devrescollect.test.view.FullScreenVideoView
+    <com.xwtiger.devrescollect.view.FullScreenVideoView
         android:id="@+id/vidioview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

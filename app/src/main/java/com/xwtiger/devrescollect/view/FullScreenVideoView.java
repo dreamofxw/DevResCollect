@@ -1,4 +1,4 @@
-package com.xwtiger.devrescollect.test.view;
+package com.xwtiger.devrescollect.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

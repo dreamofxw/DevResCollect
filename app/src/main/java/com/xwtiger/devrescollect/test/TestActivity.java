@@ -46,8 +46,6 @@ public class TestActivity extends Activity implements View.OnClickListener{
                 LinearLayout.LayoutParams.WRAP_CONTENT));
         container.addView(tv);
 
-
-
     }
 
     @Override

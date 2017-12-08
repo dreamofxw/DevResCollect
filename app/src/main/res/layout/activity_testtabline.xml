@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:tabIndicatorColor="#ff1568"
+        app:tabTextColor="#000000"
+        app:tabSelectedTextColor="#ff1568"
+        android:background="#21009200"
+        >
+    </android.support.design.widget.TabLayout>
+
+</LinearLayout>
