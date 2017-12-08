@@ -3,12 +3,14 @@ package com.xwtiger.devrescollect.test;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.MediaController;
 
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.test.view.FullScreenVideoView;
@@ -51,11 +53,14 @@ public class TestVideoViewActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 Log.d("mVideoViewtest","onCompletion end");
                 Log.d("mVideoViewtest","onCompletion ispaly="+mVideoView.isPlaying());
+                Log.d("mVideoViewtest","onCompletion getDuration="+mVideoView.getDuration());
+                mVideoView.setOnKeyListener(null);
+                mCurrentPosition =mVideoView.getDuration();
                 if(isOnlyOne){
                     isOnlyOne = false;
                     startPlay();
                 }else{
-
+                    mVideoView.stopPlayback();
                 }
             }
         });
@@ -64,6 +69,9 @@ public class TestVideoViewActivity extends AppCompatActivity {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 Log.d("mVideoViewtest","onError");
+                Log.d("mVideoViewtest","onError what ="+what);
+                Log.d("mVideoViewtest","onError extra ="+extra);
+
                 if(mVideoView != null){
                     mVideoView.stopPlayback();
                 }
@@ -74,18 +82,18 @@ public class TestVideoViewActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                Log.d("mVideoViewtest","onKey v ="+v.toString());
-                Log.d("mVideoViewtest","onKey keyCode ="+keyCode);
-                Log.d("mVideoViewtest","onKey event.getKeyCode ="+event.getKeyCode());
+//                Log.d("mVideoViewtest","onKey v ="+v.toString());
+//                Log.d("mVideoViewtest","onKey keyCode ="+keyCode);
+//                Log.d("mVideoViewtest","onKey event.getKeyCode ="+event.getKeyCode());
                 if(keyCode ==KeyEvent.KEYCODE_BACK){
 
                     return true;
                 }
-
                 return false;
             }
         });
 
+        //mVideoView.setMediaController(new MediaController(this));
         mVideoView.start();
         mVideoView.requestFocus();
 
@@ -95,6 +103,27 @@ public class TestVideoViewActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        startPlay();
+        if(mVideoView != null){
+            //int currentPosition = mVideoView.getCurrentPosition();
+            Log.d("mVideoViewtest","--------onRestart currentPosition"+mCurrentPosition);
+            Log.d("mVideoViewtest","--------onRestart getDuration"+mVideoView.getDuration());
+            //mVideoView.seekTo(mCurrentPosition);
+            mVideoView.start();
+        }
+
     }
+
+    private int mCurrentPosition =0;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mVideoView.isPlaying()){
+            mVideoView.pause();
+            mCurrentPosition = mVideoView.getCurrentPosition();
+        }
+        Log.d("mVideoViewtest","-----------onPause mCurrentPosition"+mCurrentPosition);
+    }
+
+
 }
