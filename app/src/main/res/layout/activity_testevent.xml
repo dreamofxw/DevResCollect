@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xwtiger.devrescollect.study.androidapi.event.MyFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <com.xwtiger.devrescollect.study.androidapi.event.MyLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.xwtiger.devrescollect.study.androidapi.event.MyTextView
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="test"
+            />
+    </com.xwtiger.devrescollect.study.androidapi.event.MyLinearLayout>
+
+</com.xwtiger.devrescollect.study.androidapi.event.MyFrameLayout>

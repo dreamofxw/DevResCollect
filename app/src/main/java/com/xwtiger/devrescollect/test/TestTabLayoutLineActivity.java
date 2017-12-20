@@ -1,9 +1,9 @@
 package com.xwtiger.devrescollect.test;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.view.View;
 
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
@@ -52,6 +52,11 @@ public class TestTabLayoutLineActivity extends BaseActivity {
 
     @Override
     public void setListener() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

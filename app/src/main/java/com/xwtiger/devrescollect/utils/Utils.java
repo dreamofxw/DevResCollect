@@ -2,6 +2,7 @@ package com.xwtiger.devrescollect.utils;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 
 /**
@@ -19,6 +20,23 @@ public class Utils {
 
     public static int getScreenWidth(Context context){
         return getDisplayMetrics(context).widthPixels;
+    }
+
+
+    public static String actionToString(int action){
+        String result = "";
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                result = "ACTION_DOWN";
+                break;
+            case MotionEvent.ACTION_MOVE:
+                result = "ACTION_MOVE";
+                break;
+            case MotionEvent.ACTION_UP:
+                result = "ACTION_UP";
+                break;
+        }
+        return result;
     }
 
 }

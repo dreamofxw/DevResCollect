@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.xwtiger.devrescollect.test.TestTabLayoutLineActivity"
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.img.activity.TestFontMetricsActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
