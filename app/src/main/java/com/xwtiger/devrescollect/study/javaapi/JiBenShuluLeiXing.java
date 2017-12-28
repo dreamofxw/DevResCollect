@@ -37,13 +37,13 @@ public class JiBenShuluLeiXing {
      */
     public static void main(String[] args){
 
-        System.out.println("result = "+(comparedByte(15)));
-        System.out.println("pow ="+(Math.pow(2,15)-1));
+        /*System.out.println("result = "+(comparedByte(15)));
+        System.out.println("pow ="+(Math.pow(2,15)-1));*/
 
         //2 147 483 647
         /*result = 2147483647
         pow =2.147483647E9*/
-
+        testOperation();
     }
 
     public static void test(){
@@ -66,6 +66,19 @@ public class JiBenShuluLeiXing {
             result +=temp;
         }
         return result;
+    }
+
+
+    public static void testOperation(){
+
+        System.out.println(9>>3);
+        System.out.println(8<<3);
+        System.out.println(8>>>3);
+
+       /* System.out.println(6&3);
+        System.out.println(Math.pow(2,8)-1);*/
+
+
     }
 
 }

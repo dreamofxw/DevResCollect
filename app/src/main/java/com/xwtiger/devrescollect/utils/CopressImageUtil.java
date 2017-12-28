@@ -1,7 +1,12 @@
 package com.xwtiger.devrescollect.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+
+import com.xwtiger.devrescollect.R;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
@@ -45,6 +50,16 @@ public class CopressImageUtil {
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
         return bitmap;
+    }
+
+    public static Bitmap createBitmap(Context context,float sx ,float sy){
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.icon_fengjin);
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Matrix matrix = new Matrix();
+        matrix.preScale(sx,sy);//0.2f,0.2f
+        Bitmap bitmapnew = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, false);
+        return bitmapnew;
     }
 
 }

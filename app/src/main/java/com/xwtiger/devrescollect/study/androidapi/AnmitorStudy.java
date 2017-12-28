@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.transition.Transition;
 import android.util.Log;
 import android.util.Property;
@@ -272,5 +273,11 @@ public class AnmitorStudy {
         animatorset.start();
     }
 
+    /**
+     * 转场动画
+     */
+    public void testActivityTransition(){
+
+    }
 
 }

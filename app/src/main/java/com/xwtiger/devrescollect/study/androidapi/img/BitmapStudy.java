@@ -2,6 +2,7 @@ package com.xwtiger.devrescollect.study.androidapi.img;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -14,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
 import com.xwtiger.devrescollect.R;
+import com.xwtiger.devrescollect.utils.CopressImageUtil;
 
 /**
  * Created by Busap-112 on 2017/12/18.
@@ -89,6 +91,26 @@ public class BitmapStudy {
     }
 
 
+
+    public static Bitmap test(Context context){
+       /* BitmapDrawable mBitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.mipmap.ic_launcher);
+        Bitmap mBitmap = mBitmapDrawable.getBitmap();*/
+        Bitmap mBitmap = CopressImageUtil.createBitmap(context, 0.2f, 0.2f);
+        int width = mBitmap.getWidth();
+        int height = mBitmap.getHeight();
+        int stride = width+10;
+
+        int[] pixels = new int[(width/2)*height];
+        mBitmap.getPixels(pixels,0,width/2,0,0,width/2,height/2);
+        Bitmap bitmapnew = Bitmap.createBitmap(pixels, width/2 , height/2 , Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap( width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawColor(Color.parseColor("#ffffff"));
+        canvas.drawBitmap(bitmapnew,0,0,null);
+
+        return bitmap;
+    }
 
 
 

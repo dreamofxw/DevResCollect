@@ -10,13 +10,19 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.xwtiger.devrescollect.study.androidapi.img.activity.TouchRotateActivity"
+        <activity android:name="com.xwtiger.devrescollect.test.TestTransitionActivity"
+            android:theme="@style/ActivityTransitionTheme"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name="com.xwtiger.devrescollect.test.TestTransitonDitailActivity"
+            android:theme="@style/ActivityTransitionTheme"
+            >
         </activity>
     </application>
 
