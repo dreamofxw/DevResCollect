@@ -11,6 +11,7 @@ public class TestAlgorithm {
         doTowers(nDisks, 'A', 'B', 'C');*/
         System.out.println("haha is a chinese ");
         System.out.println(sum(4));
+        System.out.println("add data from server");
         int y = 3;
     }
 
