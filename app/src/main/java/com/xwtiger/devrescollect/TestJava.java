@@ -42,6 +42,7 @@ public class TestJava {
 //        testRateForHouse();
 
         testCurrent3();
+        int xww = 1;
 
     }
 
