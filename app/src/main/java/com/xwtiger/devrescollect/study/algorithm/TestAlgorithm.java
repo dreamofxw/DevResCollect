@@ -13,6 +13,7 @@ public class TestAlgorithm {
         System.out.println(sum(4));
         System.out.println("add data from server");
         int y = 3;
+        System.out.println("add data from local");
     }
 
     /**
