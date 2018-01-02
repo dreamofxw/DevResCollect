@@ -10,14 +10,6 @@ public class TestAlgorithm {
         /*int nDisks = 4;
         doTowers(nDisks, 'A', 'B', 'C');*/
         System.out.println(sum(4));
-        System.out.println("add a character c from server");
-        System.out.println("add a new line");
-        float x =0,y =0;
-        x ++;
-        int server = 0;
-        int a=1,b=2;
-        System.out.println("chang a and b");
-        System.out.println("add a character c from local");
 
     }
 
