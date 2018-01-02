@@ -9,6 +9,7 @@ public class TestAlgorithm {
     public static void main(String[] args){
         /*int nDisks = 4;
         doTowers(nDisks, 'A', 'B', 'C');*/
+        int x = 2;
         System.out.println(sum(4));
     }
 
