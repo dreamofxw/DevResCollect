@@ -15,6 +15,7 @@ public class TestAlgorithm {
         float x =0,y =0;
         x ++;
         int a,b;
+        int server = 0;
         System.out.println("add a character c from local");
 
     }
