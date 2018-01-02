@@ -14,8 +14,9 @@ public class TestAlgorithm {
         System.out.println("add a new line");
         float x =0,y =0;
         x ++;
-        int a,b;
         int server = 0;
+        int a=1,b=2;
+        System.out.println("chang a and b");
         System.out.println("add a character c from local");
 
     }
