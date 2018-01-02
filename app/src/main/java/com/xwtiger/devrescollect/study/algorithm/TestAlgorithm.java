@@ -9,7 +9,7 @@ public class TestAlgorithm {
     public static void main(String[] args){
         /*int nDisks = 4;
         doTowers(nDisks, 'A', 'B', 'C');*/
-        System.out.println("haha");
+        System.out.println("haha is a chinese ");
         System.out.println(sum(4));
         int y = 3;
     }
