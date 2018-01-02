@@ -43,7 +43,7 @@ public class TestJava {
 
         testCurrent3();
         int xww = 1;
-
+        System.out.println("add test code in testjava");
     }
 
 
