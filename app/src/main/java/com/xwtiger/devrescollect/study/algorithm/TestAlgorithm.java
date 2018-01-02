@@ -9,11 +9,8 @@ public class TestAlgorithm {
     public static void main(String[] args){
         /*int nDisks = 4;
         doTowers(nDisks, 'A', 'B', 'C');*/
-        System.out.println("haha is a chinese ");
         System.out.println(sum(4));
-        System.out.println("add data from server");
-        int y = 3;
-        System.out.println("add data from local");
+        System.out.println("add a character c from server");
     }
 
     /**
