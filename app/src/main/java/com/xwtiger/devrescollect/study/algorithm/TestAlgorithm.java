@@ -11,6 +11,7 @@ public class TestAlgorithm {
         doTowers(nDisks, 'A', 'B', 'C');*/
         int x = 2;
         System.out.println(sum(4));
+        int y = 3;
     }
 
     /**
