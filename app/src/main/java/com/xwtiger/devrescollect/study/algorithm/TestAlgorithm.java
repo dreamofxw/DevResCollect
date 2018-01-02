@@ -11,8 +11,9 @@ public class TestAlgorithm {
         doTowers(nDisks, 'A', 'B', 'C');*/
         System.out.println(sum(4));
         System.out.println("add a character c from server");
-        float x,y;
         System.out.println("add a new line");
+        float x =0,y =0;
+        x ++;
         int a,b;
         System.out.println("add a character c from local");
 
