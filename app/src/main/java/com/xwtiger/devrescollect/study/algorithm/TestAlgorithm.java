@@ -12,6 +12,9 @@ public class TestAlgorithm {
         System.out.println(sum(4));
         System.out.println("add a character c from server");
         float x,y;
+        int a,b;
+        System.out.println("add a character c from local");
+
     }
 
     /**
