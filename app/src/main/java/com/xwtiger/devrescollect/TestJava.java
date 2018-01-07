@@ -41,7 +41,7 @@ public class TestJava {
 //        System.out.println(Double.MIN_NORMAL);
 //        testRateForHouse();
 
-        testCurrent3();
+        testCurrent1();
     }
 
 

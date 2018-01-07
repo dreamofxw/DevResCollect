@@ -115,6 +115,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
      */
     private BinaryNode<AnyType> insert( AnyType x, BinaryNode<AnyType> t )
     {
+        System.out.println("start insert x="+x);
         if( t == null )
             return new BinaryNode<>( x, null, null );
         
@@ -126,6 +127,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
             t.right = insert( x, t.right );
         else
             ;  // Duplicate; do nothing
+        System.out.println("return :"+t.element);
         return t;
     }
 
@@ -264,12 +266,22 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>>
         final int NUMS = 4000;
         final int GAP  =   37;
 
+        t.insert(100);
+        t.insert(101);
+        t.insert(102);
+        t.insert(99);
+
+        int x = 0;
+        if(x ==0){
+            return;
+        }
+
         System.out.println( "Checking... (no more output means success)" );
 
-        for( int i = GAP; i != 0; i = ( i + GAP ) % NUMS )
+        for( int i = GAP; i != 0; i = ( i + GAP ) % NUMS ){
+            System.out.println("insert i ="+i);
             t.insert( i );
-
-        t.printTree();
+        }
 
         for( int i = 1; i < NUMS; i+= 2 )
             t.remove( i );
