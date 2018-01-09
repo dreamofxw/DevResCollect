@@ -6,13 +6,22 @@
     <com.xwtiger.devrescollect.study.androidapi.event.MyLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         >
         <com.xwtiger.devrescollect.study.androidapi.event.MyTextView
             android:layout_width="100dp"
             android:layout_height="200dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:text="test"
+            android:text="test1"
+            android:background="#ff0000"
+            />
+        <com.xwtiger.devrescollect.study.androidapi.event.MyTextView2
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:text="test2"
+            android:background="#0000ff"
             />
     </com.xwtiger.devrescollect.study.androidapi.event.MyLinearLayout>
 

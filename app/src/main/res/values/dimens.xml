@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dimen_100">100dp</dimen>
+    <dimen name="testdraw_120">120dp</dimen>
+    <dimen name="testdraw_100">100dp</dimen>
+    <dimen name="testdraw_left">10dp</dimen>
+    <dimen name="testdraw_right">10dp</dimen>
+    <dimen name="testdraw_top">10dp</dimen>
+    <dimen name="testdraw_bottomer">10dp</dimen>
 
 </resources>

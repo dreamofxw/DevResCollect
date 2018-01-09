@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<com.xwtiger.devrescollect.study.androidapi.draw.TestDrawLinealayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="@dimen/testdraw_100"
+    android:layout_height="@dimen/testdraw_100"
 
+    >
+    <!--
+    android:background="#0000ff"
+    match_parent-->
     <com.xwtiger.devrescollect.study.androidapi.draw.TestTextView
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/testdraw_120"
+        android:layout_height="@dimen/testdraw_120"
         android:id="@+id/tv_req"
-        android:text="request"
-        android:gravity="center"
+        android:text="requestrequest12121212121requestrequest121212"
+        android:layout_marginTop="@dimen/testdraw_top"
+        android:layout_marginLeft="@dimen/testdraw_left"
+        android:layout_marginRight="@dimen/testdraw_right"
+        android:layout_marginBottom="@dimen/testdraw_bottomer"
+        android:background="#ff0000"
         >
     </com.xwtiger.devrescollect.study.androidapi.draw.TestTextView>
 
-    <com.xwtiger.devrescollect.study.androidapi.draw.TestTextView
+   <!-- <com.xwtiger.devrescollect.study.androidapi.draw.TestTextView
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:id="@+id/tv_inv"
         android:text="invalide"
         android:layout_marginTop="10dp"
         android:gravity="center"
+        android:visibility="gone"
         >
-    </com.xwtiger.devrescollect.study.androidapi.draw.TestTextView>
+    </com.xwtiger.devrescollect.study.androidapi.draw.TestTextView>-->
 
 
-</LinearLayout>
+</com.xwtiger.devrescollect.study.androidapi.draw.TestDrawLinealayout>

@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_start.setOnClickListener(this);
         btn_reversal.setOnClickListener(this);
 
+
+
     }
 
 
@@ -48,4 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+    public void test(boolean o){
+
+    }
+
 }
