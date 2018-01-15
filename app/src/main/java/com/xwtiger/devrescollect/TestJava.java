@@ -41,10 +41,19 @@ public class TestJava {
 //        System.out.println(Double.MIN_NORMAL);
 //        testRateForHouse();
 
-        testCurrent1();
+        //testCurrent1();
+        testAnd();
     }
 
 
+    public static void testAnd(){
+        int a = 1;//0001
+        int b = 3;//0011
+                   //0001
+        System.out.println("& ="+(a&b));//1
+        System.out.println("| ="+(a|b));//3
+        System.out.println(Math.pow(2,10)-1);
+    }
 
 
     public static void testCurrent3(){

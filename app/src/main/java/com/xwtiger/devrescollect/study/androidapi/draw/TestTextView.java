@@ -52,6 +52,7 @@ public class TestTextView extends AppCompatTextView {
         Log.d("TestTextView","onMeasure getHeight="+getHeight());
         Log.d("TestTextView","onMeasure getMeasuredHeight="+getMeasuredHeight());
         Log.d("TestTextView","onMeasure getMeasuredWidth="+getMeasuredWidth());
+        Log.d("TestTextView","onMeasure getMeasuredState="+getMeasuredState());
         Log.d("TestTextView","---------------onMeasure end---------------------- ");
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

@@ -15,7 +15,7 @@ import com.xwtiger.devrescollect.base.BaseActivity;
 
 public class TestRequestAndInvalidActivity extends BaseActivity {
 
-    private TextView tv_req;
+    private TestTextView tv_req;
 //    private TextView tv_inv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class TestRequestAndInvalidActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        tv_req = (TextView) findViewById(R.id.tv_req);
+        tv_req = (TestTextView) findViewById(R.id.tv_req);
 //        tv_inv = (TextView) findViewById(R.id.tv_inv);
     }
 
@@ -54,6 +54,7 @@ public class TestRequestAndInvalidActivity extends BaseActivity {
             case R.id.tv_req:
                 //tv_req.requestLayout();
                 Log.d("TestTextView","tv_req.getWidth() ="+tv_req.getWidth());
+                Log.d("TestTextView","tv_req.getMeasuredWidth() ="+tv_req.getMeasuredWidth());
                 Log.d("TestTextView","tv_req.getHeight ="+tv_req.getHeight());
                 break;
            /* case R.id.tv_inv:

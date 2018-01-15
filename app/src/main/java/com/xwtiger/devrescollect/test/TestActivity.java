@@ -53,7 +53,8 @@ public class TestActivity extends Activity implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.btn_start:
                 Log.d("testValueAnmitor","btn_start height ="+(btn_start.getHeight()));
-                AnmitorStudy.testValueAnmitor(tv);
+                //AnmitorStudy.testValueAnmitor(tv);
+                addTestThread();
                 break;
         }
     }
@@ -80,4 +81,51 @@ public class TestActivity extends Activity implements View.OnClickListener{
             canvas.drawText("hahah",0,0,paint);
         }
     }
+
+
+    public void addTestThread(){
+
+        for (int i = 0; i <30 ; i++) {
+            Thread thread1 = new Thread(new TimeThread());
+            thread1.start();
+        }
+
+
+
+    }
+
+    int x = 1;
+    boolean isloop = true;
+    String msg;
+    StringBuffer sb = new StringBuffer();
+
+    class TimeThread implements Runnable{
+        @Override
+        public void run() {
+            while (isloop){
+                try {
+                    Thread.sleep(100);
+                    x++;
+                    //sb.append("msg");
+                    //sb.append(x);
+                    //msg = sb.toString();
+                    //sb.delete(0,sb.length());
+
+                   //Log.d("TimeThread",msg);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        isloop = false;
+        super.onDestroy();
+    }
+
+
+
 }
