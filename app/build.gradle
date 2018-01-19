@@ -49,6 +49,10 @@ dependencies {
     //添加pickview
     compile 'com.contrarywind:Android-PickerView:3.2.7'
 
+    //添加glide
+//    implementation 'com.github.bumptech.glide:glide:4.5.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+
 
     /*
     * Android 目前可查询的网址

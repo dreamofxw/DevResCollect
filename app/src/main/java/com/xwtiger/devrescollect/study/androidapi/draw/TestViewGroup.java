@@ -40,9 +40,6 @@ public class TestViewGroup extends ViewGroup {
         Log.d("testview","AT_MOST = "+MeasureSpec.AT_MOST);
         Log.d("testview","UNSPECIFIED = "+MeasureSpec.UNSPECIFIED);
 
-
-
-
         Log.d("testview","---------------onMeasure parent end---------------------- ");
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }

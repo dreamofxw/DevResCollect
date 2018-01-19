@@ -21,6 +21,7 @@ public class TestView extends View {
 
     public TestView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        //context.obtainStyledAttributes(attrs, )
     }
 
 
