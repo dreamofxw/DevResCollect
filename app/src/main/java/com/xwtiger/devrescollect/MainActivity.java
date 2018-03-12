@@ -1,5 +1,6 @@
 package com.xwtiger.devrescollect;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btn_start.setOnClickListener(this);
         btn_reversal.setOnClickListener(this);
+
+
+
 
 
 

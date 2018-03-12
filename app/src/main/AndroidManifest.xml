@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <!--android:theme="@style/ActivityTransitionTheme"-->
-        <activity android:name="com.xwtiger.devrescollect.study.androidapi.draw.TestRequestAndInvalidActivity"
+        <activity android:name="com.xwtiger.devrescollect.test.GetMoblieMsgActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

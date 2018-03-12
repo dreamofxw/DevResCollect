@@ -1,10 +1,12 @@
 package com.xwtiger.devrescollect.test;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Binder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -45,6 +47,8 @@ public class TestActivity extends Activity implements View.OnClickListener{
         tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
         container.addView(tv);
+
+        //Service
 
     }
 

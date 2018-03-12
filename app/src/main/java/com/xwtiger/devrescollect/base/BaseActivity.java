@@ -30,11 +30,6 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
     protected void init(){
         initView();
         initData();
-
-
-
-
-
         setListener();
     }
 

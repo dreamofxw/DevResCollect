@@ -1,5 +1,6 @@
 package com.xwtiger.devrescollect.study.androidapi.event;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -21,12 +22,14 @@ import okhttp3.internal.Util;
 public class TestEventActivity extends BaseActivity {
 
 
+    private static Context mContext;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_testevent);
-
+        mContext = this;
     }
 
     @Override

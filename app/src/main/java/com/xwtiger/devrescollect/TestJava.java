@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -42,8 +43,42 @@ public class TestJava {
 //        testRateForHouse();
 
         //testCurrent1();
-        testAnd();
+        //testAnd();
+        //testFinally();
+        //System.out.println("test");
+        testThread();
     }
+
+    public static void testThread(){
+
+        int a =0;
+        while(a <100){
+            try {
+                a++;
+                TimeUnit.MILLISECONDS.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("ad---------");
+        }
+
+
+    }
+
+    public static void testFinally(){
+        try{
+            System.out.println("try");
+        }catch (Exception e){
+            System.out.println("catch");
+        }finally {
+            System.out.println("finally");
+        }
+
+    }
+
+
+
+
 
 
     public static void testAnd(){
