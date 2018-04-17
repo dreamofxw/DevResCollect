@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">DevResCollect</string>
+
+    <!--xlistview -->
+    <string name="header_hint_refresh_normal">下拉刷新</string>
+    <string name="header_hint_refresh_ready">松开刷新</string>
+    <string name="header_hint_refresh_loading">刷新中&#8230;</string>
+    <string name="header_hint_refresh_time">时间：</string>
+    <string name="footer_hint_load_normal">更多</string>
+    <string name="footer_hint_load_ready">松开加载更多</string>
+    <string name="footer_hint_load_expect">暂无更多数据</string>
+
+    <!--pulltorefreshview -->
+    <string name="str_pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="str_pull_to_refresh_release_label">松开后刷新</string>
+    <string name="str_pull_to_refresh_refreshing_label">刷新\u2026</string>
+    <string name="pull_to_refresh_footer_release_label">松开即可刷新...</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
+
+
 </resources>

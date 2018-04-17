@@ -11,12 +11,19 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        //配置LeakCanary
+
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        //配置LeakCanary时添加的
+        //mavenCentral()
+        google()
+       // mavenCentral()
     }
 }
 

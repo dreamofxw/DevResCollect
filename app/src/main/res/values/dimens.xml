@@ -8,4 +8,8 @@
     <dimen name="testdraw_top">10dp</dimen>
     <dimen name="testdraw_bottomer">10dp</dimen>
 
+    <dimen name="header_height">60dp</dimen>
+    <dimen name="footer_height">90dp</dimen>
+    <dimen name="footer_padding">10dp</dimen>
+
 </resources>

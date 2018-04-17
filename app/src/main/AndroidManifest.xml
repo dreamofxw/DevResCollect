@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xwtiger.devrescollect">
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     
     <application
         android:name=".MyApplication"
@@ -11,8 +13,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <!--android:theme="@style/ActivityTransitionTheme"-->
-        <activity android:name="com.xwtiger.devrescollect.test.GetMoblieMsgActivity"
+        <!--android:theme="@style/ActivityTransitionTheme" -->
+        <activity android:name="com.xwtiger.devrescollect.mvp.testmvp.TestMvpActivty"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +27,14 @@
             android:theme="@style/ActivityTransitionTheme"
             >
         </activity>
+        <activity android:name="com.xwtiger.devrescollect.MainActivity"
+            >
+        </activity>
     </application>
+
+
+    <meta-data
+        android:name="CHANNEL"
+        android:value="${CHANNEL_VALUE}" />
 
 </manifest>

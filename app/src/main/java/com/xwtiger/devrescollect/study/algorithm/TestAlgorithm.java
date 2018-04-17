@@ -10,7 +10,8 @@ public class TestAlgorithm {
         /*int nDisks = 4;
         doTowers(nDisks, 'A', 'B', 'C');*/
         /*System.out.println(sum(4));*/
-        testNum();
+        //testNum();
+
 
     }
 

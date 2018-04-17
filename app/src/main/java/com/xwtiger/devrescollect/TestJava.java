@@ -46,8 +46,64 @@ public class TestJava {
         //testAnd();
         //testFinally();
         //System.out.println("test");
-        testThread();
+        //testThread();
+        /*for(int i=0;i<100;i++){
+            System.out.println("i ="+i+"result ="+isPowerOfThree(i));
+        }*/
+        //changArray();
+        testDoWhile();
     }
+
+    public static void testDoWhile(){
+        int x =1;
+        do{
+            System.out.println("x ="+x);
+            x++;
+        }while (x <1);
+
+    }
+
+    public static boolean isPowerOfThree(int n) {
+        if(n<=0){
+            return false;
+        }
+        // double num=Math.log(n)/Math.log(3); log()与log10()与log1p()的区别  
+        System.out.println("math.log10(n) ="+n+" ,"+Math.log10(n));
+        double num=Math.log10(n)/Math.log10(3);
+        if(num%1==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static void changArray(){
+        int[] arr = new int[]{1,2,3,4,5};
+        printArray(arr);
+        int temp = arr[1];
+        arr[1] = arr[3];
+        arr[3] = temp;
+        System.out.println("---------");
+        printArray(arr);
+    }
+    
+    public static void printArray(int[] arr){
+        for(int i:arr){
+            System.out.println("i ="+i);
+        }
+    }
+
+    public static boolean isPowerByThree(){
+        
+        for(int i =0;i<20;i++){
+            
+            System.out.println("i ="+i+",result ="+i/3);
+        }
+        
+        
+        return false;
+    }
+    
 
     public static void testThread(){
 
