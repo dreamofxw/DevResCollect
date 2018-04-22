@@ -121,8 +121,6 @@ public class MainActivity extends BaseActivity {
         msg.obj = "haha";
         mMyHandler.sendMessage(msg);
 
-
-
     }
 
     @Override

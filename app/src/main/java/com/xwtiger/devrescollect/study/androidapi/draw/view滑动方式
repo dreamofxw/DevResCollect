@@ -1,0 +1,5 @@
+view常用的滑动方式有三种
+1,scrollTo/scrollBy:操作简单，适合对view的内容的滑动
+2，动画：操作简单，主要适用于没有交互的view和实现复杂的动画效果
+3，改变布局参数：操作复杂，适用于没有交互的view
+4,通过Scroller,Handler.postDelayed;Thread.sleep
