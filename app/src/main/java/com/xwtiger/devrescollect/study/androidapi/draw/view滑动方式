@@ -3,3 +3,11 @@ view常用的滑动方式有三种
 2，动画：操作简单，主要适用于没有交互的view和实现复杂的动画效果
 3，改变布局参数：操作复杂，适用于没有交互的view
 4,通过Scroller,Handler.postDelayed;Thread.sleep
+
+
+mScrollX:表示的是view的左边缘和view内容的左边缘的距离
+mScrollX = view的左边缘 -view内容的左边缘
+eg:scrollto,scrolly只改变view的内容位置，如果往左滑，则mScrollX为正值，反之是负的
+mScrollY道理相同
+
+

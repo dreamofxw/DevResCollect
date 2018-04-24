@@ -34,7 +34,19 @@ public class MyLinearLayout extends LinearLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        boolean bo = true;
+        boolean bo = false;
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                bo = false;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                bo = true;
+                break;
+            case MotionEvent.ACTION_UP:
+
+                break;
+
+        }
         Log.d("testevent", "【市长】任务<" + Utils.actionToString(ev.getAction()) + "> : 拦截吗？" + bo);
         return bo;
     }
@@ -55,6 +67,6 @@ public class MyLinearLayout extends LinearLayout {
                 break;
         }
         Log.d("testevent", "【市长】任务<" + Utils.actionToString(ev.getAction()) + "> : 农民真没用，下次再也不找你了，我自己来尝试一下。能解决？" + bo);
-        return bo;
+        return true;
     }
 }

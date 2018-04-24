@@ -25,12 +25,6 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         com.xwtiger.devrescollect.ActivityManager.getInstance().addActivity(this);
     }
 
-    @Override
-    public void setContentView(@LayoutRes int layoutResID) {
-        super.setContentView(layoutResID);
-        init();
-    }
-
     protected void init(){
         initView();
         initData();

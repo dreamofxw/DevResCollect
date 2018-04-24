@@ -412,8 +412,8 @@ public class XListView extends ListView implements OnScrollListener {
                     	mPullRefreshing = false;
                     	mHeader.setState(XHeaderView.STATE_NORMAL);
                     	 Log.d("testrefresh", "mPullRefresh ---no");
-                    }
-                    resetHeaderHeight();
+                    }resetHeaderHeight
+                    ();
 
                 } else if (getLastVisiblePosition() == mTotalItemCount - 1) {
                     // invoke load more.

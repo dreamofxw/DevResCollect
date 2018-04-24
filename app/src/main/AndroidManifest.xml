@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xwtiger.devrescollect">
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.xwtiger.devrescollect">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <!--android:theme="@style/ActivityTransitionTheme" -->
-        <activity android:name="com.xwtiger.devrescollect.mvp.testmvp.TestMvpActivty"
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.event.TestEventActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

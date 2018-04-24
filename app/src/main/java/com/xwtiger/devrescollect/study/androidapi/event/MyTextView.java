@@ -36,7 +36,15 @@ public class MyTextView extends TextView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev){
-        boolean bo = false;
+        boolean bo = true;
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_CANCEL:
+                bo = false;
+                break;
+            case MotionEvent.ACTION_DOWN:
+                bo = true;
+                break;
+        }
         Log.d("testevent", "【农民1】任务<" + Utils.actionToString(ev.getAction()) + "> : 自己动手，埋头苦干。能解决？" + bo);
         return bo;
     }

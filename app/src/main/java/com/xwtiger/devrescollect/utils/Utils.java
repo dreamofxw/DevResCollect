@@ -35,6 +35,9 @@ public class Utils {
             case MotionEvent.ACTION_UP:
                 result = "ACTION_UP";
                 break;
+            default:
+                result = action+"";
+                break;
         }
         return result;
     }
