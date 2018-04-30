@@ -51,6 +51,7 @@ public class TestJava {
             System.out.println("i ="+i+"result ="+isPowerOfThree(i));
         }*/
         //changArray();
+        System.out.println("");
 
     }
 
