@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <!--android:theme="@style/ActivityTransitionTheme" -->
-        <activity android:name="com.xwtiger.devrescollect.study.androidapi.event.TestEventActivity"
+        <activity android:name="com.xwtiger.devrescollect.test.TestActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

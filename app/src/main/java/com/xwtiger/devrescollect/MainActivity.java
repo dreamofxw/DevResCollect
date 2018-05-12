@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity {
     private TextView textView;
     private Button btn_start;
     private Button btn_reversal;
+    private static TestJava testjava = new TestJava();
 
 //    private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 //    private static final int COUNT_BITS = Integer.SIZE - 3;
@@ -121,6 +122,7 @@ public class MainActivity extends BaseActivity {
         msg.obj = "haha";
         mMyHandler.sendMessage(msg);
 
+        mContext = this;
     }
 
     @Override

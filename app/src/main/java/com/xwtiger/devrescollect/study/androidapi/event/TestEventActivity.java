@@ -22,14 +22,14 @@ import okhttp3.internal.Util;
 public class TestEventActivity extends BaseActivity {
 
 
-    private static Context mContext;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_testevent);
-        mContext = this;
+
     }
 
     @Override
