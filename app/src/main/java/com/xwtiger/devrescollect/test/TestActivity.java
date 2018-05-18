@@ -28,6 +28,7 @@ import com.xwtiger.devrescollect.MainActivity;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.study.androidapi.AnmitorStudy;
+import com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -101,6 +102,7 @@ public class TestActivity extends BaseActivity {
         mTestHandler2 = new TestHandler();
         mTestHandler2.createHandler();
 
+
         /*Observable.just("1").flatMap(new Func1<String, Observable<?>>() {
             @Override
             public Observable<?> call(String s) {
@@ -108,9 +110,25 @@ public class TestActivity extends BaseActivity {
             }
         }).observeOn(AndroidSchedulers.mainThread()).subscribe()*/
         //IntentService
+
+
+        handlerThread = new HandlerThread("handlerthread");
+        handlerThread.start();
+
+        handlers123 = new Handler(handlerThread.getLooper()){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                Log.d("handlerThread123","msg ="+msg.what+",threadname"+Thread.currentThread().getName());
+            }
+        };
+
+        handlers123.sendEmptyMessage(1);
+
     }
 
-
+    private HandlerThread handlerThread;
+    private Handler handlers123 ;
 
 
 
@@ -160,7 +178,7 @@ public class TestActivity extends BaseActivity {
 
                 break;
             case R.id.btn_jumpmainact:
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, TestHandlerActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -229,6 +247,7 @@ public class TestActivity extends BaseActivity {
     protected void onDestroy() {
         isloop = false;
         super.onDestroy();
+        handlerThread.quitSafely();
     }
 
 
@@ -269,6 +288,25 @@ public class TestActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+
+    public static class TTHandler extends Handler
+    {
+        public TTHandler(Looper looper){
+            super();
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Log.d("TTHandler","threadname = "+Thread.currentThread().getName()+",msg="+msg.what);
+
+        }
+    }
 
 
 }

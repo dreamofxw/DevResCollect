@@ -30,6 +30,10 @@
         <activity android:name="com.xwtiger.devrescollect.MainActivity"
             >
         </activity>
+
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity"
+            >
+        </activity>
     </application>
 
 

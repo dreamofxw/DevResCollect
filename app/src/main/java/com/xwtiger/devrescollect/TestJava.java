@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.xwtiger.devrescollect.study.javaapi.LogUtils;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
+import com.xwtiger.devrescollect.utils.TimeUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -13,11 +14,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,32 +33,121 @@ import java.util.concurrent.TimeUnit;
  */
 public class TestJava {
 
-
-
     public static void main(String[] args){
-//        testReg1(PatternStudy.REG_GRE);
-//        testReg1(PatternStudy.REG_REL);
-//        testReg1(PatternStudy.REG_POS);
+        //testDate();
 
-//        Thread[] allThreads = findAllThreads();
-//        for (int i=0;i<allThreads.length;i++){
-//
-//            System.out.println("threadName ="+allThreads[i].getName());
-//        }
-//        System.out.println(Double.MIN_NORMAL);
-//        testRateForHouse();
+//        int rawOffset = TimeZone.getDefault().getRawOffset();
+//        System.out.println("rawOffset = "+rawOffset);
 
-        //testCurrent1();
-        //testAnd();
-        //testFinally();
-        //System.out.println("test");
-        //testThread();
-        /*for(int i=0;i<100;i++){
-            System.out.println("i ="+i+"result ="+isPowerOfThree(i));
-        }*/
-        //changArray();
-        System.out.println("");
+        String[] availableIDs = TimeZone.getAvailableIDs();
+        for (String str:availableIDs){
+            System.out.println("str ="+str);
 
+        }
+
+    }
+
+
+    public static void testDate(){
+
+        String time = "2018-05-17 12:09:02";
+        String time6 = "2018-05-17";
+        String s = TimeUtils.formatDate(time);
+        System.out.println("s = "+s);
+
+        Date date = new Date();
+        long time1 = date.getTime();
+        System.out.println("time1 = "+time1);
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        String format = sd.format(date);
+        try {
+            Date parse = sd.parse(time);
+            System.out.println("parse "+parse.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println("format = "+format);
+
+    }
+
+
+    public static String formatDate(String long_time) {
+
+        // "2016-08-01 16:23"
+        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat time_year = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat time2 = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat time3 = new SimpleDateFormat("MM-dd HH:mm");
+
+        String result = "";
+        Date date = null;
+        try {
+            date = time.parse(long_time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return long_time;
+        }
+        Date currentDate = new Date();
+
+        Calendar instance = Calendar.getInstance();
+        Calendar instance_current = Calendar.getInstance();
+        instance.setTime(date);
+        instance_current.setTime(currentDate);
+
+        if (instance.get(Calendar.YEAR) < instance_current.get(Calendar.YEAR)) {
+            // 去年
+            return result = time_year.format(date);
+        }
+        if (instance.get(Calendar.MONTH) < instance_current.get(Calendar.MONTH)) {
+            // 今年
+            return result = time3.format(date);
+
+        } else if (instance.get(Calendar.MONTH) == instance_current.get(Calendar.MONTH)) {
+
+            if (instance.get(Calendar.DAY_OF_MONTH) == instance_current.get(Calendar.DAY_OF_MONTH)) {
+                // 今天
+                long diff = currentDate.getTime() - date.getTime();// 这样得到的差值是微秒级别
+                long days = diff / (1000 * 60 * 60 * 24);
+                long hours = (diff - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+                long minutes = (diff - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
+                if (hours < 6) {
+                    if (hours < 1 && minutes < 60) {
+                        return result = minutes + "分钟前";
+                    } else {
+                        return result = hours + "小时前";
+                    }
+                } else {
+                    return result = "今天 " + time2.format(date);
+                }
+            } else if (instance.get(Calendar.DAY_OF_MONTH) == instance_current.get(Calendar.DAY_OF_MONTH) - 1) {
+                // 昨天
+                return result = "昨天 " + time2.format(date);
+            }
+            return result = time3.format(date);
+        }
+        return result;
+    }
+    
+    
+    public static void changeTest(Test test){
+        test.age = 2;
+        test.name = "name2";
+    }
+
+    /**
+     * Ascaii 和char 互转
+     */
+    public void asiicandchar(){
+        String str = "还123";
+        Integer integer = Integer.valueOf(str.charAt(0));
+        System.out.println("result ="+integer);
+
+        System.out.println("-----------");
+
+        String str1="36824";
+        char c = (char) Integer.parseInt(str1);
+        System.out.println(c);
     }
 
     public static void testDoWhile(){
@@ -298,6 +393,13 @@ public class TestJava {
         System.out.println("reg = "+reg);
         System.out.println("enttime = "+enttime);
         System.out.println("------分割线--------");
+    }
+
+
+    public static class Test{
+        public String name;
+        public int age;
+
     }
 
 
