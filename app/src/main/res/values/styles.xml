@@ -20,4 +20,8 @@
     </style>
 
 
+    <style name="Theme.NoBackGround" parent="android:Theme">
+        <item name="android:background">#f00</item>
+    </style>
+
 </resources>
