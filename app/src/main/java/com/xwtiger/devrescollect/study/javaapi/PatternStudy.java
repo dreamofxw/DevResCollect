@@ -4,6 +4,8 @@ package com.xwtiger.devrescollect.study.javaapi;
  * Created by Busap-112 on 2017/11/1.
  */
 
+import android.text.TextUtils;
+
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,6 +42,25 @@ public class PatternStudy {
         while (matcher.find()) {
             System.out.println("matched form " + matcher.start() + " to " + matcher.end());
         }
+    }
+
+    public static boolean isDigit(String num)
+    {
+        String telRegex = "^[0-9][0-9]*+$";
+        if (TextUtils.isEmpty(num))
+            return false;
+        else
+            return num.matches(telRegex);
+    }
+
+    /**
+     * 匹配1.6k
+     * @param num
+     * @return
+     */
+    public static boolean testReg(String num){
+        String telRegex = "^[0-9][0-9]*+\\.?+[0-9]*+[kw]?+$";
+        return num.matches(telRegex);
     }
 
     /**

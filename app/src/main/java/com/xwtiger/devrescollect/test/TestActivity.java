@@ -1,42 +1,32 @@
 package com.xwtiger.devrescollect.test;
 
-import android.app.Activity;
-import android.app.IntentService;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.xwtiger.devrescollect.MainActivity;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
-import com.xwtiger.devrescollect.study.androidapi.AnmitorStudy;
+import com.xwtiger.devrescollect.statistics.ExceptionUpLoadUtil;
+import com.xwtiger.devrescollect.statistics.TestStatistics;
+import com.xwtiger.devrescollect.statistics.YouShuStatistics;
+import com.xwtiger.devrescollect.statistics.cache.disc.FileManager;
 import com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 /**
  * Created by Busap-112 on 2017/11/10.
@@ -125,6 +115,36 @@ public class TestActivity extends BaseActivity {
 
         handlers123.sendEmptyMessage(1);
 
+
+        //test
+
+//        FileManager.saveFile(this,"hahha");
+
+        YouShuStatistics.getInstance().startCheck();
+        TestTask task = new TestTask();
+        for(int i=0;i<5;i++){
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            executorService.execute(task);
+        }
+
+
+        ExceptionUpLoadUtil.getInstance().test();
+
+    }
+
+    static class TestTask implements Runnable{
+        @Override
+        public void run() {
+            for(int i =0;i<100;i++){
+                String name = Thread.currentThread().getName();
+                YouShuStatistics.getInstance().addEvent(name+"=="+i);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private HandlerThread handlerThread;
@@ -248,6 +268,7 @@ public class TestActivity extends BaseActivity {
         isloop = false;
         super.onDestroy();
         handlerThread.quitSafely();
+        YouShuStatistics.getInstance().destroy();
     }
 
 

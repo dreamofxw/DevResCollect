@@ -1,6 +1,7 @@
 package com.xwtiger.devrescollect;
 
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.xwtiger.devrescollect.study.javaapi.LogUtils;
@@ -18,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -25,26 +27,119 @@ import java.util.ListIterator;
 import java.util.Stack;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 /**
+ *
  *
  * Created by Busap-112 on 2017/11/1.
  *
  */
 public class TestJava {
 
+    public static boolean isfinished = true;
+
     public static void main(String[] args){
-        //testDate();
 
-//        int rawOffset = TimeZone.getDefault().getRawOffset();
-//        System.out.println("rawOffset = "+rawOffset);
+        System.out.println(testReg("1.6000"));
 
-        String[] availableIDs = TimeZone.getAvailableIDs();
-        for (String str:availableIDs){
-            System.out.println("str ="+str);
+    }
+
+
+    public static boolean testReg(String num){
+        String telRegex = "^[0-9][0-9]*+\\.?+[0-9]*+[kw]?+$";
+        return num.matches(telRegex);
+    }
+
+
+    public static void test121(){
+        System.out.println("befor thread count ="+Thread.activeCount());
+        Thread.currentThread().getThreadGroup().list();
+
+        Runnable r =  new Task();
+
+        for(int i =0;i<5;i++){
+            switch (i){
+                case 0:
+                    new Thread(r).start();
+                    break;
+                case 1:
+                    new Thread(r).start();
+                    break;
+                case 2:
+                    new Thread(r).start();
+                    break;
+                case 3:
+                    new Thread(r).start();
+                    break;
+                case 4:
+                    new Thread(r).start();
+                    break;
+
+            }
+        }
+        System.out.println("after thread count ="+Thread.activeCount());
+        while(isfinished){
+            if(Thread.activeCount()<=2){
+                isfinished = false;
+                for(String str:listtest){
+                    System.out.println("str="+str);
+                }
+                System.out.println("size :"+listtest.size());
+            }else{
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
         }
 
+        listtest.clear();
+    }
+
+
+    public  static List<String> listtest = Collections.synchronizedList(new ArrayList<String>());
+    //public  static List<String> listtest = new ArrayList<String>();
+
+    static class Task implements Runnable{
+
+        public String prifix ;
+        public Task(){
+
+        }
+
+        @Override
+        public void run() {
+            for(int i =0;i<125;i++){
+//                if(i ==3){
+//                    try {
+//                        Thread.sleep(500);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+                listtest.add(Thread.currentThread().getName()+"-"+i);
+            }
+        }
+    }
+
+
+    static class DeleteTask implements Runnable{
+
+        @Override
+        public void run() {
+            if(listtest != null&& listtest.size()>0){
+                Iterator iterator = listtest.iterator();
+                while(iterator.hasNext()){
+                    String next = (String) iterator.next();
+                    if(next.contains("0-0")){
+                        iterator.remove();
+                    }
+                }
+            }
+        }
     }
 
 
@@ -324,7 +419,7 @@ public class TestJava {
 
 
 
-    private static List<String> list = new ArrayList<String>();
+    public static List<String> list = new ArrayList<String>();
 
     public  synchronized static void addlist(){
         for(int i =0;i<20;i++){

@@ -1,5 +1,8 @@
 package com.xwtiger.devrescollect.statistics;
 
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Base64;
 
@@ -36,6 +39,8 @@ public class UploadEvent {
     public static void main(String[] args){
         getDataFromNet();
     }
+
+
 
     public static void getDataFromNet(){
         URL url = null;
@@ -222,4 +227,33 @@ public class UploadEvent {
     public static void testzip(){
 
     }
+
+
+    public static void simulationUpload(final IUploadCallBack callBack){
+
+        new AsyncTask<String,String,String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    //上传文件
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return "string";
+
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                callBack.uploadSuccess();
+            }
+        }.execute(new String[]{"adb","ada","add"});
+
+
+    }
+
+
+
 }
