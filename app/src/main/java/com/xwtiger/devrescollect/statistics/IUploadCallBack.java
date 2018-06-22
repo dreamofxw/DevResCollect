@@ -7,7 +7,7 @@ package com.xwtiger.devrescollect.statistics;
  */
 public interface IUploadCallBack {
 
-    public void uploadSuccess();
+    public void uploadSuccess(String key);
 
     public void uploadFailure();
 

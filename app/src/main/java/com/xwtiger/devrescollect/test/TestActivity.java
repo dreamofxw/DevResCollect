@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -14,17 +15,29 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
+import com.xwtiger.devrescollect.statistics.ActionLogBean;
+import com.xwtiger.devrescollect.statistics.AdditionalBean;
 import com.xwtiger.devrescollect.statistics.ExceptionUpLoadUtil;
 import com.xwtiger.devrescollect.statistics.TestStatistics;
+import com.xwtiger.devrescollect.statistics.UploadEvent;
 import com.xwtiger.devrescollect.statistics.YouShuStatistics;
 import com.xwtiger.devrescollect.statistics.cache.disc.FileManager;
+import com.xwtiger.devrescollect.statistics.cache.memory.MemorySizeCalculator;
 import com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Field;
+import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -120,7 +133,10 @@ public class TestActivity extends BaseActivity {
 
 //        FileManager.saveFile(this,"hahha");
 
-        YouShuStatistics.getInstance().startCheck();
+        /**
+         * 测试日志
+         */
+
         TestTask task = new TestTask();
         for(int i=0;i<5;i++){
             ExecutorService executorService = Executors.newCachedThreadPool();
@@ -128,18 +144,112 @@ public class TestActivity extends BaseActivity {
         }
 
 
-        ExceptionUpLoadUtil.getInstance().test();
+        //isExiteOfDrawable(this,"123");
+        ImageView iv = new ImageView(this);
+        iv.setImageResource(R.drawable.ic_launcher);
+
+
+        int resourceByReflect1 = getDrawableResourceByReflect("ic_launcher");
+        int resourceByReflect2 = getMipmapResourceByReflect("ic_launcher11222");
+        Log.d("resourceByReflect", "onCreate: resourceByReflect1="+resourceByReflect1);
+        Log.d("resourceByReflect", "onCreate: resourceByReflect2="+resourceByReflect2);
+
+        int resourceByReflect3 = getMipmapResourceByReflect("icon_fengjin");
+        int resourceByReflect4 = getDrawableResourceByReflect("icon_fengjin");
+        Log.d("resourceByReflect", "onCreate: resourceByReflect3="+resourceByReflect3);
+        Log.d("resourceByReflect", "onCreate: resourceByReflect4="+resourceByReflect4);
+
+        Log.d("actvitylifecycle", "onCreate: MODEL ="+ Build.MODEL+",SDK ="+Build.VERSION.SDK_INT);
+
+        parseJson();
+
+
+        new MemorySizeCalculator(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("actvitylifecycle", "onStart: ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("actvitylifecycle", "onResume: ");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("actvitylifecycle", "onPause: ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("actvitylifecycle", "onStop: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        isloop = false;
+        super.onDestroy();
+        handlerThread.quitSafely();
+        YouShuStatistics.getInstance().destroy();
+        Log.d("actvitylifecycle", "onDestroy: ");
+    }
+
+
+    public int getDrawableResourceByReflect(String drawableName){
+        Class<R.drawable> drawableClass = R.drawable.class;
+        try{
+            Field field = drawableClass.getField(drawableName);
+            int resid = field.getInt(field.getName());
+            return resid;
+        }catch(Exception e){
+            return 0;
+        }
+    }
+
+
+    public int getMipmapResourceByReflect(String drawableName){
+        Class<R.mipmap> mipmapClass = R.mipmap.class;
+        try{
+            Field field = mipmapClass.getField(drawableName);
+            int resid = field.getInt(field.getName());
+            return resid;
+        }catch(Exception e){
+            return 0;
+        }
+    }
+
+
+    public boolean isExiteOfDrawable(Context context,String drawablename){
+
+        int drawable = context.getResources().getIdentifier(drawablename, "drawable", context.getPackageName());
+        Log.d(TAG, "isExiteOfDrawable: packagename="+context.getPackageName());
+        //Log.d(TAG, "isExiteOfDrawable: drawable="+drawable);
+
+//        context.getResources().
+//        context.getResources().getDrawable(R.id."",null)
+
+
+        return true;
+
 
     }
 
     static class TestTask implements Runnable{
         @Override
         public void run() {
-            for(int i =0;i<100;i++){
+            for(int i =0;i<200;i++){
                 String name = Thread.currentThread().getName();
-                YouShuStatistics.getInstance().addEvent(name+"=="+i);
+                AdditionalBean additionalBean = new AdditionalBean("1234"+i,name);
+                ActionLogBean bean = new ActionLogBean("user_follow"+i,new Gson().toJson(additionalBean),"discover");
+                YouShuStatistics.getInstance().addEvent(bean);
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2600);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -195,6 +305,8 @@ public class TestActivity extends BaseActivity {
                         Log.d("handler.post","mTestHandler thread name ="+Thread.currentThread().getName());
                     }
                 });
+
+                UploadEvent.upLoadLog();
 
                 break;
             case R.id.btn_jumpmainact:
@@ -263,13 +375,7 @@ public class TestActivity extends BaseActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        isloop = false;
-        super.onDestroy();
-        handlerThread.quitSafely();
-        YouShuStatistics.getInstance().destroy();
-    }
+
 
 
     private static class TestHandler{
@@ -309,12 +415,7 @@ public class TestActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-
-    }
 
     public static class TTHandler extends Handler
     {
@@ -327,6 +428,39 @@ public class TestActivity extends BaseActivity {
             Log.d("TTHandler","threadname = "+Thread.currentThread().getName()+",msg="+msg.what);
 
         }
+    }
+
+
+    public void parseJson(){
+        String json = new Gson().toJson(new TestJson("xw","32"));
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            Iterator<String> keys = jsonObject.keys();
+            while (keys.hasNext()){
+                String next = keys.next();
+                String value = jsonObject.optString(next);
+                Log.d("parseJson", "parseJson: Iterator next ="+next);
+                Log.d("parseJson", "parseJson: Iterator value ="+value);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    class TestJson{
+
+        public String name;
+        public String age;
+
+        public TestJson(String name,String age){
+            this.name = name;
+            this.age = age;
+        }
+
     }
 
 

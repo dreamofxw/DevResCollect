@@ -5,6 +5,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
+
+import com.xwtiger.devrescollect.net.OkHttpClientManager;
+import com.xwtiger.devrescollect.net.ResultCallBack;
+import com.xwtiger.devrescollect.utils.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -20,12 +25,24 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.http.Url;
 
 /**
@@ -35,6 +52,10 @@ import retrofit2.http.Url;
  */
 public class UploadEvent {
 
+
+    public static String LogUrl ="http://logstat.laidan.com:9214";
+
+    public static String log = "/api/stat";
 
     public static void main(String[] args){
         getDataFromNet();
@@ -229,31 +250,55 @@ public class UploadEvent {
     }
 
 
-    public static void simulationUpload(final IUploadCallBack callBack){
+    public static void simulationUpload(final IUploadCallBack callBack, final String key){
 
         new AsyncTask<String,String,String>(){
             @Override
             protected String doInBackground(String... strings) {
                 try {
                     //上传文件
-                    Thread.sleep(2000);
+                    Thread.sleep(50000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                return "string";
+                return key;
 
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                callBack.uploadSuccess();
+                callBack.uploadSuccess(s);
             }
-        }.execute(new String[]{"adb","ada","add"});
+        }.execute(new String[]{key,"ada","add"});
 
 
     }
 
 
+    private static OkHttpClient mHttpClient;;
 
+
+    public static void upLoadLog(){
+        String url = LogUrl+log;
+        OkHttpClientManager.getInstance().postAsyHttp(url, new ResultCallBack() {
+            @Override
+            public void onError(Request request, Exception e) {
+                Log.d("upLoadLog", "onError: ");
+            }
+
+            @Override
+            public void onRespone(String str) throws IOException {
+                Log.d("upLoadLog", "onRespone: "+str);
+
+            }
+        },getParams(""));
+    }
+
+
+    public static Map<String,String> getParams(String json){
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("data",json);
+        return map;
+    }
 }

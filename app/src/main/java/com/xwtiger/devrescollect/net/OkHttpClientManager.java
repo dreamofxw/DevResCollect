@@ -3,8 +3,10 @@ package com.xwtiger.devrescollect.net;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.xwtiger.devrescollect.MyApplication;
 
 import java.io.File;
@@ -18,6 +20,7 @@ import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -55,10 +58,10 @@ public class OkHttpClientManager {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .writeTimeout(5,TimeUnit.SECONDS)
-                .readTimeout(5,TimeUnit.SECONDS)
-                .cache(new Cache(file.getAbsoluteFile(),maxCacheSize));
+                .readTimeout(5,TimeUnit.SECONDS);
+                //.cache(new Cache(file.getAbsoluteFile(),maxCacheSize));
         mOkHttpClient = builder.build();
-        mHandler = new Handler();
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
 
@@ -129,6 +132,28 @@ public class OkHttpClientManager {
     }
 
 
+    public void postAsyHttp1(String url, final UploadLogCallBack callback, String json, final String uploadkey){
+        MediaType type = MediaType.parse("application/json;charset=utf-8");
+        RequestBody formBody  = RequestBody.create(type,json);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Content-Type","application/json;charset=utf-8")
+                .post(formBody)
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //sendFailedCallBack(call,callBack,e);
+                callback.onError(call.request(),e,uploadkey);
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callback.onRespone(response.body().string(),uploadkey);
+            }
+        });
+    }
 
 
 }

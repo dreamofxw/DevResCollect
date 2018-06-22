@@ -4,6 +4,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.xwtiger.devrescollect.statistics.MD5Util;
 import com.xwtiger.devrescollect.study.javaapi.LogUtils;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
 import com.xwtiger.devrescollect.utils.TimeUtils;
@@ -15,17 +16,22 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -41,8 +47,86 @@ public class TestJava {
 
     public static void main(String[] args){
 
-        System.out.println(testReg("1.6000"));
+        //System.out.println(testReg("1.6000"));
+        //testMap();
+        testSign();
+    }
 
+    public static void testSign(){
+
+        Map<String,String> map = new HashMap<>();
+        map.put("c","e");
+        map.put("a","abc");
+        map.put("b","aa");
+
+        Set<String> strings = map.keySet();
+        ArrayList<String> list = new ArrayList<>(strings);
+        System.out.println("keyset ="+list.toString());
+        Collections.sort(list);
+        StringBuffer sb = new StringBuffer();
+        for(int i=0;i<list.size();i++){
+
+            sb.append("|");
+            sb.append(map.get(list.get(i)));
+
+        }
+        System.out.println("stringbuffer ="+sb.toString());
+        String secret ="76440b15b8d6907fd3df95933945be47a7e98c42";
+        String result = secret +sb.toString();
+        System.out.println("result = "+result);
+        String sign = testMD5(result);
+        String sign2 = MD5Util.encodeBy32BitMD5(result);
+        System.out.println("sign ="+sign);
+        System.out.println("sign2 ="+sign2);
+        System.out.println(sign.equals(sign2));
+
+    }
+
+    public static String testMD5(String source) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            byte[] b = digest.digest(source.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for (byte bt : b) {
+                int ibt = bt & 0xff;//抹掉高位
+                if (ibt < 16) {
+                    sb.append(0);
+                }
+                sb.append(Integer.toHexString(ibt));
+            }
+            return sb.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+
+    public static void testMap(){
+
+        Map<String,String> map = new HashMap<String,String>();
+
+        map.put("id",UUID.randomUUID().toString());
+        map.put("et","et");
+        map.put("ed","ed");
+        map.put("uid","12345");
+        map.put("v","Android/7.0/FRD-AL10/4.2.0");
+        map.put("ts",String.valueOf(System.currentTimeMillis()));
+
+        Set<String> strings = map.keySet();
+        List<String> list = new ArrayList(strings);
+        Collections.sort(list);
+        System.out.println(list.toString());
+
+        StringBuffer sb = new StringBuffer();
+        for(String s:list){
+            sb.append(map.get(s));
+        }
+        String sign = MD5Util.encodeBy32BitMD5(sb.toString());
+        map.put("sign",sign);
+
+        System.out.println(map.toString());
     }
 
 

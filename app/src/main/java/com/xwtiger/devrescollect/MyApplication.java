@@ -7,6 +7,8 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
+import com.xwtiger.devrescollect.statistics.YouShuStatistics;
+
 
 /**
  * Created by Busap-112 on 2018/1/9.
@@ -33,12 +35,13 @@ public class MyApplication extends Application {
                     .penaltyLog()
                     .build());
         }
-
-
+        YouShuStatistics.getInstance().startCheck();
     }
 
 
     public static Context getContext(){
         return context;
     }
+
+
 }

@@ -7,11 +7,17 @@ import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.xwtiger.devrescollect.MyApplication;
-import com.xwtiger.devrescollect.base.BaseActivity;
+import com.xwtiger.devrescollect.net.OkHttpClientManager;
+import com.xwtiger.devrescollect.net.UploadLogCallBack;
 import com.xwtiger.devrescollect.statistics.cache.disc.FileManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -20,6 +26,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.Request;
 
 /**
  * author:xw
@@ -38,12 +46,12 @@ public class YouShuStatistics {
 
     private static int checkFiletime = 2000;
 
-    private static int uploadfile_threshold= 1024;
+    private static int uploadfile_threshold= 4*1024;
 
 
-    private static final List<String> eventList = Collections.synchronizedList(new LinkedList<String>());
+    private static final List<ActionLogBean> eventList = Collections.synchronizedList(new LinkedList<ActionLogBean>());
 
-    private static List<String> cacheList = Collections.synchronizedList(new LinkedList<String>());
+    private static List<ActionLogBean> cacheList = Collections.synchronizedList(new LinkedList<ActionLogBean>());
 
     private static ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -55,6 +63,8 @@ public class YouShuStatistics {
     private HomeWatcherReceiver mHomeWatcherReceiver = null;
 
     private static YouShuStatistics instance = null;
+
+    private static volatile boolean isCheck = false;
 
 
     private YouShuStatistics(){};
@@ -75,123 +85,113 @@ public class YouShuStatistics {
      * 添加事件
      * @param event
      */
-    public void addEvent(final String event){
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (YouShuStatistics.class){
-                    eventList.add(event);
+    public void addEvent(final ActionLogBean event){
+        if(executorService != null){
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    synchronized (YouShuStatistics.class){
+                        eventList.add(event);
+                        //新添加
+                        checkCacheListSize();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**
      * 在application 中开启
      */
     public void startCheck(){
-        startCheckCacheSize();
-        checkCacheFileSize();
+        System.out.println("startCheck-------------------------");
+//        startCheckCacheSize();
+//        checkCacheFileSize();
         registerReceiver();
     }
 
-    public void removeEvent(final String str){
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (YouShuStatistics.class){
-                     eventList.remove(str);
-                }
-            }
-        });
-    }
 
     /**
      * 开启定时器检查内存缓存大小
      */
     private void startCheckCacheSize(){
-        timerService.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (YouShuStatistics.class){
-                    checkCacheListSize();
+        if(timerService != null ){
+            timerService.scheduleAtFixedRate(new Runnable() {
+                @Override
+                public void run() {
+                    synchronized (YouShuStatistics.class){
+                        checkCacheListSize();
+                    }
                 }
-            }
-        },1000, looptime,TimeUnit.MILLISECONDS);
+            },1000, looptime,TimeUnit.MILLISECONDS);
+        }
     }
-
 
     private  void checkCacheListSize(){
         if(eventList.size()>EVENTTHRESHOLD){
             //将数据写入缓存文件
             for (int i=EVENTTHRESHOLD;i>0;i--){
-                String removeobj = eventList.remove(i);
+                ActionLogBean removeobj = eventList.remove(i);
                 cacheList.add(0,removeobj);
             }
             saveJsonToFile();
         }else{
             //未达到条件什么不做
-            System.out.println("checkListSize =未达到条件什么不做");
-            if(loopNum >= 5){
-                loopfact = 2;
-                cacheList.clear();
-                cacheList.addAll(eventList);
-                eventList.clear();
-                if(cacheList.size()>0){
-                    saveJsonToFile();
-                }
-
-            }else if(loopNum >20){
-                loopfact = 4;
-            }
-            loopNum++;
+            System.out.println("checkCacheListSize =未达到条件什么不做");
         }
     }
 
     private void checkCacheFileSize(){
-        executorCheckFile.scheduleWithFixedDelay(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (FileManager.class){
-                    uploadFileByCondition();
+        if(executorCheckFile != null ){
+            executorCheckFile.scheduleWithFixedDelay(new Runnable() {
+                @Override
+                public void run() {
+                    synchronized (FileManager.class){
+                        uploadFileByCondition();
+                    }
                 }
-            }
-        },1000,checkFiletime,TimeUnit.MILLISECONDS);
+            },1000,checkFiletime,TimeUnit.MILLISECONDS);
+        }
+
     }
 
 
     private  void saveJsonToFile(){
-        final String result = cacheList.toString();
-        System.out.println("result ="+result);
-        cacheList.clear();
-        executorFile.execute(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (FileManager.class){
-                    FileManager.saveFile(null,result);
-                }
+        if(cacheList != null && cacheList.size()>0){
+            final String result = new Gson().toJson(cacheList);
+            System.out.println("saveJsonToFile result ="+result);
+            cacheList.clear();
+            if(executorFile != null && !executorFile.isShutdown()){
+                executorFile.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (FileManager.class){
+                            FileManager.saveFile(null,result);
+                            //新加
+                            uploadFileByCondition();
+                        }
+                    }
+                });
             }
-        });
+
+        }
+
     }
 
     /**
-     * 手动上传文件
+     * 手动上传文件  需要重新修改
      */
     public void manualUploadFile(){
-        File file = new File(".//log");
-        List<String> list = new ArrayList<String>();
-        FileManager.getUploadFileList(file,list);
-        System.out.println("上传文件的路径是"+list.toString());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(executorFile != null ){
+            executorFile.execute(new Runnable() {
+                @Override
+                public void run() {
+                    synchronized (FileManager.class){
+                        uploadFileByNoCondition();
+                    }
+                }
+            });
         }
-
-        for(String str:list){
-            FileManager.deleteDirAndFile(new File(str));
-        }
-
     }
 
     /**
@@ -199,52 +199,98 @@ public class YouShuStatistics {
      */
     public void uploadFileForBackGroundRunning(){
         //先保存内存缓存到文件
-        saveJsonToFile();
+        //saveJsonToFile();
+        synchronized (YouShuStatistics.class){
+            if(eventList.size()>0){
+                //将数据写入缓存文件
+                cacheList.addAll(eventList);
+                eventList.clear();
+                saveJsonToFile();
+            }
+        }
         //然后上传文件日志到后台
-        uploadFileByCondition();
+        if(executorFile != null ){
+            executorFile.execute(new Runnable() {
+                @Override
+                public void run() {
+                    synchronized (FileManager.class){
+                        uploadFileByNoCondition();
+                    }
+                }
+            });
+        }
     }
 
 
-
     private void uploadFileByCondition(){
-        File file = MyApplication.context.getExternalCacheDir();
-        //String statistics = externalCacheDir.getAbsolutePath()+path;
-        //File file = new File();
+        System.out.println("开始检查文件的大小  uploadFileByCondition");
+        /*final File file = MyApplication.context.getExternalCacheDir();
         if(!file.exists()){
             file.mkdir();
-        }
-        //File file = new File(".//log");
+        }*/
+
+        File file = FileManager.getCacheFile();
         int filesize = FileManager.readAllSize(file);
         System.out.println("filesize ="+filesize);
         if(filesize >uploadfile_threshold){
             //上传文件
-            final List<String> list = new ArrayList<String>();
-            FileManager.getUploadFileList(file,list);
-            System.out.println("上传文件的路径是"+list.toString());
-            UploadEvent.simulationUpload(new IUploadCallBack() {
+            uploadFileByNoCondition();
+        }
+    }
+
+    /**
+     * 直接上传文件
+     */
+    private void uploadFileByNoCondition(){
+        File file = FileManager.getCacheFile();
+        final ArrayList<String> list = new ArrayList<String>();
+        String key = FileManager.getUploadFileList(file, list);
+        System.out.println("上传文件的路径是"+FileManager.pendingUploadMap.get(key).toString());
+
+        String url = UploadEvent.LogUrl+UploadEvent.log;
+        ArrayList<String> upload_path = FileManager.pendingUploadMap.get(key);
+        for(String json:upload_path){
+            String log = FileManager.readFile(new File(json));
+            System.out.println("thread name start upload ="+Thread.currentThread().getName());
+            OkHttpClientManager.getInstance().postAsyHttp1(url, new UploadLogCallBack() {
                 @Override
-                public void uploadSuccess() {
-                    for(String str:list){
-                        FileManager.deleteDirAndFile(new File(str));
+                public void onError(Request request, Exception e,String uploadkey) {
+                    System.out.println("upLoadLog  onError" );
+                    //出错了，清除锁定的文件 但是没有删文件
+                    synchronized (FileManager.class){
+                        FileManager.pendingUpLoadKey.remove(uploadkey);
+                        ArrayList<String> remove = FileManager.pendingUploadMap.remove(uploadkey);
                     }
                 }
 
                 @Override
-                public void uploadFailure() {
-
+                public void onRespone(String str,String logkey) throws IOException {
+                    System.out.println("thread name end upload ="+Thread.currentThread().getName());
+                    System.out.println("upLoadLog   onRespone str=" +str.toString());
+                    synchronized (FileManager.class){
+                        ResultBean resultBean =new Gson().fromJson(str,ResultBean.class);
+                        FileManager.pendingUpLoadKey.remove(logkey);
+                        ArrayList<String> remove = FileManager.pendingUploadMap.remove(logkey);
+                        if(resultBean !=null && Integer.parseInt(resultBean.data.count)>0){
+                            if(remove != null && remove.size()>0){
+                                for(String s:remove){
+                                    FileManager.deleteDirAndFile(new File(s));
+                                }
+                            }
+                        }
+                    }
                 }
-
-                @Override
-                public void uploadCancel() {
-
-                }
-            });
-
+            },log,key);
         }
     }
 
 
     public void destroy(){
+        stopCheck();
+        MyApplication.getContext().unregisterReceiver(mHomeWatcherReceiver);
+    }
+
+    public void stopCheck(){
         if(executorService != null){
             executorService.shutdown();
         }
@@ -257,10 +303,9 @@ public class YouShuStatistics {
         if(executorCheckFile != null){
             executorCheckFile.shutdown();
         }
-        MyApplication.getContext().unregisterReceiver(mHomeWatcherReceiver);
+
 
     }
-
 
     public static class HomeWatcherReceiver extends BroadcastReceiver {
 
@@ -276,10 +321,10 @@ public class YouShuStatistics {
                 if (TextUtils.equals(SYSTEM_DIALOG_REASON_HOME_KEY, reason)) {
                     Log.d("HomeWatcherReceiver","按下home键 HomeWatcherReceiver");
                     YouShuStatistics.getInstance().uploadFileForBackGroundRunning();
+                    //YouShuStatistics.getInstance().stopCheck();
                 }
             }
         }
-
     }
 
     private void registerReceiver() {
@@ -288,5 +333,19 @@ public class YouShuStatistics {
         MyApplication.getContext().registerReceiver(mHomeWatcherReceiver, filter);
     }
 
+    public static boolean isGoodJson(String json) {
+        if (TextUtils.isEmpty(json)) {
+            return false;
+        }
+
+        try {
+            new JsonParser().parse(json);
+            return true;
+        } catch (JsonSyntaxException e) {
+            return false;
+        } catch (JsonParseException e) {
+            return false;
+        }
+    }
 
 }

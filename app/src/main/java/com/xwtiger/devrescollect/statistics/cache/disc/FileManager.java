@@ -13,13 +13,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * author:xw
@@ -32,88 +36,21 @@ public class FileManager {
 //    cacheDir =/data/user/0/com.xwtiger.devrescollect/cache
 //    externalStorageDirectory =/storage/emulated/0
     public static String path ="/statistics";
-    public static String testpath = "D:\\xwwworkspace\\code\\DevResCollect\\log";
 
-    public static int filestate_normal = 0;
-    public static int filestate_uploading = 1;
-    public static int filestate_uploadsuccess = 2;
-    public static int filestate_uploadfailure = 3;
+    public static final Map<String,ArrayList<String>> pendingUploadMap = Collections.synchronizedMap(new HashMap<String,ArrayList<String>>());
 
-    private static final List<String> pendingUploadList = Collections.synchronizedList(new LinkedList<String>());
-
+    public static final List<String> pendingUpLoadKey = Collections.synchronizedList(new LinkedList<String>());
 
     private static ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
 
-    public static void main(String[] args){
-//        String json="abcdefg"+"\r\n"+"123444"+"\r\n"+"咋呼或或哈或多哈多发多付";
-//        saveFile(null,json);
-//        File file = new File(testpath);
-//        File filesrc = new File(file.getAbsolutePath(), "test.txt");
-//        String json1 = readFile(filesrc);
-//        System.out.println("json ="+json1);
-//
-//        File file3 = new File(".\\");
-//        File filesrc1= new File(file3.getAbsolutePath(), "build.gradle");
-//        int filesize = readAllSize(filesrc1);
-//        System.out.println("filesize ="+filesize);
-
-        //删除目录
-//        File file4 = new File(".\\log");
-//        deleteDirAndFileeteDirAndFile(file4);
-
-
-        File file = new File(".//log");
-        //int filesize = FileManager.readAllSize(file);
-        //System.out.println("filesize ="+filesize);
-        final List<String> list = new ArrayList<>();
-        getUploadFileList(file,list);
-        System.out.println("list ="+list.toString());
-//        try {
-//            Thread.sleep(1500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        executorService.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                for(String str:list){
-//                    deleteDirAndFile(new File(str));
-//                }
-//            }
-//        });
-
-        UploadEvent.simulationUpload(new IUploadCallBack() {
-            @Override
-            public void uploadSuccess() {
-                for(String str:list){
-                    deleteDirAndFile(new File(str));
-                }
-            }
-
-            @Override
-            public void uploadFailure() {
-
-            }
-
-            @Override
-            public void uploadCancel() {
-
-            }
-        });
-
-
-    }
-
-
     ///storage/emulated/0/Android/data/com.xwtiger.devrescollect/cache
     public static  void saveFile(Context context,String json){
-        File file = MyApplication.context.getExternalCacheDir();
-        //String statistics = externalCacheDir.getAbsolutePath()+path;
-        //File file = new File();
+        /*File file = MyApplication.context.getExternalCacheDir();
         if(!file.exists()){
             file.mkdir();
-        }
+        }*/
+        final File file = getCacheFile();
         long currentTime = System.currentTimeMillis();
         System.out.println("start write file------------------");
         File destfile = new File(file.getAbsolutePath(),currentTime+".txt");
@@ -146,11 +83,12 @@ public class FileManager {
         BufferedInputStream bis = null;
         try {
             bis = new BufferedInputStream(new FileInputStream(file));
+            StringWriter sw = new StringWriter();
             StringBuffer sb = new StringBuffer();
             byte[] bytes = new byte[1024];
             int length=0;
             while((length =bis.read(bytes,0,bytes.length))!=-1){
-                sb.append(new String(bytes,"utf-8"));
+                sb.append(new String(bytes,0,length,"utf-8"));
             }
             bis.close();
             return sb.toString();
@@ -213,7 +151,17 @@ public class FileManager {
             }
 
         } else if (file.isFile()) {
-            totalsize =getFileSize(file);
+            boolean isContainer = false;
+            for(String key:pendingUpLoadKey){
+                ArrayList<String> pendinglist = pendingUploadMap.get(key);
+                if(pendinglist != null&&pendinglist.contains(file.getAbsolutePath())){
+                    isContainer =true;
+                    break;
+                }
+            }
+            if(!isContainer){
+                totalsize =getFileSize(file);
+            }
             //System.out.println("file ="+file.getName());
         }
         return totalsize;
@@ -225,7 +173,7 @@ public class FileManager {
      * @param result
      * @return
      */
-    public static List<String> getUploadFileList(File file,List<String> result){
+    public static String getUploadFileList(File file,ArrayList<String> result){
         if(file.isDirectory()){
             File[] files = file.listFiles();
             for (File f :files){
@@ -233,9 +181,22 @@ public class FileManager {
             }
         }else if (file.isFile()){
             String absolutePath = file.getAbsolutePath();
-            result.add(absolutePath);
+            boolean isContainer= false;
+            for(String key:pendingUpLoadKey){
+                ArrayList<String> pendinglist = pendingUploadMap.get(key);
+                if(pendinglist != null&&pendinglist.contains(absolutePath)){
+                    isContainer =true;
+                    break;
+                }
+            }
+            if(!isContainer){
+                result.add(absolutePath);
+            }
         }
-        return result;
+        String time = System.currentTimeMillis()+"";
+        pendingUpLoadKey.add(time);
+        pendingUploadMap.put(time,result);
+        return time;
     }
     
 
@@ -261,6 +222,15 @@ public class FileManager {
 
 
 
+    public static File getCacheFile(){
+        File file = MyApplication.context.getExternalCacheDir();
+        String statistics = file.getAbsolutePath()+path;
+        File filedest = new File(statistics);
+        if(!filedest.exists()){
+            filedest.mkdir();
+        }
+        return filedest;
+    }
 
 
 }

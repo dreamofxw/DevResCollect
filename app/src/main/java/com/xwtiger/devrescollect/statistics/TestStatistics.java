@@ -42,13 +42,13 @@ public class TestStatistics {
         @Override
         public void run() {
             for(int i =0;i<100;i++){
-                String name = Thread.currentThread().getName();
+               /* String name = Thread.currentThread().getName();
                 YouShuStatistics.getInstance().addEvent(name+"=="+i);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         }
     }
