@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         //classpath 'com.android.tools.build:gradle:3.0.1'
@@ -23,7 +24,7 @@ allprojects {
         //配置LeakCanary时添加的
         //mavenCentral()
         google()
-       // mavenCentral()
+        mavenCentral()
     }
 }
 

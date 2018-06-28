@@ -7,6 +7,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
+import com.bumptech.glide.annotation.GlideModule;
 import com.xwtiger.devrescollect.statistics.YouShuStatistics;
 
 
@@ -36,6 +37,9 @@ public class MyApplication extends Application {
                     .build());
         }
         YouShuStatistics.getInstance().startCheck();
+
+
+
     }
 
 

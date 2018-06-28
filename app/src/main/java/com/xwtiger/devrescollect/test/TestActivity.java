@@ -137,11 +137,11 @@ public class TestActivity extends BaseActivity {
          * 测试日志
          */
 
-        TestTask task = new TestTask();
-        for(int i=0;i<5;i++){
-            ExecutorService executorService = Executors.newCachedThreadPool();
-            executorService.execute(task);
-        }
+//        TestTask task = new TestTask();
+//        for(int i=0;i<5;i++){
+//            ExecutorService executorService = Executors.newCachedThreadPool();
+//            executorService.execute(task);
+//        }
 
 
         //isExiteOfDrawable(this,"123");
@@ -243,17 +243,17 @@ public class TestActivity extends BaseActivity {
     static class TestTask implements Runnable{
         @Override
         public void run() {
-            for(int i =0;i<200;i++){
-                String name = Thread.currentThread().getName();
-                AdditionalBean additionalBean = new AdditionalBean("1234"+i,name);
-                ActionLogBean bean = new ActionLogBean("user_follow"+i,new Gson().toJson(additionalBean),"discover");
-                YouShuStatistics.getInstance().addEvent(bean);
-                try {
-                    Thread.sleep(2600);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+//            for(int i =0;i<200;i++){
+//                String name = Thread.currentThread().getName();
+//                AdditionalBean additionalBean = new AdditionalBean("1234"+i,name);
+//                ActionLogBean bean = new ActionLogBean("user_follow"+i,new Gson().toJson(additionalBean),"discover");
+//                YouShuStatistics.getInstance().addEvent(bean);
+//                try {
+//                    Thread.sleep(2600);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
         }
     }
 

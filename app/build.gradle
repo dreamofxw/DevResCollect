@@ -8,12 +8,12 @@ android {
             storePassword '123456'
         }
     }
-    compileSdkVersion 25
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
     defaultConfig {
         applicationId "com.xwtiger.devrescollect"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -45,8 +45,8 @@ android {
 }
 
 ext {
-    support_v4_version='24.1.0'
-    android_need_version = '25.3.1'
+    support_v4_version='27.1.1'
+    android_need_version = '27.1.1'
     volley_need_version = '1.0.19'
     glide_need_version = '3.7.0'
     okhttp_need_version = '3.4.1'
@@ -61,20 +61,25 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile "com.android.support:appcompat-v7:${android_need_version}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile "com.android.support:recyclerview-v7:${android_need_version}"
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
-    compile 'com.android.support:design:25.3.1'
+    compile "com.android.support:design:${android_need_version}"
     //添加pickview
     compile 'com.contrarywind:Android-PickerView:3.2.7'
     //添加okhttp3.0
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okio:okio:1.7.0'
+
     //添加glide
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+
+
     //compile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
     // releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
     //compile 'com.squareup.leakcanary:leakcanary-android:1.5'

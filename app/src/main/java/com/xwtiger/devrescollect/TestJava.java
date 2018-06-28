@@ -1,21 +1,9 @@
 package com.xwtiger.devrescollect;
 
-import android.provider.Settings;
-import android.text.TextUtils;
-import android.util.Log;
-
 import com.xwtiger.devrescollect.statistics.MD5Util;
-import com.xwtiger.devrescollect.study.javaapi.LogUtils;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
 import com.xwtiger.devrescollect.utils.TimeUtils;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,12 +16,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
-import java.util.TimeZone;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -49,7 +36,14 @@ public class TestJava {
 
         //System.out.println(testReg("1.6000"));
         //testMap();
-        testSign();
+        //testSign();
+
+//        int i = new Random().nextInt(10);
+//        System.out.println(i);
+        for(int i=0;i<10;i++){
+            System.out.println(i%3);
+        }
+
     }
 
     public static void testSign(){
