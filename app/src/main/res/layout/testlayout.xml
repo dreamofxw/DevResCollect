@@ -3,7 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
-
     android:background="#fff"
     >
     <Button
@@ -19,6 +18,21 @@
         android:textColor="#ff0000"
         android:text="test"
         android:layout_marginTop="200dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_null"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="null"
+        android:gravity="center"
+    />
+    <TextView
+        android:id="@+id/tv_get"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="get"
+        android:gravity="center"
         />
 
 </LinearLayout>

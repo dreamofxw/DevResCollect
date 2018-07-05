@@ -21,8 +21,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.snappydb.DBFactory;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
+import com.xwtiger.devrescollect.prsenter.DBPresenter;
 import com.xwtiger.devrescollect.statistics.ActionLogBean;
 import com.xwtiger.devrescollect.statistics.AdditionalBean;
 import com.xwtiger.devrescollect.statistics.ExceptionUpLoadUtil;
@@ -54,6 +56,8 @@ public class TestActivity extends BaseActivity {
     private Button btnJump;
     private TestHandler mTestHandler;
     private TestHandler mTestHandler2;
+    private TextView tv_null;
+    private TextView tv_get;
 
     private Handler handler = new Handler(){
         @Override
@@ -78,6 +82,11 @@ public class TestActivity extends BaseActivity {
         container = (LinearLayout) findViewById(R.id.container);
         btn_start = (Button) findViewById(R.id.btn_start);
         btn_start.setOnClickListener(this);
+
+        tv_null = findViewById(R.id.tv_null);
+        tv_get = findViewById(R.id.tv_get);
+        tv_null.setOnClickListener(this);
+        tv_get.setOnClickListener(this);
 
         btnJump = (Button) findViewById(R.id.btn_jumpmainact);
         btnJump.setOnClickListener(this);
@@ -165,6 +174,9 @@ public class TestActivity extends BaseActivity {
 
 
         new MemorySizeCalculator(this);
+
+
+        DBPresenter.testPut(new DBPresenter.TestBean("aaa","bbb"));
     }
 
     @Override
@@ -312,6 +324,12 @@ public class TestActivity extends BaseActivity {
             case R.id.btn_jumpmainact:
                 Intent intent = new Intent(this, TestHandlerActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.tv_null:
+                DBPresenter.testPut(null);
+                break;
+            case R.id.tv_get:
+                DBPresenter.get();
                 break;
         }
     }
