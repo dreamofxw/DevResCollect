@@ -14,10 +14,18 @@ public class AlgorithmForArray {
 
     public static void main(String[] args){
 
-//        int[][] a ={{1,1,0,0,1,1},{1,0,1,1,0,1},{0,0,0,1,0,1}};
+        int[][] a ={{0,1,0,0,1,1},
+                    {0,0,1,0,0,1},
+                    {0,0,0,1,0,0},
+                    {0,0,0,0,1,0}};
 //        flippingImg(a);
 
+        //怎么分组
+        //取每组的最小值 相加得到一个最大的数
+//        int result = arrayPairSum(input);
+//        System.out.println("result ="+result);
 
+        System.out.println("boolean is "+isToeplitzMatrix(a));
 
     }
 
@@ -60,6 +68,96 @@ public class AlgorithmForArray {
                 System.out.println("-------------");
             }
         }
+    }
+
+
+    public static int arrayPairSum(int[] nums) {
+        int[] exist = new int[20001];
+        for (int i = 0; i < nums.length; i++) {
+            exist[nums[i] + 10000]++;
+        }
+        int sum = 0;
+        boolean odd = true;
+        for (int i = 0; i < exist.length; i++) {
+            while (exist[i] > 0) {
+                if (odd) {
+                    sum += i - 10000;
+                }
+                odd = !odd;
+                exist[i]--;
+            }
+        }
+        return sum;
+
+    }
+
+
+    /**
+     *
+     * 1 1 1 1
+     * 2 2 2 2
+     * 3 3 3 3
+     * 4 4 4 4
+     *
+     * @param matrix
+     * @return
+     */
+    public static boolean isToeplitzMatrix(int[][] matrix) {
+        boolean result = true;
+        a:for(int i=matrix.length-1;i<matrix.length&&i>0;i--){
+            if(i==matrix.length-1){
+                b:for(int j=0;j<matrix[i].length;j++){
+                    int temp1 =matrix[i][j];
+                    int column = j;
+                    int row = i;
+                    while(row-1>=0&&column-1>=0){
+                        int temp2 = matrix[row-1][column-1];
+                        if(temp2 !=temp1){
+                            result = false;
+                            return result;
+                        }
+                        row--;
+                        column--;
+                    }
+                }
+            }else{
+                int column =matrix[i].length-1;
+                int temp1 =matrix[i][column];
+                int row = i;
+                while(row-1>=0&&column-1>=0){
+                    int temp2 = matrix[row-1][column-1];
+                    if(temp2 != temp1){
+                        result = false;
+                        return result;
+                    }
+                    row--;
+                    column--;
+                }
+
+            }
+        }
+        return result;
+    }
+
+
+    /**
+     *
+     * @param nums
+     * @param r
+     * @param c
+     * @return
+     */
+    public int[][] matrixReshape(int[][] nums, int r, int c) {
+
+        if(nums != null && nums.length>0){
+            int temp_r = nums.length;
+            int temp_c = nums[0].length;
+
+
+
+        }
+
+        return null;
     }
 
 

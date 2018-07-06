@@ -24,6 +24,8 @@ import com.google.gson.JsonObject;
 import com.snappydb.DBFactory;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
+import com.xwtiger.devrescollect.net.RetrofitTest;
+import com.xwtiger.devrescollect.net.SimpleMockService;
 import com.xwtiger.devrescollect.prsenter.DBPresenter;
 import com.xwtiger.devrescollect.statistics.ActionLogBean;
 import com.xwtiger.devrescollect.statistics.AdditionalBean;
@@ -38,6 +40,7 @@ import com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
@@ -305,20 +308,38 @@ public class TestActivity extends BaseActivity {
 //                mTestHandler.sendMessage(mTestHandler2.mHandler,"gei two");
 //                handler.sendEmptyMessage(0);
 //                handler2.sendEmptyMessage(0);
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("handler.post","thread name ="+Thread.currentThread().getName());
-                    }
-                });
-                mTestHandler.mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("handler.post","mTestHandler thread name ="+Thread.currentThread().getName());
-                    }
-                });
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Log.d("handler.post","thread name ="+Thread.currentThread().getName());
+//                    }
+//                });
+//                mTestHandler.mHandler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Log.d("handler.post","mTestHandler thread name ="+Thread.currentThread().getName());
+//                    }
+//                });
+//
+//                UploadEvent.upLoadLog();
 
-                UploadEvent.upLoadLog();
+                try {
+                    SimpleMockService.test();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+//                    new Thread(){
+//                        @Override
+//                        public void run() {
+//                            super.run();
+//                            try {
+//
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }.start();
+
 
                 break;
             case R.id.btn_jumpmainact:
