@@ -36,6 +36,7 @@ import com.xwtiger.devrescollect.statistics.YouShuStatistics;
 import com.xwtiger.devrescollect.statistics.cache.disc.FileManager;
 import com.xwtiger.devrescollect.statistics.cache.memory.MemorySizeCalculator;
 import com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity;
+import com.xwtiger.devrescollect.utils.PermissionChecker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -179,7 +180,7 @@ public class TestActivity extends BaseActivity {
         new MemorySizeCalculator(this);
 
 
-        DBPresenter.testPut(new DBPresenter.TestBean("aaa","bbb"));
+        //DBPresenter.testPut(new DBPresenter.TestBean("aaa","bbb"));
     }
 
     @Override
@@ -274,7 +275,7 @@ public class TestActivity extends BaseActivity {
 
     private HandlerThread handlerThread;
     private Handler handlers123 ;
-
+    private PermissionChecker mPermissionChecker = new PermissionChecker(this);
 
 
     @Override
@@ -323,11 +324,11 @@ public class TestActivity extends BaseActivity {
 //
 //                UploadEvent.upLoadLog();
 
-                try {
-                    SimpleMockService.test();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    SimpleMockService.test();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 //                    new Thread(){
 //                        @Override
 //                        public void run() {
@@ -340,6 +341,14 @@ public class TestActivity extends BaseActivity {
 //                        }
 //                    }.start();
 
+//                if(mPermissionChecker.checkPermission()){
+//                    Intent intent_live = new Intent(this,SWCameraStreamingActivity.class);
+//                    startActivity(intent_live);
+//                }
+                Intent intent_live = new Intent(this,SWCameraStreamingActivity.class);
+                startActivity(intent_live);
+
+
 
                 break;
             case R.id.btn_jumpmainact:
@@ -347,7 +356,7 @@ public class TestActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.tv_null:
-                DBPresenter.testPut(null);
+               // DBPresenter.testPut(null);
                 break;
             case R.id.tv_get:
                 DBPresenter.get();

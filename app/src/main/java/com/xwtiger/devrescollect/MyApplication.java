@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.bumptech.glide.annotation.GlideModule;
+import com.qiniu.pili.droid.streaming.StreamingEnv;
 import com.xwtiger.devrescollect.statistics.YouShuStatistics;
 
 
@@ -36,8 +37,8 @@ public class MyApplication extends Application {
                     .penaltyLog()
                     .build());
         }
-        YouShuStatistics.getInstance().startCheck();
-
+        //YouShuStatistics.getInstance().startCheck();
+        StreamingEnv.init(getApplicationContext());
 
 
     }

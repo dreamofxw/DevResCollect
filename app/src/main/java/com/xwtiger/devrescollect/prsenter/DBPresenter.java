@@ -20,19 +20,19 @@ public class DBPresenter {
 
 
     public static void testPut(TestBean bean){
-        DB snappydb =null;
-        try {
-            snappydb = DBFactory.open(MyApplication.getContext(),null); //create or open an existing database using the default name
-            snappydb.put("key111",bean);
-        } catch (SnappydbException e) {
-
-        }finally {
-            try {
-                snappydb.close();
-            } catch (SnappydbException e) {
-                e.printStackTrace();
-            }
-        }
+//        DB snappydb =null;
+//        try {
+//            snappydb = DBFactory.open(MyApplication.getContext(),null); //create or open an existing database using the default name
+//            snappydb.put("key111",bean);
+//        } catch (SnappydbException e) {
+//
+//        }finally {
+//            try {
+//                snappydb.close();
+//            } catch (SnappydbException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
 
