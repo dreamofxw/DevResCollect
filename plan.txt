@@ -1,0 +1,12 @@
+
+2018年要做的事情
+1,glide源码分析
+2,okhttp源码分析
+3,retrifit源码分析
+4,rxjava源码分析
+5,kotlin的应用
+6,内存分析总结
+7,热更新方案及原理
+8,gradle编译
+9,android单元测试
+10,jinkens打包
