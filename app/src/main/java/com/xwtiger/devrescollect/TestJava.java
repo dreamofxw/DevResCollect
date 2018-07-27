@@ -46,11 +46,17 @@ public class TestJava {
 
     }
     
+
     
     public static void testSourceTree(){
         System.out.println("testSourceTree");
     }
     
+
+    public void fixbug(){
+        System.out.println("fixbug");
+    }
+
 
     public static void testSign(){
 
