@@ -45,6 +45,10 @@ public class TestJava {
         }
 
     }
+    
+    public void fixbug(){
+        System.out.println("fixbug");
+    }
 
     public static void testSign(){
 
