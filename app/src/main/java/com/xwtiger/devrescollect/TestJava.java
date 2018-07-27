@@ -58,10 +58,16 @@ public class TestJava {
     }
 
     /**
+
      * v1.0.0之后
      */
     public void fixbug2(){
         System.out.println("fixbugs");
+    }
+
+
+    public void fixbugforV100(){
+        System.out.println("fixbug");
     }
 
 
