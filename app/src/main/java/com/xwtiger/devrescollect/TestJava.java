@@ -57,6 +57,13 @@ public class TestJava {
         System.out.println("fixbug");
     }
 
+    /**
+     * v1.0.0之后
+     */
+    public void fixbug2(){
+        System.out.println("fixbugs");
+    }
+
 
     public static void testSign(){
 
