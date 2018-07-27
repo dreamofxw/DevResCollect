@@ -69,6 +69,10 @@ public class TestJava {
     public void fixbugforV100(){
         System.out.println("fixbug");
     }
+    
+    public void addDataFor(){
+        System.out.println("addDataFor");
+    }
 
 
     public static void testSign(){
