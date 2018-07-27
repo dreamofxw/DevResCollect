@@ -74,6 +74,10 @@ public class TestJava {
         System.out.println("addDataFor");
     }
 
+    public void addDataFor2(){
+        System.out.println("addDataFor");
+    }
+
 
     public static void testSign(){
 
