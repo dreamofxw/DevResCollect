@@ -74,6 +74,13 @@ public class TestJava {
         System.out.println("addDataFor");
     }
 
+    /**
+     * fixbug2.0.0
+     */
+    public void fixbugFor200(){
+        System.out.println("fix bug 2.0.0");
+    }
+
 
     public static void testSign(){
 
