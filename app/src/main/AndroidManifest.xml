@@ -26,7 +26,7 @@
 
         <!--android:theme="@style/ActivityTransitionTheme" -->
         <activity android:name="com.xwtiger.devrescollect.test.TestActivity"
-            android:theme="@style/Theme.NoBackGround"
+
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,6 +50,9 @@
             >
         </activity>
         <activity android:name="com.xwtiger.devrescollect.test.TestLockScreenActivity"
+            >
+        </activity>
+        <activity android:name="com.xwtiger.devrescollect.test.TestMyListViewActivity"
             >
         </activity>
     </application>

@@ -1,0 +1,177 @@
+﻿1，线程：
+   Thread:
+   AsyncTask :底层封装线程池（两个线程池）+handler
+   
+   IntentService:服务执行完之后自己停止，封装了HandlerThread,和handler
+   HanderThread:封装了一个loop的创建,是一个线程，run方法中创建了Looper，和消息队列
+
+2，JRT 和Dalvik的区别
+	a,在Dalvik下，应用每次运行都需要通过即时编译器（JIT）将字节码转换为机器码，
+	即每次都要编译加运行，这一机制并不高效，
+	但让应用安装比较快，而且更容易在不同硬件和架构上运行。
+	ART完全改变了这种做法，在应用安装时就预编译字节码到机器语言，
+	在移除解释代码这一过程后，应用程序执行将更有效率，启动更快。
+	b,ART占用空间比Dalvik大
+	c,Dalvik是即时编译(JIT)，每次运行都要调用;ART是预编译（AOT）,第一次安装运行一次
+
+3，手势和图片的旋转
+   通过matrix 和手势
+   
+4，android 内存分析工具 android studio 3.0之后又android  profiler ;dump java heap
+
+	在生成内存快照之前点下gc
+  在classes列表中，您可以看到以下信息： 
+	Heap Count: 堆中的实例数。
+	Shallow Size: 此堆中所有实例的总大小（以字节为单位）。
+	Retained Size: 这个类的所有实例(以字节为单位)保留的内存总大小
+	
+	在Instance View中，每个实例包括以下内容：
+	Depth：从任何GC根到所选实例的跳数最短。
+	Shallow Size：此实例的大小。
+	
+	Retained Size：retained heap值的计算方式是将retained set中的所有对象大小叠加。
+	或者说，由于X被释放，导致其它所有被释放对象（包括被递归释放的）所占的heap大小。。
+	
+	Mat 选中 android devices motior --->dump Hprof file 导出文件，用mat打开
+	
+	LeakCanary :
+	
+	
+5,进程：
+   android:process=":remote" ,已冒号表示的叫私有进程；其他应用的组件不可以和它跑在同一个进程中
+   进程名称不以“:”开头的进程都可以叫全局进程，其他应用通过设置相同的ShareUID可以和它跑在同一个进程 
+   
+   
+6，Application生命周期
+  onCreate ---初始化
+  onTerminate --程序终止的时候调用
+  onLowMemory --程序低内存的时候执行
+  onTrimMemory --程序在内存清理的时候调用
+  
+7，网络框架
+   tcp：三次握手建立连接，四次挥手断开连接；
+   http协议：
+   其实http 1.1 协议中对url的长度是不受限制的,之前的版本url长度限制在2048个字符内
+   get:用于获取数据
+   post:用于表单提交  
+   
+   httpclient 是Apache的，androidsdk在android6.0版本直接删除了HttpClient
+   httpclient的应用DefaultHttpClient
+   
+   在android2.2版本之前用httpclient是较好的选择；
+   HttpUrlConnection在2.2版本有个bug，对一个可读的InputStream调用close,就有可能导致连接池失效
+   但是android2.3以后HttpUrlConnection是最好的选择
+   它的体积小，API简单；HttpUrlConnection的压缩和缓存机制减少网络访问的流量；
+   httpUrlConnection.setRequestProperty用于添加请求头
+   
+   volley:2013年google推出，数据量不大，但通信频繁的的网络操作
+   原理：基于请求队列的（底层用的是优先级队列），
+   sdk>2.2 用HurlStack(底层封装的HttpUrlConnection)
+   小于2.2用HttpClientStack(底层封装的是AndroidHttpClient)
+   
+   添加到请求队列：添加到缓存队列
+     
+   缓存调度线程：从队列取出请求，如果有缓存的响应，则对缓存响应进行解析并回调给主线程
+   如果没有缓存响应，则将请求加入到网络调度线程
+   
+   网络调度线程：从队列出去请求，请求网络并回调给主线程
+   
+   ExecutorDelivery：集成了Executor ；注入了Handler
+       
+   修改头文件：重写request中的getHeaders方法
+     
+   okhttp
+   Dispatcher :任务调度；维护了一个线程池，可以使用默认的，也可以自定义线程池
+   其中okio是对java.io进行的封装，source 类似于inputstream ,seek 类似于outputstream
+   
+   glide的好处：
+   
+   
+   
+   
+   
+   b,关于缓存思路的总结：
+    volley可以设置磁盘缓存，
+	缓存策略：返回的数据有缓存到本地，头信息缓存在内存中（用的是LinkedHashMap）
+	key是请求方式+url
+	
+	okhttp的缓存思路：
+	磁盘缓存：post不缓存，get缓存；
+	
+	Android Universal Image Loader 缓存策略：
+	FIFO算法：添加缓存的时候如果文件大小+当前缓存大小大于缓存限制的大小，则先移除第一个缓存的大小
+	LRU(最近最少使用):
+	LFU（Least Frequently Used ），最近最少频率使用
+	与LRU的区别就是，LRU强调时间较长，LFU强调次数较少
+   
+   
+8，加密： 加密算法可以分为两类：对称加密和非对称加密
+   对称加密；需要对加密和解密使用相同密钥的加密算法；常用的有DES,AES加密（AES替代DES）
+   
+   非对称加密算法：需要两个密钥来进行加密和解密，这两个秘钥是公开密钥（public key，简称公钥）和私有密钥（private key，简称私钥）
+   私钥用于自己解密，公钥用于给对方加密 eg,RES加密
+   
+   
+   混淆 ：
+   apk加固
+   
+
+
+
+
+
+9 ActivityManagerService
+
+10 ANR
+    不需要root手机到处trace.txt的步骤
+    $:adb shell
+	$:cd data/anr(此处不要直接cd data，因为有些目录没有权限，会报permission deny)
+	$:ls
+	查看当前目录下的所有文件，并找到你想导出的那个（traces.txt，traces_1.txt，native1_1.txt，....）
+	$:ctrl+d或exit退出
+	$:adb pull data/anr/traces.txt
+   
+    $adb pull /data/anr/traces.txt   d:/     =》意思是将手机上的traces.txt导出到电脑的d目录下
+   
+   Trace文件分析stack调用情况
+   
+11 android studio 的使用
+   class文件的目录：app/build/intermediates/classes/
+   
+12 SharedPreferences 的commit和apply分析
+   如果关心存入结果则使用commit如果不关心存入结果则使用apply。
+   
+   apply是将修改数据原子提交到内存，而后异步真正提交到硬件磁盘；
+   而commit是同步的提交到硬件磁盘，因此，在多个并发的提交commit的时候，
+   他们会等待正在处理的commit保存到磁盘后在操作，从而降低了效率。
+   而apply只是原子的提交到内存，后面有调用apply的函数的将会直接覆盖前面的内存数据，
+   这样从一定程度上提高了很多效率
+   
+ 13 rxjava
+    被观察者：observable
+    观察者：observer,subscriber(在observer基础上扩展)	
+	subject = observable+observer
+14 图像优化
+  a，采样压缩，质量压缩bitmap compress
+  b，缓存：内存缓存，磁盘缓存，异步加载
+  c, 根据需求来修改像素格式，模式ARGB_8888,RGB_565
+  
+15 数据库
+  select name from person group by name having count(*)>1
+   Having与Where的区别
+ (1)where 子句的作用是在对查询结果进行分组前，将不符合where条件的行去掉，
+ 即在分组之前过滤数据，where条件中不能包含聚组函数，使用where条件过滤出特定的行。
+ 
+ (2)having 子句的作用是筛选满足条件的组，即在分组之后过滤数据，条件中经常包含聚组函数，
+ 使用having 条件过滤出特定的组，也可以使用多个分组标准进行分组。
+ 
+ 删除语句：delete from 表名 where 条件子句。如：delete from person  where id=10（删除id=10这行）
+ 插入语句：insert into 表名(字段列表) values(值列表)。如： insert into person(name, age) values(‘haha’,3)
+ 更新语句：update 表名 set 字段名=值 where 条件子句。如：update person set name=‘haha‘ where id=10
+ 
+16 git常用指令
+ 拉取pull 将远程代码拉到本地库，并合并到项目文件夹（merge）（=fetch+merge）
+ 获取fetch 将远程代码拉到本地库
+ commit将工作空间修改提交到本地库。
+ push将本地库修改提交到远程库
+ 

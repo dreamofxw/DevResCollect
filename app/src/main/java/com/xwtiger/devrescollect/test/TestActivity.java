@@ -345,7 +345,9 @@ public class TestActivity extends BaseActivity {
 //                    Intent intent_live = new Intent(this,SWCameraStreamingActivity.class);
 //                    startActivity(intent_live);
 //                }
-                Intent intent_live = new Intent(this,SWCameraStreamingActivity.class);
+//                Intent intent_live = new Intent(this,SWCameraStreamingActivity.class);
+//                startActivity(intent_live);
+                Intent intent_live = new Intent(this,TestMyListViewActivity.class);
                 startActivity(intent_live);
 
 

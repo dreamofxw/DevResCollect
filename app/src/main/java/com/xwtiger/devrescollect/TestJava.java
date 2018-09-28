@@ -1,9 +1,13 @@
 package com.xwtiger.devrescollect;
 
+import android.text.TextUtils;
+
 import com.xwtiger.devrescollect.statistics.MD5Util;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
 import com.xwtiger.devrescollect.utils.TimeUtils;
 
+import java.lang.ref.WeakReference;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +25,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -32,59 +38,141 @@ public class TestJava {
 
     public static boolean isfinished = true;
 
+    public static String REG_POS = ".*+f00";
+    public static String REG_REL = ".*?f00";
+    public static String REG_GRE = ".*f00";
+
+//    public static String Reg_gretest=".*[\\u4e00-\\u9fa5]+.*";
+//    public static String Reg_reltest=".*?[\\u4e00-\\u9fa5]+?.*?";
+//    public static String Reg_postest=".*+[\\u4e00-\\u9fa5]++.*+";
+
+//    public static String Reg_gretest=".*[\\[\\([a-z]\\)\\]]+.*";
+//    public static String Reg_reltest=".*?[\\[\\([a-z]\\)\\]]+?.*?";
+//    public static String Reg_postest=".*+[\\[\\([a-z]\\)\\]]++.*+";
+
+    public static String Reg_gretest=".*[a-z]+[a-z]+.*";
+    public static String Reg_reltest=".*?[a-z]+?[a-z]+?.*?";
+    public static String Reg_postest=".*+[a-z]++[a-z]++.*+";
+
+
+//    public static String test = "[\\u[a-fA-F0-9]{4}]";//
+//    public static String test1 = "[\\\\u[a-fA-F0-9]{4}]+";//
+    public static String test3 = "[\\uD83C\\uDF00-\\uD83D\\uDDFF]+";//
+    public static String test2 = "[\uD83C\uDF00-\uD83D\uDDFF]+|[\uD83E\uDD00-\uD83E\uDDFF]+|[\uD83D\uDE00-\uD83D\uDE4F]+|[\uD83D\uDE80-\uD83D\uDEFF]+";
+
+
+
+
+    public static final String ee_1 = "[(a)]";
+
     public static void main(String[] args){
+//        String test ="\uD83C\uDF37\uD83C\uDF38\uD83C\uDF39\uD83D\uDC2D\uD83C\uDF43\uD83D\uDDFB\uD83D\uDCA8\uD83D\uDCA6\uD83C\uDF0A\uD83C\uDF08";
+//        String source="\uD83C\uDF38\uD83C\uDF39\uD83D\uDC2D\uD83C\uDF43";//🌸🌹🐭🍃
 
-        //System.out.println(testReg("1.6000"));
-        //testMap();
-        //testSign();
+        String fact = "fact";
+        String s = test32(test31(fact), fact);
+        System.out.println("result ="+s);
+    }
 
-//        int i = new Random().nextInt(10);
-//        System.out.println(i);
-        for(int i=0;i<10;i++){
-            System.out.println(i%3);
+
+    public static String test31(String str){
+
+        return "test31"+str;
+    }
+
+    public static String test32(String str,String fact){
+        System.out.println("test32");
+        fact = "123";
+        return str;
+    }
+
+
+
+    static class Parent{
+
+        public void test(){
+            System.out.println("parent.test");
         }
+    }
+
+    static class Child extends Parent{
+        @Override
+        public void test() {
+            //super.test();
+            System.out.println("child test");
+        }
+    }
+
+
+    
+    public static void testWeak(){
+        WeakReference<TestBean> weakReference = new WeakReference<>(new TestBean("zhangsan"));
+        weakReference.clear();
+        System.out.println(weakReference.get());
+        System.gc();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(weakReference);
+        weakReference = new WeakReference<>(new TestBean("lisi"));
+        System.out.println(weakReference);
+        
 
     }
-    
-
-    
-    public static void testSourceTree(){
-        System.out.println("testSourceTree");
+    static class TestBean{
+        public TestBean(String name){
+            this.name = name;
+        }
+        public String name;
     }
-    
 
-    public void fixbug(){
-        System.out.println("fixbug");
+    public static boolean isContainerChinese(String source,String reg){
+        //String reg =".*[\\u4e00-\\u9fa5]+.*";//Greedy
+
+
+        return source.matches(reg);
+    }
+
+
+    public static boolean isContainerEnglish(String source){
+        String reg= ".*[a-zA-Z]+.*";
+        if(TextUtils.isEmpty(source)){
+            return false;
+        }
+        return source.matches(reg);
     }
 
     /**
-
-     * v1.0.0之后
+     * 是否包含数字
+     * @param source
+     * @return
      */
-    public void fixbug2(){
-        System.out.println("fixbugs");
+    public static boolean isContainerNum(String source){
+        String reg= ".*[0-9]+.*";
+        if(TextUtils.isEmpty(source)){
+            return false;
+        }
+        return source.matches(reg);
+    }
+
+    public static boolean regex3(String reg,String input){
+        Pattern p = Pattern.compile(reg);
+        Matcher matcher = p.matcher(input);
+        while (matcher.find()) {
+            System.out.println("matched form " + matcher.start() + " to " + matcher.end());
+            return true;
+        }
+        return false;
     }
 
 
-    public void fixbugforV100(){
-        System.out.println("fixbug");
+
+    public static void testReg(String source,String reg){
+        System.out.println(source.matches(reg));
     }
     
-    public void addDataFor(){
-        System.out.println("addDataFor");
-    }
-
-
-    public void addDataFor2(){
-        System.out.println("addDataFor");
-
-    /**
-     * fixbug2.0.0
-     */
-    public void fixbugFor200(){
-        System.out.println("fix bug 2.0.0");
-
-    }
 
 
     public static void testSign(){

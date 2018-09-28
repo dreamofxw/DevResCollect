@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     signingConfigs {
         config {
@@ -64,7 +65,7 @@ dependencies {
     })
     compile "com.android.support:appcompat-v7:${android_need_version}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    //testCompile 'junit:junit:4.12'
     compile "com.android.support:recyclerview-v7:${android_need_version}"
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.trello:rxlifecycle:1.0'
@@ -80,13 +81,13 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:${retrofit_need_version}"
     compile "com.squareup.retrofit2:retrofit-mock:${retrofit_need_version}"
     //添加glide
-    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    compile 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     // NoSql数据库框架-SnappyDB
     compile 'com.snappydb:snappydb-lib:0.5.2'
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'
     //七牛推流
-    implementation files('libs/pldroid-media-streaming-2.3.0.jar')
+    compile files('libs/pldroid-media-streaming-2.3.0.jar')
     compile 'com.qiniu:happy-dns:0.2.+'
     //compile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
     // releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
@@ -96,6 +97,6 @@ dependencies {
                     * Android 目前可查询的网址
                     * https://developer.android.google.cn/topic/libraries/support-library/rev-archive.html
                     * */
-    implementation 'com.google.code.gson:gson:2.8.5'
+    compile 'com.google.code.gson:gson:2.8.5'
 
 }
