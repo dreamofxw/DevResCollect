@@ -71,6 +71,8 @@ public class TestJava extends TestUapte{
 
 
        //data:image/png;base64
+       System.out.println("test1");
+
 
     }
 
