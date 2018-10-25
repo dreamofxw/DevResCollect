@@ -17,6 +17,7 @@ android {
         targetSdkVersion TARGET_VERSON as int
         versionCode 1
         versionName "1.0"
+        resValue "string","app_name","DevResCollect"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -29,7 +30,11 @@ android {
     }
     flavorDimensions "versionCode"
     productFlavors {
-        kuan {}
+        kuan {
+            applicationId "com.test"
+            resValue "string","app_name","testPush"
+            // manifestPlaceholders = [app_icon : "@mipmap/ic_launcher1"]
+        }
         xiaomi {}
         qh360 {}
         baidu {}

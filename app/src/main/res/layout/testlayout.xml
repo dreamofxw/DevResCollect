@@ -11,6 +11,13 @@
         android:id="@+id/btn_jumpmainact"
         />
 
+    <TextView
+        android:id="@+id/tv_pack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="包名"
+        />
+
     <Button
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"

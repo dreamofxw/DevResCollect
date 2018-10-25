@@ -62,6 +62,7 @@ public class TestActivity extends BaseActivity {
     private TestHandler mTestHandler2;
     private TextView tv_null;
     private TextView tv_get;
+    private TextView tv_pack;
 
     private Handler handler = new Handler(){
         @Override
@@ -94,6 +95,10 @@ public class TestActivity extends BaseActivity {
 
         btnJump = (Button) findViewById(R.id.btn_jumpmainact);
         btnJump.setOnClickListener(this);
+
+        tv_pack = findViewById(R.id.tv_pack);
+
+        tv_pack.setText(getPackageName());
 
         tv = new TextView(this);
         //TestView textView = new TestView(this);
@@ -361,7 +366,7 @@ public class TestActivity extends BaseActivity {
                // DBPresenter.testPut(null);
                 break;
             case R.id.tv_get:
-                DBPresenter.get();
+                //DBPresenter.get();
                 break;
         }
     }

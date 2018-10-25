@@ -37,22 +37,22 @@ public class DBPresenter {
 
 
     public static void get(){
-        DB snappydb =null;
-        try{
-            snappydb = DBFactory.open(MyApplication.getContext(),null);
-            if(snappydb.exists("key111")){
-                TestBean bean = snappydb.getObject("key111", TestBean.class);
-                Log.d("DBPresenter", "get: key1 =");
-            }
-        }catch (SnappydbException e){
-            e.printStackTrace();
-        }finally {
-            try {
-                snappydb.close();
-            } catch (SnappydbException e) {
-                e.printStackTrace();
-            }
-        }
+//        DB snappydb =null;
+//        try{
+//            snappydb = DBFactory.open(MyApplication.getContext(),null);
+//            if(snappydb.exists("key111")){
+//                TestBean bean = snappydb.getObject("key111", TestBean.class);
+//                Log.d("DBPresenter", "get: key1 =");
+//            }
+//        }catch (SnappydbException e){
+//            e.printStackTrace();
+//        }finally {
+//            try {
+//                snappydb.close();
+//            } catch (SnappydbException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
     }
 
