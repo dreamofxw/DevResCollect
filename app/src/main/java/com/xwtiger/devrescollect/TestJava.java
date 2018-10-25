@@ -80,6 +80,7 @@ public class TestJava extends TestUapte{
        System.out.println("testbrand3 test7");
        System.out.println("master test9");
        System.out.println("testbrand4 test8");
+       System.out.println("testbrand5 test9");
 
 
     }
