@@ -77,6 +77,7 @@ public class TestJava extends TestUapte{
        System.out.println("test4");
        System.out.println(" master test5");
        System.out.println("testbrand2 test4");
+       System.out.println("testbrand3 test7");
 
 
     }
