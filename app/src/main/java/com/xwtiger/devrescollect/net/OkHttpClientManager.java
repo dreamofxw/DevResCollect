@@ -11,10 +11,24 @@ import com.xwtiger.devrescollect.MyApplication;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Cache;
 import okhttp3.Call;
@@ -69,6 +83,12 @@ public class OkHttpClientManager {
         final Request request = new Request.Builder().url(url).build();
         Call call = mOkHttpClient.newCall(request);
         dealResult(call,callBack);
+        //同步调用
+//        try {
+//            call.execute();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void postAsyHttp(String url,ResultCallBack callback,Map<String,String> map){
@@ -153,7 +173,19 @@ public class OkHttpClientManager {
                 callback.onRespone(response.body().string(),uploadkey);
             }
         });
+        call.cancel();
     }
 
+
+    public void callAllRequest(){
+        mOkHttpClient.dispatcher().cancelAll();
+    }
+
+
+
+    public void supportHttps(InputStream... certificates){
+
+
+    }
 
 }

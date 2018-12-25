@@ -18,41 +18,68 @@ import java.io.Serializable;
  */
 public class DBPresenter {
 
+    public static String key = "key111";
+    public static String tag = "DBPresenter";
 
     public static void testPut(TestBean bean){
-//        DB snappydb =null;
-//        try {
-//            snappydb = DBFactory.open(MyApplication.getContext(),null); //create or open an existing database using the default name
-//            snappydb.put("key111",bean);
-//        } catch (SnappydbException e) {
-//
-//        }finally {
-//            try {
-//                snappydb.close();
-//            } catch (SnappydbException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        DB snappydb =null;
+        try {
+            snappydb = DBFactory.open(MyApplication.getContext()); //create or open an existing database using the default name
+            snappydb.put(key,bean);
+            Log.d(tag,"put success");
+        } catch (SnappydbException e) {
+
+        }finally {
+            try {
+                snappydb.close();
+            } catch (SnappydbException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
-    public static void get(){
-//        DB snappydb =null;
-//        try{
-//            snappydb = DBFactory.open(MyApplication.getContext(),null);
-//            if(snappydb.exists("key111")){
-//                TestBean bean = snappydb.getObject("key111", TestBean.class);
-//                Log.d("DBPresenter", "get: key1 =");
-//            }
-//        }catch (SnappydbException e){
-//            e.printStackTrace();
-//        }finally {
-//            try {
-//                snappydb.close();
-//            } catch (SnappydbException e) {
-//                e.printStackTrace();
-//            }
-//        }
+    public static TestBean get(){
+        DB snappydb =null;
+        try{
+            snappydb = DBFactory.open(MyApplication.getContext());
+            if(snappydb.exists(key)){
+                TestBean bean = snappydb.getObject(key, TestBean.class);
+                Log.d(tag, "get: key1 =");
+                return bean;
+            }
+            Log.d(tag, "get: null ");
+        }catch (SnappydbException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                snappydb.close();
+            } catch (SnappydbException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+    public static void deleteObj(){
+        DB snappydb =null;
+        try{
+           snappydb = DBFactory.open(MyApplication.getContext());
+            if(snappydb.exists(key)){
+                snappydb.del(key);
+                Log.d(tag,"deleteobj success");
+            }
+
+        }catch(Exception e){
+
+        }finally {
+            try {
+                snappydb.close();
+            } catch (SnappydbException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 

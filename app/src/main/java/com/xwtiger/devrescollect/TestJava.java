@@ -1,6 +1,9 @@
 package com.xwtiger.devrescollect;
 
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.widget.ListView;
 
 import com.xwtiger.devrescollect.statistics.MD5Util;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
@@ -9,10 +12,13 @@ import com.xwtiger.devrescollect.utils.TimeUtils;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.sql.SQLTransientException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -26,9 +32,16 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 import java.util.UUID;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.internal.Util;
+import retrofit2.http.Url;
 
 /**
  *
@@ -65,24 +78,141 @@ public class TestJava extends TestUapte{
 
     public static final String ee_1 = "[(a)]";
 
-    public static void main(String[] args){
+    public static void main(String[] args)   {
 //        String test ="\uD83C\uDF37\uD83C\uDF38\uD83C\uDF39\uD83D\uDC2D\uD83C\uDF43\uD83D\uDDFB\uD83D\uDCA8\uD83D\uDCA6\uD83C\uDF0A\uD83C\uDF08";
 //        String source="\uD83C\uDF38\uD83C\uDF39\uD83D\uDC2D\uD83C\uDF43";//🌸🌹🐭🍃
 
 
        //data:image/png;base64
-       System.out.println("test1");
-       System.out.println("test2");
-       System.out.println("test3");
-       System.out.println("test4");
-       System.out.println(" master test5");
-       System.out.println("testbrand2 test4");
-       System.out.println("testbrand3 test7");
-       System.out.println("master test9");
-       System.out.println("testbrand4 test8");
-       System.out.println("testbrand5 test9");
+
+        java.net.URL  url = null;
+        try {
+            url = new  java.net.URL("https://i.cnblogs.com/EditPosts.aspx?postid=9007907");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        List<String> list = addList();
 
 
+        List<List<String>> result = spliteData(list);
+        
+        System.out.println(result);
+       
+
+
+    }
+
+    public static List<String> addList(){
+        List<String> list = new ArrayList<>();
+        for(int i=0;i<1;i++){
+            list.add("string"+i);
+        }
+        return list;
+    }
+
+
+    public static List<List<String>> spliteData(List<String> bean){
+        int fact = 3;
+        List<List<String>> list_result = null;
+        if(bean != null){
+            List<String> list = bean;
+            if(list != null && list.size()>0){
+                list_result = new ArrayList<>();
+                List<String> temp = new ArrayList<>();
+                for(int i =0;i<list.size();i++){
+                    temp.add(list.get(i));
+                    if(temp.size()==3||i==list.size()-1){
+                        List<String> result = new ArrayList<>(temp);
+                        temp.clear();
+                        list_result.add(result);
+                    }
+                }
+            }
+        }
+        return list_result;
+
+    }
+
+
+
+    public static void tesSwitch(){
+        int a = 0;
+        switch (a){
+            case 0:
+                System.out.println("0");
+            case 1:
+                System.out.println("1");
+            case 2:
+                System.out.println("2");
+            case 3:
+                System.out.println("3");
+            case 4:
+                System.out.println("4");
+            case 5:
+                System.out.println("5");
+
+        }
+    }
+
+
+
+    public static void testThreads(){
+        //SynchronousQueue<Runnable>()
+        //Integer.MAX_VALUE
+        ThreadPoolExecutor tpe =  new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<Runnable>(1), new ThreadFactory() {
+            @Override
+            public Thread newThread(@NonNull Runnable r) {
+                Thread t = new Thread(r);
+                return t;
+            }
+        });
+        for(int i =0;i<100;i++){
+            tpe.execute(new TestThreads());
+        }
+    }
+
+
+    static class TestThreads implements Runnable{
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(3000);
+                System.out.println("threadName="+Thread.currentThread().getName());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+
+
+    public static String testchain(){
+
+        List<TestInteceptor> list = new ArrayList<>();
+        for(int i=0;i<10;i++){
+            list.add(new TestInteceptor(i));
+        }
+
+        TestChain testChain = new TestChain(list,0);
+        return testChain.process();
+
+    }
+
+
+
+
+    
+    
+    public static void testQueue(){
+        int size = 30;
+        ArrayDeque arrayDeque = new ArrayDeque();
+        for(int i =0;i<size;i++){
+            arrayDeque.add("string"+i);
+        }
+        System.out.println(arrayDeque);
     }
 
     public class hh{

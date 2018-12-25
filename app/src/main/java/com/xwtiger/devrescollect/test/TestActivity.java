@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,18 +14,25 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.snappydb.DBFactory;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
+import com.xwtiger.devrescollect.net.OkHttpClientManager;
+import com.xwtiger.devrescollect.net.ResultCallBack;
 import com.xwtiger.devrescollect.net.RetrofitTest;
 import com.xwtiger.devrescollect.net.SimpleMockService;
 import com.xwtiger.devrescollect.prsenter.DBPresenter;
@@ -37,6 +46,8 @@ import com.xwtiger.devrescollect.statistics.cache.disc.FileManager;
 import com.xwtiger.devrescollect.statistics.cache.memory.MemorySizeCalculator;
 import com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity;
 import com.xwtiger.devrescollect.utils.PermissionChecker;
+import com.xwtiger.devrescollect.view.TestDialog;
+import com.xwtiger.devrescollect.view.TestPopuwindow;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +57,8 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import okhttp3.Request;
 
 /**
  * Created by Busap-112 on 2017/11/10.
@@ -63,6 +76,10 @@ public class TestActivity extends BaseActivity {
     private TextView tv_null;
     private TextView tv_get;
     private TextView tv_pack;
+    private TextView tv_put;
+    private ImageView iv_progress;
+
+    private TextView tv_26;
 
     private Handler handler = new Handler(){
         @Override
@@ -90,6 +107,13 @@ public class TestActivity extends BaseActivity {
 
         tv_null = findViewById(R.id.tv_null);
         tv_get = findViewById(R.id.tv_get);
+        iv_progress = findViewById(R.id.iv_progress);
+
+
+        iv_progress.setImageResource(R.drawable.ebook_ani);
+        AnimationDrawable animationDrawable = (AnimationDrawable) iv_progress.getDrawable();
+        animationDrawable.start();
+
         tv_null.setOnClickListener(this);
         tv_get.setOnClickListener(this);
 
@@ -97,6 +121,8 @@ public class TestActivity extends BaseActivity {
         btnJump.setOnClickListener(this);
 
         tv_pack = findViewById(R.id.tv_pack);
+        tv_put = findViewById(R.id.tv_put);
+        tv_put.setOnClickListener(this);
 
         tv_pack.setText(getPackageName());
 
@@ -146,7 +172,8 @@ public class TestActivity extends BaseActivity {
 
         handlers123.sendEmptyMessage(1);
 
-
+        ListView list = new ListView(this);
+        //list.setAdapter();
         //test
 
 //        FileManager.saveFile(this,"hahha");
@@ -185,7 +212,26 @@ public class TestActivity extends BaseActivity {
         new MemorySizeCalculator(this);
 
 
+
+
+        String str= "abc";
+        Log.d("isGsonJson","isgsonjson = "+isGsonJson(str));
         //DBPresenter.testPut(new DBPresenter.TestBean("aaa","bbb"));
+
+
+
+        TextView tv_26 = findViewById(R.id.tv_26);
+        TextView tv_90 = findViewById(R.id.tv_90);
+        TextView tv_18 = findViewById(R.id.tv_18);
+
+        Log.d("testpadding","tv_26.getPaddingTop "+tv_26.getPaddingTop());
+        Log.d("testpadding","v_26.getPaddingBottom "+tv_26.getPaddingBottom());
+        Log.d("testpadding","tv_90.getPaddingBottom "+tv_90.getPaddingTop());
+        Log.d("testpadding","tv_90.getPaddingBottom "+tv_90.getPaddingBottom());
+        Log.d("testpadding","tv_18.getPaddingBottom "+tv_18.getPaddingTop());
+        Log.d("testpadding","tv_18.getPaddingBottom "+tv_18.getPaddingBottom());
+
+
     }
 
     @Override
@@ -352,9 +398,39 @@ public class TestActivity extends BaseActivity {
 //                }
 //                Intent intent_live = new Intent(this,SWCameraStreamingActivity.class);
 //                startActivity(intent_live);
-                Intent intent_live = new Intent(this,TestMyListViewActivity.class);
-                startActivity(intent_live);
+//                Intent intent_live = new Intent(this,TestMyListViewActivity.class);
+//                startActivity(intent_live);
+//                String url = "https://kyfw.12306.cn/otn/";
+//                OkHttpClientManager.getInstance().getAsynHttp(url, new ResultCallBack() {
+//                    @Override
+//                    public void onError(Request request, Exception e) {
+//                      Log.d("testtsl",e.getMessage());
+//                      Log.d("testtsl","error");
+//                    }
+//
+//                    @Override
+//                    public void onRespone(String str) throws IOException {
+//                        Log.d("testtsl",str);
+//                        Log.d("testtsl","success");
+//                    }
+//                });
 
+                /*Uri uri = Uri.parse("https://i.cnblogs.com/EditPosts.aspx?postid=9007907&uid=123&username=xww");
+
+                System.out.println("getAuthority="+uri.getAuthority());
+                System.out.println("getHost="+uri.getHost());
+                System.out.println("getPath="+uri.getPath());
+                System.out.println("getQuery="+uri.getQuery());
+                System.out.println("getQueryParameterNames="+uri.getQueryParameterNames());
+                System.out.println("getScheme="+uri.getScheme());
+                System.out.println("getQueryParameters="+uri.getQueryParameters("postid"));*/
+
+
+               /* TestDialog testDialog = new TestDialog(this);
+                testDialog.show();*/
+
+                TestPopuwindow testPopuwindow = new TestPopuwindow(this);
+                testPopuwindow.showAsDropDown(container);
 
 
                 break;
@@ -363,10 +439,16 @@ public class TestActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.tv_null:
-               // DBPresenter.testPut(null);
+                DBPresenter.deleteObj();
                 break;
             case R.id.tv_get:
-                //DBPresenter.get();
+                DBPresenter.get();
+                break;
+            case R.id.tv_put:
+//                DBPresenter.TestBean testBean = new DBPresenter.TestBean("123","345");
+//                DBPresenter.testPut(testBean);
+                String json= "abcahdadshfadsfads";
+                Log.d("isGsonJson","isgsonjson = "+isGsonJson(json));
                 break;
         }
     }
@@ -516,6 +598,20 @@ public class TestActivity extends BaseActivity {
             this.age = age;
         }
 
+    }
+
+    public static boolean isGsonJson(String json) {
+        if (TextUtils.isEmpty(json)) {
+            return false;
+        }
+        try {
+            new JsonParser().parse(json);
+            return true;
+        } catch (JsonSyntaxException e) {
+            return false;
+        } catch (JsonParseException e) {
+            return false;
+        }
     }
 
 
