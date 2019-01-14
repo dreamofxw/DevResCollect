@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
-            keyPassword '123456'
-            storeFile file('C:/Users/xwadmin/DesResColletKey.jks')
-            storePassword '123456'
-        }
+//        config {
+//            keyPassword '123456'
+//            storeFile file('C:/Users/xwadmin/DesResColletKey.jks')
+//            storePassword '123456'
+//        }
     }
     compileSdkVersion 27
     buildToolsVersion "27.0.2"
