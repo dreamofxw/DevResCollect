@@ -8,4 +8,21 @@ package com.xwtiger.devrescollect.study.javaapi;
  * //</editor-fold>
  */
 public class TestLifeBean {
+
+    static{
+        System.out.println("TestLifeBean 静态成员");
+    }
+
+    {
+        System.out.println("TestLifeBean 非静态成员");
+    }
+
+    public TestLifeBean(){
+        System.out.println("TestLifeBean 构造方法");
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+    }
 }

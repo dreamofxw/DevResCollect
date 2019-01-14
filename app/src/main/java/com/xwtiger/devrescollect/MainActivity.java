@@ -1,6 +1,7 @@
 package com.xwtiger.devrescollect;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.net.OkHttpClientManager;
 import com.xwtiger.devrescollect.net.ResultCallBack;
 import com.xwtiger.devrescollect.study.androidapi.AnmitorStudy;
+import com.xwtiger.devrescollect.test.TestActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -29,6 +31,8 @@ public class MainActivity extends BaseActivity {
     private Button btn_start;
     private Button btn_reversal;
     private static TestJava testjava = new TestJava();
+
+    private TextView nextpage;
 
 //    private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 //    private static final int COUNT_BITS = Integer.SIZE - 3;
@@ -64,14 +68,17 @@ public class MainActivity extends BaseActivity {
         textView = (TextView) findViewById(R.id.tv);
         btn_start = (Button) findViewById(R.id.btn_start);
         btn_reversal = (Button) findViewById(R.id.btn_reversal);
+        nextpage = (TextView) findViewById(R.id.nextpage);
 
-        btn_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    System.out.println("");
-            }
-        });
+//        btn_start.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                    System.out.println("");
+//            }
+//        });
         btn_reversal.setOnClickListener(this);
+        btn_start.setOnClickListener(this);
+        nextpage.setOnClickListener(this);
 
        // mThreadLocal = new ThreadLocal();
 
@@ -176,11 +183,16 @@ public class MainActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_start:
-                AnmitorStudy.test2(textView);
+                //AnmitorStudy.test2(textView);
+                //AnmitorStudy.testNoValue(textView);
+                AnmitorStudy.testNoValue(btn_start);
                 break;
             case R.id.btn_reversal:
-
                 AnmitorStudy.reversalAnmitor(textView,btn_start.getHeight()+10);
+                break;
+            case R.id.nextpage:
+                Intent intent = new Intent(this, TestActivity.class);
+                startActivity(intent);
                 break;
         }
     }

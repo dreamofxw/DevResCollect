@@ -32,6 +32,9 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 import java.util.UUID;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
@@ -85,7 +88,7 @@ public class TestJava extends TestUapte{
 
        //data:image/png;base64
 
-        java.net.URL  url = null;
+        /*java.net.URL  url = null;
         try {
             url = new  java.net.URL("https://i.cnblogs.com/EditPosts.aspx?postid=9007907");
         } catch (MalformedURLException e) {
@@ -96,11 +99,161 @@ public class TestJava extends TestUapte{
 
         List<List<String>> result = spliteData(list);
         
-        System.out.println(result);
-       
+        System.out.println(result);*/
 
+        //testThread1212();
+        //testqueue();
+        //testSynqueue();
+        //
+        // testValue();
+        //testBean();
+
+//        TestBean99 testBean99 = new TestBean99();
+//        testBean99.name = "hah";
+//        testBean99.address = "beijing";
+//        testBean99.setAge(5);
+
+//        TestBean99 testBean992 = testBean99;
+//        testBean99 =null;
+//
+//        System.out.println(testBean99);
+//        System.out.println(testBean992);
+
+
+//        System.out.println("---first--");
+//        System.out.println("name ="+testBean99.name);
+//        System.out.println("address ="+testBean99.address);
+//        System.out.println("age ="+TestBean99.age);
+//        System.out.println("---second--");
+//        System.out.println("name ="+testBean992.name);
+//        System.out.println("address ="+testBean992.address);
+//        System.out.println("age ="+TestBean99.age);
+        
+//        Map<String,String> map = new HashMap<>();
+//        map.put("123","hah");
+//        System.out.println(map.put("123","abc"));
+//        System.out.println(map.containsValue("abc"));
+        
+        if(Object.class.isAssignableFrom(TestJava.class)){
+            System.out.println("true");
+        }else{
+            System.out.println("false");
+        }
 
     }
+
+    public static class TestBean99{
+        public static int age = 1;
+        public String name;
+        public String address;
+
+        public TestBean99(){};
+
+        public void setAge(int a)
+        {
+            age= a;
+        }
+    }
+
+
+    public static void testValue(){
+        int a = 1;
+        int b = a;
+        a++;
+        System.out.println("a ="+a);
+        System.out.println("b ="+b);
+
+    }
+
+    public static BlockingQueue blockingQueue = new SynchronousQueue();
+
+    public static void testSynqueue(){
+        //new SynchronousQueue<Runnable>()
+        ExecutorService executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
+                blockingQueue, new ThreadFactory() {
+            @Override
+            public Thread newThread(@NonNull Runnable r) {
+                Thread result = new Thread(r);
+                result.setDaemon(false);
+                return result;
+            }
+        });
+
+        for(int i=0;i<10;i++){
+            executorService.execute(new TestRunable("test_syn_queue"+i));
+        }
+    }
+
+    final static SynchronousQueue<String> synchronousQueue =  new SynchronousQueue<String>();
+    public static void testqueue(){
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        ExecutorService executorService_out = Executors.newSingleThreadExecutor();
+
+
+       for(int i=0;i<10;i++){
+           executorService_out.execute(new Runnable() {
+               @Override
+               public void run() {
+                   try {
+                       System.out.println(synchronousQueue.take());
+                   } catch (InterruptedException e) {
+                       e.printStackTrace();
+                   }
+               }
+           });
+       }
+
+
+
+        for(int i=0;i<10;i++){
+            System.out.println("i ="+i);
+            executorService.execute(new TestRunable("string"+i));
+
+        }
+
+        System.out.println("size ="+synchronousQueue.size());
+    }
+
+    public static void testThread1212(){
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 20, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<Runnable>(12),new ThreadFactory(){
+            @Override
+            public Thread newThread(@NonNull Runnable r) {
+                Thread result = new Thread(r);
+                result.setDaemon(false);
+                return result;
+            }
+        });
+
+        for(int i =0;i<30;i++){
+            threadPoolExecutor.execute(new TestRunable("sting"+i));
+        }
+    }
+
+    static class TestRunable implements Runnable{
+
+        public String name;
+        public TestRunable(String name){
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+            try {
+                synchronousQueue.put(name);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //System.out.println(Thread.currentThread().getName()+",name ="+name+",queue_size"+blockingQueue.size());
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+        }
+    }
+
+
 
     public static List<String> addList(){
         List<String> list = new ArrayList<>();
@@ -847,10 +1000,33 @@ public class TestJava extends TestUapte{
     }
 
 
+    public static void testBean(){
+        Test test1 = new Test();
+        test1.age = 3;
+        test1.addList("test1");
+        Test test2 = new Test();
+        test2.age = 29;
+        test2.addList("test2");
+
+        System.out.println("test1 :age ="+test1.age+",name ="+test1.getName()+",list.size ="+test1.list);
+        System.out.println("test2 :age ="+test2.age+",name ="+test2.getName()+",list.size ="+test2.list);
+
+    }
+
     public static class Test{
-        public String name;
+        public static String name ="dadafd";
         public int age;
 
+        public List<String> list = new ArrayList();
+
+
+        public String getName(){
+            return name;
+        }
+
+        public void addList(String str){
+            list.add(str);
+        }
     }
 
 

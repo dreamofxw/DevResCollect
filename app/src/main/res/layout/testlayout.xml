@@ -46,6 +46,44 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_startservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始服务"
+        android:layout_marginTop="10px"
+        android:background="#ff0000"
+        android:padding="10dp"
+        />
+    <TextView
+        android:id="@+id/tv_stopservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="停止服务"
+        android:layout_marginTop="10px"
+        android:background="#ff0000"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_bind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="绑定服务"
+        android:layout_marginTop="10px"
+        android:background="#ff0000"
+        android:padding="10dp"
+        />
+    <TextView
+        android:id="@+id/tv_unbind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="解绑服务"
+        android:layout_marginTop="10px"
+        android:background="#ff0000"
+        android:padding="10dp"
+        />
+
     <ImageView
         android:id="@+id/iv_progress"
         android:layout_width="wrap_content"
@@ -59,7 +97,7 @@
         android:layout_height="wrap_content"
         android:textColor="#ff0000"
         android:text="test"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="20dp"
         />
 
     <TextView

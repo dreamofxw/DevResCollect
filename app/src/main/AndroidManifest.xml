@@ -41,6 +41,11 @@
         </activity>
         <activity android:name="com.xwtiger.devrescollect.MainActivity"
             >
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
 
         <activity android:name="com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity"
@@ -55,6 +60,9 @@
         <activity android:name="com.xwtiger.devrescollect.test.TestMyListViewActivity"
             >
         </activity>
+        <service android:name="com.xwtiger.devrescollect.study.androidapi.service.TestService"
+            >
+        </service>
     </application>
 
 

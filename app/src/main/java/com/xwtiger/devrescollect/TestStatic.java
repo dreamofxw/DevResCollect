@@ -1,4 +1,4 @@
-package com.xwtiger.devrescollect.view;
+package com.xwtiger.devrescollect;
 
 /**
  * author:xw
@@ -8,4 +8,17 @@ package com.xwtiger.devrescollect.view;
  * //</editor-fold>
  */
 public class TestStatic {
+
+    public final static int a = 10;
+    static {
+        System.out.println("类初始化");
+    }
+    
+    public TestStatic(){
+        System.out.println("teststatic 构造方法");
+    }
+    
+    public static void testMethod(){
+        System.out.println("testMethod");
+    }
 }

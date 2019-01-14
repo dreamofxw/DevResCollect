@@ -1,7 +1,9 @@
 package com.xwtiger.devrescollect.test;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -44,7 +47,9 @@ import com.xwtiger.devrescollect.statistics.UploadEvent;
 import com.xwtiger.devrescollect.statistics.YouShuStatistics;
 import com.xwtiger.devrescollect.statistics.cache.disc.FileManager;
 import com.xwtiger.devrescollect.statistics.cache.memory.MemorySizeCalculator;
+import com.xwtiger.devrescollect.study.androidapi.AnmitorStudy;
 import com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity;
+import com.xwtiger.devrescollect.study.androidapi.service.TestService;
 import com.xwtiger.devrescollect.utils.PermissionChecker;
 import com.xwtiger.devrescollect.view.TestDialog;
 import com.xwtiger.devrescollect.view.TestPopuwindow;
@@ -79,6 +84,11 @@ public class TestActivity extends BaseActivity {
     private TextView tv_put;
     private ImageView iv_progress;
 
+    private TextView tv_bind;
+    private TextView tv_unbind;
+    private TextView tv_start;
+    private TextView tv_stop;
+
     private TextView tv_26;
 
     private Handler handler = new Handler(){
@@ -109,6 +119,15 @@ public class TestActivity extends BaseActivity {
         tv_get = findViewById(R.id.tv_get);
         iv_progress = findViewById(R.id.iv_progress);
 
+        tv_bind = findViewById(R.id.tv_bind);
+        tv_unbind = findViewById(R.id.tv_unbind);
+        tv_bind.setOnClickListener(this);
+        tv_unbind.setOnClickListener(this);
+
+        tv_start = findViewById(R.id.tv_startservice);
+        tv_stop = findViewById(R.id.tv_stopservice);
+        tv_start.setOnClickListener(this);
+        tv_stop.setOnClickListener(this);
 
         iv_progress.setImageResource(R.drawable.ebook_ani);
         AnimationDrawable animationDrawable = (AnimationDrawable) iv_progress.getDrawable();
@@ -263,7 +282,7 @@ public class TestActivity extends BaseActivity {
         isloop = false;
         super.onDestroy();
         handlerThread.quitSafely();
-        YouShuStatistics.getInstance().destroy();
+        //YouShuStatistics.getInstance().destroy();
         Log.d("actvitylifecycle", "onDestroy: ");
     }
 
@@ -354,7 +373,12 @@ public class TestActivity extends BaseActivity {
                     e.printStackTrace();
                 }*/
                 Log.d("testValueAnmitor","btn_start height ="+(btn_start.getHeight()));
-                //AnmitorStudy.testValueAnmitor(tv);
+                //AnmitorStudy.testNoValue(tv);
+                try {
+                    RetrofitTest.test();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 //addTestThread();
 //                mTestHandler.sendMessage(mTestHandler.mHandler,"default");
 //                mTestHandler.sendMessage(mTestHandler2.mHandler,"gei two");
@@ -429,8 +453,8 @@ public class TestActivity extends BaseActivity {
                /* TestDialog testDialog = new TestDialog(this);
                 testDialog.show();*/
 
-                TestPopuwindow testPopuwindow = new TestPopuwindow(this);
-                testPopuwindow.showAsDropDown(container);
+               /* TestPopuwindow testPopuwindow = new TestPopuwindow(this);
+                testPopuwindow.showAsDropDown(container);*/
 
 
                 break;
@@ -450,8 +474,41 @@ public class TestActivity extends BaseActivity {
                 String json= "abcahdadshfadsfads";
                 Log.d("isGsonJson","isgsonjson = "+isGsonJson(json));
                 break;
+            case R.id.tv_bind:
+                Log.d(TestService.tag,"click bind");
+                Intent bs = new Intent(this, TestService.class);
+                this.bindService(bs,serviceConnection,Context.BIND_AUTO_CREATE);
+                break;
+            case R.id.tv_unbind:
+                Log.d(TestService.tag,"click unbind");
+                this.unbindService(serviceConnection);
+                break;
+            case R.id.tv_startservice:
+                Log.d(TestService.tag,"click start service");
+                Intent ss = new Intent(this, TestService.class);
+                startService(ss);
+                break;
+            case R.id.tv_stopservice:
+                Log.d(TestService.tag,"click stop service");
+                Intent ss1 = new Intent(this, TestService.class);
+                stopService(ss1);
+                break;
+
         }
     }
+
+
+    ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d(TestService.tag,"onServiceConnected");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.d(TestService.tag,"onServiceDisconnected");
+        }
+    };
 
 
     public class TestView extends View{
