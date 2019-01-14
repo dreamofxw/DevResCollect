@@ -139,6 +139,10 @@ public class TestJava extends TestUapte{
         }else{
             System.out.println("false");
             System.out.println("test mac submit");
+            System.out.println("test mac as submit");
+
+
+
         }
 
 
