@@ -141,6 +141,7 @@ public class TestJava extends TestUapte{
             System.out.println("test mac submit");
             System.out.println("test mac as submit");
             System.out.println("test mac as submit add shell ");
+            System.out.println("test mac as submit audo add shell");
 
 
 

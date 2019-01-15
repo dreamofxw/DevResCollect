@@ -35,16 +35,16 @@ task clean(type: Delete) {
 
 
 task aacopyaar23232(type:Copy){
-    println "--start23---"
-    def a = 3
-    //D:\xwwworkspace\code\DevResCollect\build
-    println rootProject.buildDir
-    def file = new File("test123.txt")
-    println file.getAbsolutePath()
-    FileInputStream fis = new FileInputStream(file)
-    def b = new byte[1024]
-    def ab= 0
-    while((ab=fis.read(b,0,b.length))!=-1){
-        println new String(b).toString()
-    }
+//    println "--start23---"
+//    def a = 3
+//    //D:\xwwworkspace\code\DevResCollect\build
+//    println rootProject.buildDir
+//    def file = new File("test123.txt")
+//    println file.getAbsolutePath()
+//    FileInputStream fis = new FileInputStream(file)
+//    def b = new byte[1024]
+//    def ab= 0
+//    while((ab=fis.read(b,0,b.length))!=-1){
+//        println new String(b).toString()
+//    }
 }
