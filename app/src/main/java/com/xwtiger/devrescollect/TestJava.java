@@ -9,7 +9,12 @@ import com.xwtiger.devrescollect.statistics.MD5Util;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
 import com.xwtiger.devrescollect.utils.TimeUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
@@ -40,9 +45,12 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import jcifs.smb.SmbException;
+import jcifs.smb.SmbFile;
 import okhttp3.internal.Util;
 import retrofit2.http.Url;
 
@@ -81,7 +89,7 @@ public class TestJava extends TestUapte{
 
     public static final String ee_1 = "[(a)]";
 
-    public static void main(String[] args)   {
+    public static void main(String[] args) throws IOException {
 //        String test ="\uD83C\uDF37\uD83C\uDF38\uD83C\uDF39\uD83D\uDC2D\uD83C\uDF43\uD83D\uDDFB\uD83D\uDCA8\uD83D\uDCA6\uD83C\uDF0A\uD83C\uDF08";
 //        String source="\uD83C\uDF38\uD83C\uDF39\uD83D\uDC2D\uD83C\uDF43";//🌸🌹🐭🍃
 
@@ -104,6 +112,31 @@ public class TestJava extends TestUapte{
         //testThread1212();
         //testqueue();
         //testSynqueue();
+//        try {
+//            synchronousQueue.put("abc");
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+//        int a = 1<<29;
+//        a--;
+//        System.out.println("a ="+a);
+        
+        
+//        int a = -1 <<29;
+//        int b = 0 <<29;
+//        int c = 1 <<29;
+//        int d = 2 <<29;
+//        int e = 3 <<29;
+        
+//        System.out.println("a ="+a);
+//        System.out.println("b ="+b);
+//        System.out.println("c ="+c);
+//        System.out.println("d ="+d);
+//        System.out.println("e ="+e);
+
+        
+        
         //
         // testValue();
         //testBean();
@@ -134,22 +167,55 @@ public class TestJava extends TestUapte{
 //        System.out.println(map.put("123","abc"));
 //        System.out.println(map.containsValue("abc"));
         
-        if(Object.class.isAssignableFrom(TestJava.class)){
-            System.out.println("true");
-        }else{
-            System.out.println("false");
-            System.out.println("test mac submit");
-            System.out.println("test mac as submit");
-            System.out.println("test mac as submit add shell ");
-            System.out.println("test mac as submit audo add shell");
-            System.out.println("test mac as submit audo add second shell");
+//        if(Object.class.isAssignableFrom(TestJava.class)){
+//            System.out.println("true");
+//        }else{
+//
+//        }
+        
+//        String str = "smb://nas.youshu.cc/1.临时共享/ebook/ebook/origin/dl/book-cover_5a9911c89a08fzhunbeihaoliaoma_kaishigongzuoba_m.epub";
+//
+//        try {
+//            SmbFile smbFile = new SmbFile(str);
+//            System.out.println(smbFile.getPath());
+//            System.out.println(smbFile.getName());
+//            System.out.println("-------");
+//
+//            if(smbFile.isDirectory()){
+//                SmbFile[] smbFiles = smbFile.listFiles();
+//                System.out.println(smbFile.getPath());
+//            }
+//
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (SmbException e) {
+//            e.printStackTrace();
+//        }
 
+        String str = "qa.apidev.laidan.com:8080";
 
+        String[] split = str.split(".");
+        System.out.println(split.length);
 
+        for(int i=0;i<split.length;i++){
+            System.out.println(split[i]);
         }
 
+    }
 
 
+    public static String getHostFromUrl(String str_url){
+        java.net.URL  url = null;
+        try {
+            url = new  java.net.URL(str_url);
+            String host = url.getHost();// 获取主机名
+            int i = host.indexOf(".");//获取第一个点的位置
+            return host.substring(i+1,host.length());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public static class TestBean99{
@@ -175,93 +241,7 @@ public class TestJava extends TestUapte{
 
     }
 
-    public static BlockingQueue blockingQueue = new SynchronousQueue();
-
-    public static void testSynqueue(){
-        //new SynchronousQueue<Runnable>()
-        ExecutorService executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
-                blockingQueue, new ThreadFactory() {
-            @Override
-            public Thread newThread(@NonNull Runnable r) {
-                Thread result = new Thread(r);
-                result.setDaemon(false);
-                return result;
-            }
-        });
-
-        for(int i=0;i<10;i++){
-            executorService.execute(new TestRunable("test_syn_queue"+i));
-        }
-    }
-
-    final static SynchronousQueue<String> synchronousQueue =  new SynchronousQueue<String>();
-    public static void testqueue(){
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        ExecutorService executorService_out = Executors.newSingleThreadExecutor();
-
-
-       for(int i=0;i<10;i++){
-           executorService_out.execute(new Runnable() {
-               @Override
-               public void run() {
-                   try {
-                       System.out.println(synchronousQueue.take());
-                   } catch (InterruptedException e) {
-                       e.printStackTrace();
-                   }
-               }
-           });
-       }
-
-
-
-        for(int i=0;i<10;i++){
-            System.out.println("i ="+i);
-            executorService.execute(new TestRunable("string"+i));
-
-        }
-
-        System.out.println("size ="+synchronousQueue.size());
-    }
-
-    public static void testThread1212(){
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 20, 60, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<Runnable>(12),new ThreadFactory(){
-            @Override
-            public Thread newThread(@NonNull Runnable r) {
-                Thread result = new Thread(r);
-                result.setDaemon(false);
-                return result;
-            }
-        });
-
-        for(int i =0;i<30;i++){
-            threadPoolExecutor.execute(new TestRunable("sting"+i));
-        }
-    }
-
-    static class TestRunable implements Runnable{
-
-        public String name;
-        public TestRunable(String name){
-            this.name = name;
-        }
-
-        @Override
-        public void run() {
-            try {
-                synchronousQueue.put(name);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            //System.out.println(Thread.currentThread().getName()+",name ="+name+",queue_size"+blockingQueue.size());
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-        }
-    }
+//    public static BlockingQueue blockingQueue = new SynchronousQueue();
 
 
 

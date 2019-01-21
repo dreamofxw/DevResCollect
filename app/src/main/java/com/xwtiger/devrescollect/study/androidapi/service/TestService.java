@@ -23,6 +23,10 @@ import java.lang.ref.WeakReference;
  *总结：服务由谁开启，就又谁关闭，中间的调用不影响整体的生命周期
  * 比如startService 开启的服务，中间不关调用了startService，bindService,最后结束服务还是stopService
  *
+ * eg.通过startService 开启服务，之后在调用startService就只调用onStartCommand 不调用onCreate()
+ *    2,通过bindService 开启服务，之后在调用bindService 就不调用任何方法，如果换了context来绑定
+ *    则只调用se
+ *
  *
  *
  *
@@ -83,5 +87,11 @@ public class TestService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.d(tag,"onDestroy");
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        super.onRebind(intent);
+        Log.d(tag, "onRebind: onrebind");
     }
 }

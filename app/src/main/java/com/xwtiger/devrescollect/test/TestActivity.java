@@ -32,6 +32,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.snappydb.DBFactory;
+import com.xwtiger.devrescollect.MainActivity;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.net.OkHttpClientManager;
@@ -459,7 +460,8 @@ public class TestActivity extends BaseActivity {
 
                 break;
             case R.id.btn_jumpmainact:
-                Intent intent = new Intent(this, TestHandlerActivity.class);
+                //Intent intent = new Intent(this, TestHandlerActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_null:
