@@ -8,6 +8,6 @@ view常用的滑动方式有三种
 mScrollX:表示的是view的左边缘和view内容的左边缘的距离
 mScrollX = view的左边缘 -view内容的左边缘
 eg:scrollto,scrolly只改变view的内容位置，如果往左滑，则mScrollX为正值，反之是负的
-mScrollY道理相同
+mScrollY道理相同（往上滑是正的，往下滑是负的）
 
 

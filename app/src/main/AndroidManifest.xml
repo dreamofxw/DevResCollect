@@ -15,6 +15,17 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"></uses-permission>
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"></uses-permission>
 
+
+    //魔窗
+    <!-- 连接互联网Internet权限 -->
+    <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--判断程序是否在前台运行,必须 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 检测手机基本状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 缓存资源优先存入SDcard -->
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -24,15 +35,32 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
+        <activity android:name="com.xwtiger.devrescollect.act.ActivityFromWeb">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.BROWSABLE"></category>
+                <data android:scheme="youshu" android:host="youshu.cc"></data>
+                <data android:scheme="youshuapp" android:host="pack"></data>
+
+            </intent-filter>
+        </activity>
+
         <!--android:theme="@style/ActivityTransitionTheme" -->
         <activity android:name="com.xwtiger.devrescollect.test.TestActivity"
 
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity android:name="com.xwtiger.devrescollect.test.TestTransitonDitailActivity"
@@ -60,14 +88,39 @@
         <activity android:name="com.xwtiger.devrescollect.test.TestMyListViewActivity"
             >
         </activity>
-        <service android:name="com.xwtiger.devrescollect.study.androidapi.service.TestService"
+        <activity android:name=".act.deeplink.TestDeepLink"
             >
-        </service>
-    </application>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+        </activity>
+
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.behavoir.BehaviorActivity">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.event.TestCoordinateActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+            <service android:name="com.xwtiger.devrescollect.study.androidapi.service.TestService"
+                >
+            </service>
+        </application>
 
 
-    <meta-data
-        android:name="CHANNEL"
-        android:value="${CHANNEL_VALUE}" />
+        <meta-data
+            android:name="CHANNEL"
+            android:value="${CHANNEL_VALUE}" />
 
-</manifest>
+    </manifest>
