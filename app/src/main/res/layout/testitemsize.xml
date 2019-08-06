@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_container"
+    android:background="#ffffff"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/animationview"
+        android:background="#ffffff"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_animation"
+            android:background="#ffffff"
+            android:visibility="visible"
+            android:layout_alignTop="@+id/rl_content"
+            android:layout_alignBottom="@+id/rl_content"
+            >
+        </View>
+
+        <RelativeLayout
+            android:id="@+id/rl_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_first"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="可以隐藏"
+                android:background="#00ffffff"
+                android:textColor="#333333"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+
+
+
+
+
+        <TextView
+            android:id="@+id/tv_middle"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="中间展示"
+            android:background="#fff"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:layout_below="@id/rl_content"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/tv_second"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="一直显示"
+            android:background="#00f"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:layout_below="@id/tv_middle"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -14,6 +14,7 @@ import com.qiniu.pili.droid.streaming.MediaStreamingManager;
 import com.qiniu.pili.droid.streaming.StreamingProfile;
 import com.qiniu.pili.droid.streaming.StreamingState;
 import com.qiniu.pili.droid.streaming.StreamingStateChangedListener;
+import com.xwtiger.devrescollect.MyException;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.view.CameraPreviewFrameView;
@@ -70,7 +71,7 @@ public class SWCameraStreamingActivity  extends BaseActivity  implements Streami
 //                        .setEncoderRCMode(StreamingProfile.EncoderRCModes.QUALITY_PRIORITY)
 //                        .setPublishUrl(publishURLFromServer);  // You can invoke this before startStreaming, but not in initialization phase.
 //            } catch (URISyntaxException e) {
-//                e.printStackTrace();
+//                MyException.printStr(e);
 //            }
 //            CameraStreamingSetting setting = new CameraStreamingSetting();
 //            setting.setCameraId(Camera.CameraInfo.CAMERA_FACING_FRONT)
@@ -81,7 +82,7 @@ public class SWCameraStreamingActivity  extends BaseActivity  implements Streami
 //            mMediaStreamingManager.prepare(setting, mProfile);
 //            mMediaStreamingManager.setStreamingStateListener(this);
 //        } catch (Exception e) {
-//            e.printStackTrace();
+//            MyException.printStr(e);
 //        }
     }
 
@@ -113,7 +114,7 @@ public class SWCameraStreamingActivity  extends BaseActivity  implements Streami
 //            mProfile.setSendingBufferProfile(new StreamingProfile.SendingBufferProfile(0.2f, 0.8f, 3.0f, 20 * 1000));
             //mProfile.setPictureStreamingResourceId(R.drawable.default_img);
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         CameraStreamingSetting setting = new CameraStreamingSetting();
         setting.setCameraId(Camera.CameraInfo.CAMERA_FACING_FRONT);//设置摄像头

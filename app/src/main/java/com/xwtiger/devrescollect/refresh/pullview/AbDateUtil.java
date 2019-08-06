@@ -15,6 +15,8 @@
  */
 package com.xwtiger.devrescollect.refresh.pullview;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -77,7 +79,7 @@ public class AbDateUtil {
 		try {
 			date = mSimpleDateFormat.parse(strDate);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return date;
 	}
@@ -95,7 +97,7 @@ public class AbDateUtil {
 			c.setTime(date);
 			c.add(calendarField, offset);
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return c.getTime();
 	}
@@ -118,7 +120,7 @@ public class AbDateUtil {
 			c.add(calendarField, offset);
 			mDateTime = mSimpleDateFormat.format(c.getTime());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return mDateTime;
 	}
@@ -141,7 +143,7 @@ public class AbDateUtil {
 			c.add(calendarField, offset);
 			strDate = mSimpleDateFormat.format(c.getTime());
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return strDate;
 	}
@@ -160,7 +162,7 @@ public class AbDateUtil {
 		try {
 			strDate = mSimpleDateFormat.format(date);
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return strDate;
 	}
@@ -181,7 +183,7 @@ public class AbDateUtil {
 			SimpleDateFormat mSimpleDateFormat2 = new SimpleDateFormat(format);
 			mDateTime = mSimpleDateFormat2.format(c.getTime());
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return mDateTime;
 	}
@@ -202,7 +204,7 @@ public class AbDateUtil {
 			SimpleDateFormat mSimpleDateFormat2 = new SimpleDateFormat(format);
 			mDateTime = mSimpleDateFormat2.format(c.getTime());
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return mDateTime;
 	}
@@ -220,7 +222,7 @@ public class AbDateUtil {
 			SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(format);
 			thisDateTime = mSimpleDateFormat.format(milliseconds);
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return thisDateTime;
 	}
@@ -238,7 +240,7 @@ public class AbDateUtil {
 			Calendar c = new GregorianCalendar();
 			curDateTime = mSimpleDateFormat.format(c.getTime());
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return curDateTime;
 
@@ -260,7 +262,7 @@ public class AbDateUtil {
 			c.add(calendarField, offset);
 			mDateTime = mSimpleDateFormat.format(c.getTime());
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return mDateTime;
 
@@ -381,7 +383,7 @@ public class AbDateUtil {
 				strDate = mSimpleDateFormat.format(c.getTime());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return strDate;
 	}
@@ -401,7 +403,7 @@ public class AbDateUtil {
 			c.set(GregorianCalendar.DAY_OF_MONTH, 1);
 			strDate = mSimpleDateFormat.format(c.getTime());
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return strDate;
 
@@ -423,7 +425,7 @@ public class AbDateUtil {
 			c.roll(Calendar.DATE, -1);
 			strDate = mSimpleDateFormat.format(c.getTime());
 		} catch (Exception e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return strDate;
 	}

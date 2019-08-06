@@ -1,5 +1,7 @@
 package com.xwtiger.devrescollect.study.javaapi;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -64,13 +66,13 @@ public class NetStudy {
             urlConnection.connect();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (KeyStoreException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (KeyManagementException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
 
     }
@@ -89,7 +91,7 @@ public class NetStudy {
             Response execute = okHttpClient.newCall(request).execute();
             System.out.println("body ="+execute.body().string());
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
 
@@ -142,9 +144,9 @@ public class NetStudy {
             bos.close();
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
 

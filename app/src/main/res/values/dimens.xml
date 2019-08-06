@@ -11,5 +11,9 @@
     <dimen name="header_height">60dp</dimen>
     <dimen name="footer_height">90dp</dimen>
     <dimen name="footer_padding">10dp</dimen>
+    <dimen name="testheight">200dp</dimen>
+    <dimen name="testheight1">144dp</dimen>
+    <dimen name="test100">100dp</dimen>
+    <dimen name="test10">10dp</dimen>
 
 </resources>

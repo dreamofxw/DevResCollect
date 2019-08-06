@@ -1,5 +1,7 @@
 package com.xwtiger.devrescollect.study.javaapi;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -55,7 +57,7 @@ public class IOStudy {
             randomAccessFile_read.close();
             randomAccessFile_write.close();
         }  catch (Exception e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
 
@@ -81,7 +83,7 @@ public class IOStudy {
             stringWriter.close();
             stringReader.close();
         }  catch (Exception e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
 
@@ -99,9 +101,9 @@ public class IOStudy {
                 fileWriter.flush();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
 
@@ -121,9 +123,9 @@ public class IOStudy {
             bufferedWriter.close();
             bufferedReader.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
 
     }
@@ -149,10 +151,13 @@ public class IOStudy {
             bos.close();
             bis.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
+
+
+
 
 }

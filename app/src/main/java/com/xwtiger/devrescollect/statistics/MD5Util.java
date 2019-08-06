@@ -2,6 +2,8 @@ package com.xwtiger.devrescollect.statistics;
 
 import android.text.TextUtils;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,9 +35,9 @@ public class MD5Util {
                 encryptedStr = encryptedStr.substring(8, 24);
             }
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
 
         return encryptedStr;

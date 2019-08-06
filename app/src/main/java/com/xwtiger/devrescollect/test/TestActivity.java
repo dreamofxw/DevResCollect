@@ -31,10 +31,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.annotations.SerializedName;
 import com.snappydb.DBFactory;
 import com.xwtiger.devrescollect.MainActivity;
+import com.xwtiger.devrescollect.MyException;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
+import com.xwtiger.devrescollect.dialog.TestDialog1;
 import com.xwtiger.devrescollect.net.OkHttpClientManager;
 import com.xwtiger.devrescollect.net.ResultCallBack;
 import com.xwtiger.devrescollect.net.RetrofitTest;
@@ -109,6 +112,7 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.setTheme(R.style.AppThemeReading);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.testlayout);
@@ -251,7 +255,8 @@ public class TestActivity extends BaseActivity {
         Log.d("testpadding","tv_18.getPaddingBottom "+tv_18.getPaddingTop());
         Log.d("testpadding","tv_18.getPaddingBottom "+tv_18.getPaddingBottom());
 
-
+        
+        testGson();
     }
 
     @Override
@@ -338,7 +343,7 @@ public class TestActivity extends BaseActivity {
 //                try {
 //                    Thread.sleep(2600);
 //                } catch (InterruptedException e) {
-//                    e.printStackTrace();
+//                    MyException.printStr(e);
 //                }
 //            }
         }
@@ -364,6 +369,8 @@ public class TestActivity extends BaseActivity {
 
     }
 
+    private TestDialog1 testDialog;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -371,15 +378,15 @@ public class TestActivity extends BaseActivity {
                /* try {
                     Thread.sleep(20000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }*/
-                Log.d("testValueAnmitor","btn_start height ="+(btn_start.getHeight()));
+                //Log.d("testValueAnmitor","btn_start height ="+(btn_start.getHeight()));
                 //AnmitorStudy.testNoValue(tv);
-                try {
-                    RetrofitTest.test();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    RetrofitTest.test();
+//                } catch (IOException e) {
+//                    MyException.printStr(e);
+//                }
                 //addTestThread();
 //                mTestHandler.sendMessage(mTestHandler.mHandler,"default");
 //                mTestHandler.sendMessage(mTestHandler2.mHandler,"gei two");
@@ -403,7 +410,7 @@ public class TestActivity extends BaseActivity {
 //                try {
 //                    SimpleMockService.test();
 //                } catch (IOException e) {
-//                    e.printStackTrace();
+//                    MyException.printStr(e);
 //                }
 //                    new Thread(){
 //                        @Override
@@ -412,7 +419,7 @@ public class TestActivity extends BaseActivity {
 //                            try {
 //
 //                            } catch (IOException e) {
-//                                e.printStackTrace();
+//                                MyException.printStr(e);
 //                            }
 //                        }
 //                    }.start();
@@ -451,13 +458,15 @@ public class TestActivity extends BaseActivity {
                 System.out.println("getQueryParameters="+uri.getQueryParameters("postid"));*/
 
 
-               /* TestDialog testDialog = new TestDialog(this);
+               /* TestDialog1 testDialog = new TestDialog1(this);
                 testDialog.show();*/
 
                /* TestPopuwindow testPopuwindow = new TestPopuwindow(this);
                 testPopuwindow.showAsDropDown(container);*/
-
-
+                if(testDialog ==null){
+                    testDialog = new TestDialog1(this);
+                }
+                testDialog.show();
                 break;
             case R.id.btn_jumpmainact:
                 //Intent intent = new Intent(this, TestHandlerActivity.class);
@@ -564,7 +573,7 @@ public class TestActivity extends BaseActivity {
 
                    //Log.d("TimeThread",msg);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }
             }
         }
@@ -641,7 +650,7 @@ public class TestActivity extends BaseActivity {
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
 
     }
@@ -670,6 +679,57 @@ public class TestActivity extends BaseActivity {
             return false;
         } catch (JsonParseException e) {
             return false;
+        }
+    }
+
+
+    public void testGson(){
+
+        GsonBean bean= new GsonBean("aa","bb");
+
+        String s = new Gson().toJson(bean);
+
+        Log.d("testgson", "testGson: s="+s);
+
+        Log.d("testgson", "=============================== ");
+
+        GsonBean gsonBean = new Gson().fromJson(s, GsonBean.class);
+        Log.d("testgson", "testGson: gsonBean.a="+gsonBean.a);
+        Log.d("testgson", "testGson: gsonBean.b="+gsonBean.b);
+
+
+
+    }
+
+
+    class GsonBean{
+
+        @SerializedName(value = "key1",alternate = {"key111","key11"})
+        public String a;
+
+        @SerializedName("key2")
+        public String b;
+
+
+        public GsonBean(String a,String b){
+            this.a=a;
+            this.b=b;
+        }
+    }
+
+
+    class GsonBean1{
+
+        @SerializedName("key111")
+        public String a;
+
+        @SerializedName("key2")
+        public String b;
+
+
+        public GsonBean1(String a,String b){
+            this.a=a;
+            this.b=b;
         }
     }
 

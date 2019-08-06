@@ -7,6 +7,7 @@ import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;
 import com.xwtiger.devrescollect.MyApplication;
+import com.xwtiger.devrescollect.MyException;
 
 import java.io.File;
 import java.io.Serializable;
@@ -33,7 +34,7 @@ public class DBPresenter {
             try {
                 snappydb.close();
             } catch (SnappydbException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
         }
     }
@@ -50,12 +51,12 @@ public class DBPresenter {
             }
             Log.d(tag, "get: null ");
         }catch (SnappydbException e){
-            e.printStackTrace();
+            MyException.printStr(e);
         }finally {
             try {
                 snappydb.close();
             } catch (SnappydbException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
         }
         return null;
@@ -77,7 +78,7 @@ public class DBPresenter {
             try {
                 snappydb.close();
             } catch (SnappydbException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
         }
 

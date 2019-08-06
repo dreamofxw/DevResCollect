@@ -11,6 +11,16 @@
         android:id="@+id/btn_jumpmainact"
         />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:background="@drawable/pic_xinxi_ext"
+        android:text="121212121212"
+        android:gravity="center"
+        android:textSize="20sp"
+        />
+
     <TextView
         android:id="@+id/tv_pack"
         android:layout_width="wrap_content"

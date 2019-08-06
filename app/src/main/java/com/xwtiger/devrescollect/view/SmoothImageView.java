@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
+import com.xwtiger.devrescollect.MyException;
+
 public class SmoothImageView extends ImageView {
   
     private static final int STATE_NORMAL = 0;  
@@ -84,7 +86,7 @@ public class SmoothImageView extends ImageView {
             statusBarHeight = context.getResources().getDimensionPixelSize(x);  
             return statusBarHeight;  
         } catch (Exception e) {  
-            e.printStackTrace();  
+            MyException.printStr(e);
         }  
         return statusBarHeight;  
     }  
@@ -120,7 +122,7 @@ public class SmoothImageView extends ImageView {
             try {  
                 rect = (LocationSizeF) startRect.clone();  
             } catch (CloneNotSupportedException e) {  
-                e.printStackTrace();  
+                MyException.printStr(e);
             }  
         }  
   
@@ -129,7 +131,7 @@ public class SmoothImageView extends ImageView {
             try {  
                 rect = (LocationSizeF) endRect.clone();  
             } catch (CloneNotSupportedException e) {  
-                e.printStackTrace();  
+                MyException.printStr(e);
             }  
         }  
           

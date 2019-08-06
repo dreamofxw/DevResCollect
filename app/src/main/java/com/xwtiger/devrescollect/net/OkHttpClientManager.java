@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.xwtiger.devrescollect.MyApplication;
+import com.xwtiger.devrescollect.MyException;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -94,7 +95,7 @@ public class OkHttpClientManager {
 //        try {
 //            call.execute();
 //        } catch (IOException e) {
-//            e.printStackTrace();
+//            MyException.printStr(e);
 //        }
     }
 
@@ -142,7 +143,7 @@ public class OkHttpClientManager {
                 try {
                     callBack.onRespone(str);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }
             }
         });
@@ -295,7 +296,7 @@ public class OkHttpClientManager {
                         //progressCallBack(remaining, current, callBack);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }
             }
         };
@@ -364,7 +365,7 @@ public class OkHttpClientManager {
                 }
             });
         }catch (Exception e){
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
 

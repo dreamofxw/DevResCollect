@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fl_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_palcetoporpay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            >
+            <ImageView
+                android:id="@+id/iv_placetop"
+                android:layout_width="60px"
+                android:layout_height="36px"
+                />
+            <ImageView
+                android:id="@+id/iv_pay"
+                android:layout_width="60px"
+                android:layout_height="36px"
+                android:layout_marginLeft="10px"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_null"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="占位"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:text="content"
+            />
+    </FrameLayout>
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:columnWidth="100dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="3"
+        android:verticalSpacing="10dp"
+        android:layout_below="@id/fl_top"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:visibility="gone"
+        >
+    </GridView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_expandable"
+        android:layout_below="@id/fl_top"
+        android:layout_marginTop="20dp"
+        />
+    <com.xwtiger.devrescollect.view.ExpandTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_expandable"
+        android:layout_marginTop="20dp"
+        android:id="@+id/expandtextview"
+        />
+
+
+
+</RelativeLayout>

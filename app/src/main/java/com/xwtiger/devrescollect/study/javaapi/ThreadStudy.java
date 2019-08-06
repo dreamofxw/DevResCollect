@@ -2,6 +2,8 @@ package com.xwtiger.devrescollect.study.javaapi;
 
 import android.support.annotation.NonNull;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -88,9 +90,9 @@ public class ThreadStudy {
             }
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } 
     }
 
@@ -107,7 +109,7 @@ public class ThreadStudy {
                     try {
                         System.out.println(synchronousQueue.take());
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        MyException.printStr(e);
                     }
                 }
             });
@@ -152,13 +154,13 @@ public class ThreadStudy {
 //            try {
 //                synchronousQueue.put(name);
 //            } catch (InterruptedException e) {
-//                e.printStackTrace();
+//                MyException.printStr(e);
 //            }
             System.out.println(Thread.currentThread().getName()+",name ="+name+",queue_size"+blockingQueue.size());
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
         }
     }

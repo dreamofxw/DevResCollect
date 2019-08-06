@@ -16,7 +16,7 @@ android {
         applicationId "com.xwtiger.devrescollect"
         minSdkVersion 21
         targetSdkVersion TARGET_VERSON as int
-        versionCode 1
+        versionCode 3
         versionName "1.0"
         resValue "string","app_name","DevResCollect"
 
@@ -87,8 +87,12 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:${retrofit_need_version}"
     compile "com.squareup.retrofit2:retrofit-mock:${retrofit_need_version}"
     //添加glide
-    compile 'com.github.bumptech.glide:glide:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+
+        compile 'com.github.bumptech.glide:glide:3.7.0'
+
+
+//    compile 'com.github.bumptech.glide:glide:4.6.1'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     // NoSql数据库框架-SnappyDB
     compile 'com.snappydb:snappydb-lib:0.5.2'
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'

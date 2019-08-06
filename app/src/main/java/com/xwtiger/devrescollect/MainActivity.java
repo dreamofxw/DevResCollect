@@ -184,7 +184,7 @@ public class MainActivity extends BaseActivity {
                     count --;
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }*/
             }
         }
@@ -197,9 +197,9 @@ public class MainActivity extends BaseActivity {
                 int o = (int) threadLocalHashCode.get(mThreadLocal);
                 Log.d("mThreadLocal","location ="+location+"before threadLocalHashCode = "+o);
             } catch (NoSuchFieldException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }*/
         }
     }
@@ -268,7 +268,7 @@ public class MainActivity extends BaseActivity {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
             return null;
         }

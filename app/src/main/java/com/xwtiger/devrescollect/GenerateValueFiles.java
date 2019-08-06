@@ -16,7 +16,8 @@ public class GenerateValueFiles {
     private int baseH;
 
    // private String dirStr = "./res";
-    private String dirStr = "d:\\test";
+    //private String dirStr = "d:\\test";//windosw
+    private String dirStr = "/Users/xuww/test";//macbook pro
 
     private final static String WTemplate = "<dimen name=\"x{0}\">{1}px</dimen>\n";
     private final static String HTemplate = "<dimen name=\"y{0}\">{1}px</dimen>\n";
@@ -133,7 +134,7 @@ public class GenerateValueFiles {
             pw.print(sbForHeight.toString());
             pw.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
 
@@ -161,7 +162,7 @@ public class GenerateValueFiles {
 
             System.err
                     .println("right input params : java -jar xxx.jar width height w,h_w,h_..._w,h;");
-            e.printStackTrace();
+            MyException.printStr(e);
             System.exit(-1);
         }
 

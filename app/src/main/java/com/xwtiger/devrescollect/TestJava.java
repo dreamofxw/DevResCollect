@@ -9,8 +9,12 @@ import com.xwtiger.devrescollect.statistics.MD5Util;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
 import com.xwtiger.devrescollect.utils.TimeUtils;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -18,9 +22,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.sql.SQLTransientException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -100,7 +106,7 @@ public class TestJava extends TestUapte{
         try {
             url = new  java.net.URL("https://i.cnblogs.com/EditPosts.aspx?postid=9007907");
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         List<String> list = addList();
 
@@ -115,7 +121,7 @@ public class TestJava extends TestUapte{
 //        try {
 //            synchronousQueue.put("abc");
 //        } catch (InterruptedException e) {
-//            e.printStackTrace();
+//            MyException.printStr(e);
 //        }
 
 //        int a = 1<<29;
@@ -188,20 +194,226 @@ public class TestJava extends TestUapte{
 //
 //
 //        } catch (MalformedURLException e) {
-//            e.printStackTrace();
+//            MyException.printStr(e);
 //        } catch (SmbException e) {
-//            e.printStackTrace();
+//            MyException.printStr(e);
 //        }
 
-        String str = "qa.apidev.laidan.com:8080";
 
-        String[] split = str.split(".");
-        System.out.println(split.length);
+//        String result = "10.2;";
+//
+//
+//        if(testReg11(result)){
+//            float f_1 = Float.parseFloat(result);
+//            int i_1 = (int) Float.parseFloat(result);
+//
+//
+//            if((f_1-i_1)>0){
+//                System.out.println("大于"+(f_1-i_1));
+//            }
+//            System.out.println("f_1="+f_1);
+//            System.out.println("i_1="+i_1);
+//        }else{
+//            System.out.println("false result ="+result);
+//        }
 
-        for(int i=0;i<split.length;i++){
-            System.out.println(split[i]);
+//        List list = new ArrayList();
+//        list.add("str"+1);
+//        list.add("str"+2);
+//        list.add("str"+3);
+//        list.add("str"+4);
+//        System.out.println(list.toString());
+//
+//        Iterator<String> it = list.iterator();
+//        while(it.hasNext()){
+//            String x = it.next();
+//            if(x.equals("str2")|x.equals("str3")){
+//                it.remove();
+//            }
+//        }
+//        System.out.println("after :"+list.toString());
+
+//        String phone = "14567891345";
+//
+//        System.out.println(testReg22(phone));
+
+//            File file = new File("./plan.txt");
+//            byte[] b =new byte[1024];
+//            int length =0;
+//            BufferedInputStream  bis = new BufferedInputStream(new FileInputStream(file));
+//
+//            while((length =bis.read(b,0,b.length)) !=-1){
+//                System.out.println(new String(b,0,length));
+//            }
+
+            
+
+//            System.out.println(file.getPath());
+
+
+
+        //testException();
+
+//        String test ="123.0";
+//        System.out.println("------------");
+//        
+//        System.out.println();
+
+        //removeByIterator();
+
+
+
+        //System.out.println(TestJava.class.getName());
+
+//        long time = System.currentTimeMillis();
+//        time = time -24*60*60*1000;
+//        Date date = new Date();
+//        date.setTime(time);
+//
+//        System.out.println(isToday(date));
+
+//        List<String> list = new ArrayList<>();
+//        list.add("str1");
+//        list.add("str2");
+//        list.add("str3");
+//
+//        List<String> list1 = new ArrayList<>();
+//        list1.add("str3");
+//        list1.add("str2");
+//        list1.add("str4");
+//
+//
+//        System.out.println(list.containsAll(list1));
+
+        String url = "http://www.baidu.com";
+        String url1 = "http://apidev.laidan.com:81/m/page/getIndex?page_id=10010013&&uid=123";
+        replaceHostForOldNet(url1);
+    }
+
+
+    public static void replaceHostForOldNet(String urlpath){
+        try {
+            URL url = new URL(urlpath);
+            System.out.println("host ="+url.getHost());
+            System.out.println("path ="+url.getPath());
+            System.out.println("参数 ="+url.getQuery());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void testDate12(){
+        SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date old_date = new Date(0);
+
+        // System.out.println(fmt.format(old_date).toString());
+
+        Date customer = new Date(2019-1900,2,1);
+        System.out.println("customer ="+fmt.format(customer));
+
+
+        Date date = new Date();
+        long time = date.getTime();
+        System.out.println("time ="+time);
+        System.out.println("currentTimeMillis="+System.currentTimeMillis());
+        System.out.println(fmt.format(new Date(time)));
+        System.out.println("---------------");
+        time = customer.getTime();
+        for(long i=1;i<30;i++){
+            long result = time -24*60*60*1000*(i);
+            Date date1 = new Date(result);
+            System.out.println(fmt.format(date1)+"星期--"+getWeek(date1));
+        }
+    }
+
+
+    public static String getWeek(Date date){
+        String[] weeks = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int week_index = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if(week_index<0){
+            week_index = 0;
+        }
+        //System.out.println(weeks[week_index]);
+        return weeks[week_index];
+    }
+
+
+    public static boolean isToday(Date date){
+        SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("old ="+fmt.format(date));
+        System.out.println("new ="+fmt.format(new Date()));
+        if(fmt.format(date).toString().equals(fmt.format(new Date()).toString())){//格式化为相同格式
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+        public static void removeByIterator(){//正确的删除方式
+            HashMap<Integer, String> map = new HashMap<Integer, String>();
+            map.put(1, "one");
+            map.put(2, "two");
+            map.put(3, "three");
+            System.out.println(map);
+            Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry<Integer, String> entry = it.next();
+                if(entry.getKey() != 2)
+                    it.remove();//使用迭代器的remove()方法删除元素
+            }
+            System.out.println(map);
         }
 
+
+//    Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+//
+//    for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+//
+//        System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+//
+//    }
+
+
+    public static String readableFileSize(long size) {
+        if (size <= 0) return "0B";
+        final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + "" + units[digitGroups];
+    }
+
+
+
+    public static void testException(){
+
+        System.out.println("test exception");
+        
+        String str =null;
+        try{
+            System.out.println(str.charAt(0));
+        }catch (Exception e){
+            MyException.printStr(e);
+        }
+
+    }
+
+
+
+
+
+
+    public static boolean testReg22(String num){
+        String telRegex = "^1[0-9]{10}+$";
+        return num.matches(telRegex);
+    }
+
+
+    public static boolean testReg11(String num){
+        String telRegex = "^[0-9]?+[0-9]*+\\.?+[0-9]*+$";
+        return num.matches(telRegex);
     }
 
 
@@ -213,7 +425,7 @@ public class TestJava extends TestUapte{
             int i = host.indexOf(".");//获取第一个点的位置
             return host.substring(i+1,host.length());
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         return "";
     }
@@ -323,7 +535,7 @@ public class TestJava extends TestUapte{
                 Thread.sleep(3000);
                 System.out.println("threadName="+Thread.currentThread().getName());
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
 
         }
@@ -405,7 +617,7 @@ public class TestJava extends TestUapte{
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         System.out.println(weakReference);
         weakReference = new WeakReference<>(new TestBean("lisi"));
@@ -512,7 +724,7 @@ public class TestJava extends TestUapte{
             return sb.toString();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            MyException.printStr(e);
             return "";
         }
     }
@@ -589,7 +801,7 @@ public class TestJava extends TestUapte{
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }
             }
 
@@ -616,7 +828,7 @@ public class TestJava extends TestUapte{
 //                    try {
 //                        Thread.sleep(500);
 //                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
+//                        MyException.printStr(e);
 //                    }
 //                }
                 listtest.add(Thread.currentThread().getName()+"-"+i);
@@ -659,7 +871,7 @@ public class TestJava extends TestUapte{
             Date parse = sd.parse(time);
             System.out.println("parse "+parse.getTime());
         } catch (ParseException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         System.out.println("format = "+format);
 
@@ -679,7 +891,7 @@ public class TestJava extends TestUapte{
         try {
             date = time.parse(long_time);
         } catch (ParseException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
             return long_time;
         }
         Date currentDate = new Date();
@@ -803,7 +1015,7 @@ public class TestJava extends TestUapte{
                 a++;
                 TimeUnit.MILLISECONDS.sleep(10000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
             System.out.println("ad---------");
         }

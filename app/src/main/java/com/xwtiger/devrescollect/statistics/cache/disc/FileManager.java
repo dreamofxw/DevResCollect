@@ -3,6 +3,7 @@ package com.xwtiger.devrescollect.statistics.cache.disc;
 import android.content.Context;
 
 import com.xwtiger.devrescollect.MyApplication;
+import com.xwtiger.devrescollect.MyException;
 import com.xwtiger.devrescollect.statistics.IUploadCallBack;
 import com.xwtiger.devrescollect.statistics.UploadEvent;
 
@@ -58,7 +59,7 @@ public class FileManager {
             try {
                 destfile.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
         }
         try {
@@ -72,9 +73,9 @@ public class FileManager {
 
             System.out.println("ent write file------------------");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
     }
 
@@ -93,15 +94,15 @@ public class FileManager {
             bis.close();
             return sb.toString();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }finally {
             if(bis != null){
                 try {
                     bis.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }
             }
         }
@@ -119,15 +120,15 @@ public class FileManager {
                 fis.close();
                 return length;
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             } catch (IOException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }finally {
                 if(fis != null){
                     try {
                         fis.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        MyException.printStr(e);
                     }
                 }
             }

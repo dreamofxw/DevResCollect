@@ -2,6 +2,8 @@ package com.xwtiger.devrescollect.net;
 
 import android.util.Log;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -16,6 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
+import rx.Scheduler;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -49,6 +53,11 @@ public class RetrofitTest {
         Call<List<Contributor>> contributors1(
                 @Path("owner") String owner,
                 @Path("repo") String repo);
+
+        @GET("/repos/{owner}/{repo}/contributors")
+        Observable<ResponseBody> contributors2(
+                @Path("owner") String owner,
+                @Path("repo") String repo);
     }
 
 
@@ -76,10 +85,23 @@ public class RetrofitTest {
             Log.d("testanno","getAnnotations GET="+contributors1.getAnnotation(GET.class));
 
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
 
 
+//        Observable<ResponseBody> responseObservable = github.contributors2("square", "retrofit");
+//
+//        responseObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ResponseBody>() {
+//            @Override
+//            public void call(ResponseBody response) {
+//                Log.d("", "call: ");
+//            }
+//        }, new Action1<Throwable>() {
+//            @Override
+//            public void call(Throwable throwable) {
+//                Log.d("", "call: ");
+//            }
+//        });
 
 
         Log.d("RetrofitTest", "callAdapterFactories size :"+retrofit.callAdapterFactories().size());
@@ -96,7 +118,7 @@ public class RetrofitTest {
 
             @Override
             public void onFailure(Call<List<Contributor>> call, Throwable t) {
-
+                Log.d("", "onFailure: ");
             }
         });
 
@@ -107,7 +129,7 @@ public class RetrofitTest {
 //                try {
 //                    Log.d("RetrofitTest", "test: responseBody ="+responseBody.toString());
 //                } catch (Exception e) {
-//                    e.printStackTrace();
+//                    MyException.printStr(e);
 //                }
 //            }
 //        }, new Action1<Throwable>() {

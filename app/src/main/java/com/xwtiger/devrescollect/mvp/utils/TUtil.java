@@ -1,5 +1,7 @@
 package com.xwtiger.devrescollect.mvp.utils;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.lang.reflect.ParameterizedType;
 
 public class TUtil {
@@ -9,11 +11,11 @@ public class TUtil {
                     .getGenericSuperclass())).getActualTypeArguments()[i])
                     .newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (ClassCastException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         return null;
     }
@@ -22,7 +24,7 @@ public class TUtil {
         try {
             return Class.forName(className);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         return null;
     }

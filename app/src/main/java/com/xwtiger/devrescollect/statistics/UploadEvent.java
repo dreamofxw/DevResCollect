@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
+import com.xwtiger.devrescollect.MyException;
 import com.xwtiger.devrescollect.net.OkHttpClientManager;
 import com.xwtiger.devrescollect.net.ResultCallBack;
 import com.xwtiger.devrescollect.utils.Utils;
@@ -45,6 +46,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.http.Url;
 
+import static com.xwtiger.devrescollect.MyException.*;
+
 /**
  * author:xw
  * Date:2018-05-24 18:09
@@ -82,9 +85,9 @@ public class UploadEvent {
             bos.close();
             in.close();
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            printStr(e);
         }catch (IOException e){
-            e.printStackTrace();
+            printStr(e);
         }finally {
             urlConnection.disconnect();
         }
@@ -141,9 +144,9 @@ public class UploadEvent {
             //return Base64Encoder.encode(encode);
             //return "";
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            printStr(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            printStr(e);
         }
 
         return null;
@@ -176,7 +179,7 @@ public class UploadEvent {
             out.close();
             return out.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            printStr(e);
         }
         return null;
     }
@@ -204,9 +207,9 @@ public class UploadEvent {
             return new String(Base64.encode(encode,Base64.DEFAULT));
             //return Base64Encoder.encode(encode);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            printStr(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            printStr(e);
         }
 
         return null;
@@ -240,7 +243,7 @@ public class UploadEvent {
             out.close();
             return out.toString("UTF-8");
         } catch (IOException e) {
-            e.printStackTrace();
+            printStr(e);
         }
         return null;
     }
@@ -259,7 +262,7 @@ public class UploadEvent {
                     //上传文件
                     Thread.sleep(50000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    printStr(e);
                 }
                 return key;
 
