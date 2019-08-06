@@ -288,6 +288,7 @@ public class TestJava extends TestUapte{
         String url = "http://www.baidu.com";
         String url1 = "http://apidev.laidan.com:81/m/page/getIndex?page_id=10010013&&uid=123";
         replaceHostForOldNet(url1);
+        System.out.println("submit code first");
     }
 
 
