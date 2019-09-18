@@ -7,6 +7,8 @@ import java.util.Date;
 
 import android.text.TextUtils;
 
+import com.xwtiger.devrescollect.MyException;
+
 public class TimeUtils {
 
 	public static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -177,7 +179,7 @@ public class TimeUtils {
 			String time = days + "天" + hours + "小时" + minutes + "分";
 			return time;
 		} catch (ParseException e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return "";
 	}
@@ -197,7 +199,7 @@ public class TimeUtils {
 		try {
 			date = time.parse(long_time);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		Date currentDate = new Date();
 
@@ -240,7 +242,7 @@ public class TimeUtils {
 		try {
 			date = time.parse(long_time);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		Date currentDate = new Date();
 
@@ -281,7 +283,7 @@ public class TimeUtils {
         try {
             date = DEFAULT_DATE_FORMAT.parse(long_time);
         } catch (ParseException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         Date currentDate = new Date();
         
@@ -340,7 +342,7 @@ public class TimeUtils {
         try {
             date = time.parse(long_time);
         } catch (ParseException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         Date currentDate = new Date();
         Calendar instance = Calendar.getInstance();
@@ -402,7 +404,7 @@ public class TimeUtils {
 	// // String time = days + "天" ;//+ hours + "小时" + minutes + "分"
 	// return days;
 	// } catch (ParseException e) {
-	// e.printStackTrace();
+	// MyException.printStr(e);
 	// }
 	// return 0;
 	// }
@@ -423,7 +425,7 @@ public class TimeUtils {
 	// }
 	// return true;
 	// } catch (ParseException e) {
-	// e.printStackTrace();
+	// MyException.printStr(e);
 	// }
 	// return true;
 	// }

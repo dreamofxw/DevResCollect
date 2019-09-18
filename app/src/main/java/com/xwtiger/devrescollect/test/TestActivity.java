@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-//import com.snappydb.DBFactory;
+import com.snappydb.DBFactory;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.net.RetrofitTest;

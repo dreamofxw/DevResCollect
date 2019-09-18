@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:visibility="gone"
+            />
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/y30"
+            android:background="#ff0000"
+            >
+        </WebView>
+
+        <TextView
+            android:id="@+id/tv_click"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/webview"
+            android:text="test textview "
+            android:gravity="center"
+            android:background="#00ff00"
+            />
+    </LinearLayout>
+
+
+</ScrollView>

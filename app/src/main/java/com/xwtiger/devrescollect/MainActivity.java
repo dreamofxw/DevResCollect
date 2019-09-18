@@ -1,9 +1,13 @@
 package com.xwtiger.devrescollect;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +18,8 @@ import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.net.OkHttpClientManager;
 import com.xwtiger.devrescollect.net.ResultCallBack;
 import com.xwtiger.devrescollect.study.androidapi.AnmitorStudy;
+import com.xwtiger.devrescollect.study.androidapi.service.TestService;
+import com.xwtiger.devrescollect.test.TestActivity;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -29,6 +35,8 @@ public class MainActivity extends BaseActivity {
     private Button btn_start;
     private Button btn_reversal;
     private static TestJava testjava = new TestJava();
+
+    private TextView nextpage;
 
 //    private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 //    private static final int COUNT_BITS = Integer.SIZE - 3;
@@ -54,7 +62,12 @@ public class MainActivity extends BaseActivity {
     private MyHandler mMyHandler;
 
 
-    private static Context mContext;
+    private  Context mContext;
+
+    private TextView tv_bind;
+    private TextView tv_unbind;
+    private TextView tv_start;
+    private TextView tv_stop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +77,30 @@ public class MainActivity extends BaseActivity {
         textView = (TextView) findViewById(R.id.tv);
         btn_start = (Button) findViewById(R.id.btn_start);
         btn_reversal = (Button) findViewById(R.id.btn_reversal);
+        nextpage = (TextView) findViewById(R.id.nextpage);
 
-        btn_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    System.out.println("");
-            }
-        });
+
+
+        //test
+        tv_bind = findViewById(R.id.tv_bind);
+        tv_unbind = findViewById(R.id.tv_unbind);
+        tv_bind.setOnClickListener(this);
+        tv_unbind.setOnClickListener(this);
+
+        tv_start = findViewById(R.id.tv_startservice);
+        tv_stop = findViewById(R.id.tv_stopservice);
+        tv_start.setOnClickListener(this);
+        tv_stop.setOnClickListener(this);
+
+//        btn_start.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                    System.out.println("");
+//            }
+//        });
         btn_reversal.setOnClickListener(this);
+        btn_start.setOnClickListener(this);
+        nextpage.setOnClickListener(this);
 
        // mThreadLocal = new ThreadLocal();
 
@@ -112,6 +141,9 @@ public class MainActivity extends BaseActivity {
         mMyHandler.sendMessage(msg);
 
         mContext = this;
+
+        //test
+
     }
 
     @Override
@@ -152,7 +184,7 @@ public class MainActivity extends BaseActivity {
                     count --;
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }*/
             }
         }
@@ -165,9 +197,9 @@ public class MainActivity extends BaseActivity {
                 int o = (int) threadLocalHashCode.get(mThreadLocal);
                 Log.d("mThreadLocal","location ="+location+"before threadLocalHashCode = "+o);
             } catch (NoSuchFieldException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }*/
         }
     }
@@ -176,11 +208,35 @@ public class MainActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_start:
-                AnmitorStudy.test2(textView);
+                //AnmitorStudy.test2(textView);
+                //AnmitorStudy.testNoValue(textView);
+                AnmitorStudy.testNoValue(btn_start);
                 break;
             case R.id.btn_reversal:
-
                 AnmitorStudy.reversalAnmitor(textView,btn_start.getHeight()+10);
+                break;
+            case R.id.nextpage:
+                Intent intent = new Intent(this, TestActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_bind:
+                Log.d(TestService.tag,"mainact click bind");
+                Intent bs = new Intent(this, TestService.class);
+                this.bindService(bs,serviceConnection,Context.BIND_AUTO_CREATE);
+                break;
+            case R.id.tv_unbind:
+                Log.d(TestService.tag,"mainact click unbind");
+                this.unbindService(serviceConnection);
+                break;
+            case R.id.tv_startservice:
+                Log.d(TestService.tag,"mainact click start service");
+                Intent ss = new Intent(this, TestService.class);
+                startService(ss);
+                break;
+            case R.id.tv_stopservice:
+                Log.d(TestService.tag,"maniact click stop service");
+                Intent ss1 = new Intent(this, TestService.class);
+                stopService(ss1);
                 break;
         }
     }
@@ -212,7 +268,7 @@ public class MainActivity extends BaseActivity {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
             return null;
         }
@@ -248,4 +304,18 @@ public class MainActivity extends BaseActivity {
 
         }
     }
+
+    ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d(TestService.tag,"mainactivity onServiceConnected");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.d(TestService.tag," mainactivity onServiceDisconnected");
+        }
+    };
 }
+
+

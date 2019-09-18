@@ -1,6 +1,9 @@
 package com.xwtiger.devrescollect.utils;
 
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.LeadingMarginSpan;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.WindowManager;
@@ -35,11 +38,22 @@ public class Utils {
             case MotionEvent.ACTION_UP:
                 result = "ACTION_UP";
                 break;
+            case MotionEvent.ACTION_CANCEL:
+                result = "ACTION_CANCEL";
+                break;
             default:
                 result = action+"";
                 break;
         }
         return result;
+    }
+
+
+    public static SpannableString getSpannableString( String description,int marginSpanSize) {
+        SpannableString spannableString = new SpannableString(description);
+        LeadingMarginSpan leadingMarginSpan = new LeadingMarginSpan.Standard(marginSpanSize, 0);//仅首行缩进
+        spannableString.setSpan(leadingMarginSpan, 0, description.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        return spannableString;
     }
 
 }

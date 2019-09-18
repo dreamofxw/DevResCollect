@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DevResCollect</string>
+   <!-- <string name="app_name">DevResCollect</string>-->
 
     <!--xlistview -->
     <string name="header_hint_refresh_normal">下拉刷新</string>

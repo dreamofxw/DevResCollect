@@ -20,8 +20,69 @@
     </style>
 
 
-    <style name="Theme.NoBackGround" parent="android:Theme">
-        <item name="android:background">#f00</item>
+    <style name="AppTheme.NoBackGround" >
+        <item name="android:windowBackground">@drawable/ic_launcher</item>
     </style>
+
+
+    <style name="CommonDialogStyle" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+
+    <style name="AppThemeReading" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#000</item>
+        <item name="colorPrimaryDark">#000</item>
+    </style>
+
+
+
+
+    //新浪
+    <style name="EnterNullAnimationStyle">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@anim/exit_left</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@anim/exit_right</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@anim/exit_left</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@anim/exit_right</item>
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+        <item name="android:taskToFrontExitAnimation">@anim/exit_left</item>
+        <item name="android:taskToBackEnterAnimation">@null</item>
+        <item name="android:taskToBackExitAnimation">@anim/exit_right</item>
+    </style>
+
+    <style name="FullScreenAndNoEnterAnimStyle" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/transparent</item>
+        <item name="android:windowAnimationStyle">@style/EnterNullAnimationStyle</item>
+    </style>
+
+
+    <style name="Splash" parent="@style/FullScreenAndNoEnterAnimStyle">
+        <item name="android:windowBackground">@drawable/welcome_layler_drawable</item>
+    </style>
+
+
+
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+
+
 
 </resources>

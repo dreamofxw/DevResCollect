@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 
+import com.xwtiger.devrescollect.MyException;
 import com.xwtiger.devrescollect.net.OkHttpClientManager;
 import com.xwtiger.devrescollect.net.ResultCallBack;
 import com.xwtiger.devrescollect.study.javabase.TestSingle;
@@ -203,7 +204,7 @@ public class TestJavaBase {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
             return null;
         }
@@ -257,7 +258,7 @@ public class TestJavaBase {
                             //Thread.yield();
                             System.out.println("threadName ="+Thread.currentThread().getName()+",sleep1 finish");
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            MyException.printStr(e);
                         }
                     }else{
                         try {
@@ -268,7 +269,7 @@ public class TestJavaBase {
                             //Thread.yield();
                             System.out.println("threadName ="+Thread.currentThread().getName()+",sleep2 finish");
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            MyException.printStr(e);
                         }
                     }
 
@@ -371,7 +372,7 @@ public class TestJavaBase {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         thread.interrupt();
         thread2.interrupt();
@@ -391,7 +392,7 @@ public class TestJavaBase {
                         try {
                             Thread.sleep(2000);
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            MyException.printStr(e);
                             Thread.currentThread().interrupted();
                         }
                     }
@@ -419,9 +420,9 @@ public class TestJavaBase {
                 try {
                     System.out.println(submit.get());
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }
             }
         }.start();
@@ -446,7 +447,7 @@ public class TestJavaBase {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
         }
     }

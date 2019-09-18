@@ -1,0 +1,25 @@
+android 坐标系
+将屏幕左上角的顶点作为Android坐标系的原点，
+这个原点向右是x轴的正方向
+这个原点向下是y轴的正方向
+使用getRawX(),getRawY()获取的是android 坐标系的坐标
+
+view 坐标系
+假设触摸的view，view的父类是viewgroup
+eg:
+getLeft();:view的左边到父类的左边的距离
+getTop();view的顶部到父类的顶部的距离
+getRight()：view的右边到父类的左边的距离
+getBottom();view的底部到父类的顶部的距离
+是相对于view的父类的距离
+
+MotionEvent:
+getX();:触摸点到view的左边的距离
+getY();触摸点到view的顶部的距离
+
+getRawX();:触摸点到屏幕的左边的距离
+getRawY();:触摸点到屏幕的顶部的距离
+
+View中的x,y,tanslationX,tanslationY
+其中x,y是view的左上角坐标，traslationX,translationY是view左上角相对于父容器的偏移量
+其中view.getx() = left

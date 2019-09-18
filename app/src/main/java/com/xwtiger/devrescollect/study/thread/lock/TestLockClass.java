@@ -1,5 +1,7 @@
 package com.xwtiger.devrescollect.study.thread.lock;
 
+import com.xwtiger.devrescollect.MyException;
+
 /**
  * Created by xwadmin on 2018/4/6.
  */
@@ -31,7 +33,7 @@ public class TestLockClass {
             try {
                 Thread.sleep(0);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyException.printStr(e);
             }
 
             System.out.println(Thread.currentThread().getName() + "--" + testForSynchronized.setID_02());

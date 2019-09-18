@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/test100"
+    android:layout_height="@dimen/test100">
+    <ImageView
+        android:layout_width="@dimen/test100"
+        android:layout_height="@dimen/test100"
+        android:id="@+id/iv_gridview"
+        android:background="#00ff00"
+        />
+</RelativeLayout>

@@ -106,8 +106,8 @@ public class AnmitorStudy {
 
 
     public static void testNoValue(View target){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(target,View.X.getName(),target.getX()+target.getWidth());
-        animator.setInterpolator(new OvershootInterpolator());
+        ObjectAnimator animator = ObjectAnimator.ofFloat(target,"Y",target.getY(),target.getY()+390);
+        //animator.setInterpolator(new OvershootInterpolator());
         animator.setDuration(1000);
         animator.start();
     }

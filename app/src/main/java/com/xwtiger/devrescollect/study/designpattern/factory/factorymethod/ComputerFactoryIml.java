@@ -1,5 +1,6 @@
 package com.xwtiger.devrescollect.study.designpattern.factory.factorymethod;
 
+import com.xwtiger.devrescollect.MyException;
 import com.xwtiger.devrescollect.study.designpattern.factory.simplefactory.Computer;
 
 /**
@@ -15,11 +16,11 @@ public class ComputerFactoryIml extends ComputerFactory {
         try {
             computer  = (Computer) Class.forName(name).newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         return (T) computer;
     }

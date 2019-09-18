@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item  android:drawable="@drawable/welcome_android" />-->
+    <item  android:drawable="@drawable/splash_fff" />
+    <!--<item  android:height="900px" android:gravity="bottom">-->
+        <!--<bitmap android:gravity="center_horizontal" android:src="@mipmap/slogan" />-->
+    <!--</item>-->
+
+    <item   android:gravity="top" android:top="50dp">
+        <bitmap android:gravity="top" android:src="@drawable/slogan" />
+    </item>
+    <!--<item android:top="200px">-->
+        <!--<bitmap android:gravity="center|top" android:src="@mipmap/welcome_android_slogan" />-->
+    <!--</item>-->
+    <!--<item android:top="20.0dip" android:right="20.0dip">-->
+        <!--<bitmap android:gravity="center|right|top" android:src="@mipmap/channel_logo" />-->
+    <!--</item>-->
+</layer-list>

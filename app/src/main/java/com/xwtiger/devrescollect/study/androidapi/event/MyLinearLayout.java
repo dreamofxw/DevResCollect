@@ -37,10 +37,10 @@ public class MyLinearLayout extends LinearLayout {
         boolean bo = false;
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
-                bo = false;
+                bo = true;
                 break;
             case MotionEvent.ACTION_MOVE:
-                bo = true;
+                bo = false;
                 break;
             case MotionEvent.ACTION_UP:
 
@@ -48,7 +48,7 @@ public class MyLinearLayout extends LinearLayout {
 
         }
         Log.d("testevent", "【市长】任务<" + Utils.actionToString(ev.getAction()) + "> : 拦截吗？" + bo);
-        return bo;
+        return false;
     }
 
     @Override
@@ -67,6 +67,6 @@ public class MyLinearLayout extends LinearLayout {
                 break;
         }
         Log.d("testevent", "【市长】任务<" + Utils.actionToString(ev.getAction()) + "> : 农民真没用，下次再也不找你了，我自己来尝试一下。能解决？" + bo);
-        return true;
+        return false;
     }
 }

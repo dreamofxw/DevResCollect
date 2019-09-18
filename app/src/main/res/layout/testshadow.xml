@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ff00"
+    android:clipChildren="false"
+    >
+
+    <ImageView
+        android:id="@+id/iv_note_rightimg"
+        android:layout_width="@dimen/x210"
+        android:layout_height="@dimen/x210"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x34"
+        android:visibility="visible"
+        android:src="@drawable/pay_icon_alipay"
+        android:scaleType="centerCrop"
+        android:background="#ff0000"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_note_rightimg"
+
+        >
+        <ImageView
+            android:id="@+id/iv_note_rightimg1"
+            android:layout_width="@dimen/x210"
+            android:layout_height="@dimen/x210"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x34"
+            android:visibility="visible"
+            android:background="#ff0000"
+            android:scaleType="centerCrop"
+            />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_testshadow"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/testshadow"
+        android:text="共读"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+
+    <com.xwtiger.devrescollect.view.CheckView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_testshadow"
+        android:id="@+id/checkview"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:scrollbars="vertical"
+        android:layout_below="@id/checkview"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbarThumbVertical="@drawable/scrollbar_green"
+        android:scrollbarSize="@dimen/x10"
+        android:paddingLeft="@dimen/x44"
+        android:paddingRight="@dimen/x44"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:text="text11111"
+            />
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:layout_below="@id/tv1"
+            android:text="text222222"
+
+            />
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:layout_below="@id/tv2"
+            android:text="text3333333"
+
+            />
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:layout_below="@id/tv3"
+            android:text="text444444"
+
+            />
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:layout_below="@id/tv4"
+            android:text="text5555555"
+            />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

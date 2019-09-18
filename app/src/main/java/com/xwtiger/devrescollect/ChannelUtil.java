@@ -78,13 +78,13 @@ public class ChannelUtil {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } finally {
             if (zipfile != null) {
                 try {
                     zipfile.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    MyException.printStr(e);
                 }
             }
         }
@@ -139,7 +139,7 @@ public class ChannelUtil {
 		try{
 			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
 		}catch(NameNotFoundException e) {
-			e.printStackTrace();
+			MyException.printStr(e);
 		}
 		return -1;
 	}

@@ -6,6 +6,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.lang.reflect.Field;
 
 /**
@@ -31,14 +33,14 @@ public class TabLayoutUtils {
         try {
             tabStrip = tabLayout.getDeclaredField("mTabStrip");
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
         tabStrip.setAccessible(true);
         LinearLayout llTab = null;
         try {
             llTab = (LinearLayout) tabStrip.get(tabs);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
 
         int left = (int) TypedValue.applyDimension(dporpx?TypedValue.COMPLEX_UNIT_DIP:TypedValue.COMPLEX_UNIT_PX, leftDip, Resources.getSystem().getDisplayMetrics());

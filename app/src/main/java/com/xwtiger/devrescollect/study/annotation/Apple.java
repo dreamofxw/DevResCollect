@@ -1,5 +1,7 @@
 package com.xwtiger.devrescollect.study.annotation;
 
+import com.xwtiger.devrescollect.MyException;
+
 import java.lang.reflect.Field;
 
 /**
@@ -26,9 +28,9 @@ public class Apple {
             }
 
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            MyException.printStr(e);
         }
 
     }

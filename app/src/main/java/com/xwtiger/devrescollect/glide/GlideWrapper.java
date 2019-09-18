@@ -3,7 +3,6 @@ package com.xwtiger.devrescollect.glide;
 import android.content.Context;
 
 import com.bumptech.glide.Glide;
-import com.xwtiger.devrescollect.GlideYouShu;
 
 /**
  * author:xw
