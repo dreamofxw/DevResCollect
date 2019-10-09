@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'org.greenrobot.greendao'
 
 
 android {
@@ -112,6 +113,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     compile 'cn.magicwindow:MagicWindowSDK:4.2.181130'
+
+    implementation 'org.greenrobot:greendao:3.2.2'
 
 
 }

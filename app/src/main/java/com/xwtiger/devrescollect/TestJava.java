@@ -3,16 +3,23 @@ package com.xwtiger.devrescollect;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
 import com.xwtiger.devrescollect.statistics.MD5Util;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
 import com.xwtiger.devrescollect.utils.TimeUtils;
+import com.xwtiger.devrescollect.utils.ZipUtil;
+import com.xwtiger.devrescollect.view.TestChildren;
+import com.xwtiger.devrescollect.view.TestParent;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
@@ -25,6 +32,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLTransientException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -42,6 +50,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
+import java.util.TimeZone;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -283,12 +292,322 @@ public class TestJava extends TestUapte{
 //        list1.add("str4");
 //
 //
-//        System.out.println(list.containsAll(list1));
+//        System.out.println(list.containsAll(list1))
 
-        String url = "http://www.baidu.com";
-        String url1 = "http://apidev.laidan.com:81/m/page/getIndex?page_id=10010013&&uid=123";
-        replaceHostForOldNet(url1);
-        System.out.println("submit code first");
+
+//        Calendar cal1 = Calendar.getInstance(TimeZone.getTimeZone("GMT+08"));
+//        Calendar cal2 = Calendar.getInstance(TimeZone.getTimeZone("Australia/Darwin"));
+//        Calendar cal3 = Calendar.getInstance(TimeZone.getTimeZone("Africa/Cairo"));
+//
+//        long l = System.currentTimeMillis();
+//        long result = l-5*24*60*60*1000;
+//        cal1.setTimeInMillis(result);
+//
+//
+//        System.out.println("cal1 ="+cal1.get(Calendar.DAY_OF_WEEK));
+//        System.out.println("cal2 ="+cal2.get(Calendar.DAY_OF_WEEK));
+//        System.out.println("cal3 ="+cal3.get(Calendar.DAY_OF_WEEK));
+//
+//
+//        System.out.println("----------------------");
+//        System.out.println( TimeZone.getDefault().getID());
+//        System.out.println(TimeZone.getTimeZone("Australia/Darwin").getID());
+//        System.out.println(TimeZone.getTimeZone("GMT+08").getID());
+
+//        "start_time": "1533571200",
+//                "end_time": "1533657300",
+
+        long start_time = 1533571200;
+        long end_time = 1533657300;
+        
+
+//        SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//
+//
+//        String format_starttime = fmt.format(new Date(start_time * 1000));
+//        String format_endtime = fmt.format(new Date(end_time * 1000));
+//        System.out.println(System.currentTimeMillis()/1000);
+//        System.out.println((System.currentTimeMillis()+3*24*60*60*1000)/1000);
+//
+//        System.out.println("format_starttime ="+format_starttime);
+//        System.out.println("format_endtime ="+format_endtime);
+        //testData(b);
+        //unzip();
+
+
+        //1568624823
+        //1568884023
+
+//        String fileurl = "/Users/xuww/DevResCollect/unzip/newbee.zip";
+//        File file = new File(fileurl);
+//
+//        System.out.println("---start");
+//        System.out.println(getMD5Checksum(fileurl));
+
+
+        //df79675fa973c99ab151a4ae04b29f57
+        //47494360eec9a75173e76d01592f2c36
+        //f0e17c9d59d43df9b9a71d1dc487bafb
+
+        //c69d137713b0a830791ef953945c28e7
+        //aa4b8f123f5eab0e8ef4f601d792a8af
+//        System.out.println("78161e25249e38896554b44f0dd838ea".length());
+//        System.out.println("df798754a973c99ab151a4ae04b20f68".length());
+
+
+//        String url = "http://www.baidu.?com.a";
+//
+//        System.out.println(url.endsWith("?"));
+       // System.out.println(generateVersionCode("15.25"));
+        
+        
+        String str1 = "4";
+        String str2 = "5.23.1";
+        
+        //System.out.println(compareVersions(str1,str2));
+
+
+//        int temp1 = 2;
+//        int temp2 = temp1;
+//        //temp1++;
+//
+//        testindex(temp1);
+//        System.out.println("temp1 ="+temp1);
+//        System.out.println("temp2 ="+temp2);
+
+        TestParent testChildren = new TestParent();
+        testChildren.test();
+
+        
+    }
+
+
+    public static void testindex(int index){
+        index++;
+        System.out.println("函数内部  index ="+index);
+    }
+
+
+    public static void testIndex(){
+        List<String> list = new ArrayList<>();
+        list.add("str1");
+        list.add("str2");
+        int currPos = -1;
+        for (int i = 0; i < list.size(); i++) {
+            if ("str1".equals(list.get(i))) {
+                currPos = i;
+                break;
+            }
+        }
+        System.out.println("currPos="+currPos);
+    }
+
+
+
+
+    //1 大于, 0等于 ,-1小于
+    public static int compareVersions(String v1, String v2) {
+        //判断是否为空数据
+//        if (TextUtils.equals(v1, "") || TextUtils.equals(v2, "")) {
+//            return false;
+//        }
+        String[] str1 = v1.split("\\.");
+        String[] str2 = v2.split("\\.");
+
+        int result = 0;
+        if (str1.length == str2.length) {
+            for (int i = 0; i < str1.length; i++) {
+                if (Integer.parseInt(str1[i]) > Integer.parseInt(str2[i])) {
+                    return 1;
+                } else if (Integer.parseInt(str1[i]) < Integer.parseInt(str2[i])) {
+                    return -1;
+                } else if (Integer.parseInt(str1[i]) == Integer.parseInt(str2[i])) {
+
+                }
+            }
+            return 0;
+        } else {
+            if (str1.length > str2.length) {
+                for (int i = 0; i < str2.length; i++) {
+                    if (Integer.parseInt(str1[i]) > Integer.parseInt(str2[i])) {
+                        return 1;
+                    } else if (Integer.parseInt(str1[i]) < Integer.parseInt(str2[i])) {
+                        return -1;
+
+                    } else if (Integer.parseInt(str1[i]) == Integer.parseInt(str2[i])) {
+                        if(i == str2.length - 1){
+                            for(int j = i+1;j<str1.length;j++){
+                                if(Integer.parseInt(str1[j])>0){
+                                    return 1;
+                                }
+                            }
+                            return 0;
+                        }
+                    }
+                }
+            } else {
+                for (int i = 0; i < str1.length; i++) {
+                    if (Integer.parseInt(str1[i]) > Integer.parseInt(str2[i])) {
+                        return 1;
+                    } else if (Integer.parseInt(str1[i]) < Integer.parseInt(str2[i])) {
+                        return -1;
+
+                    } else if (Integer.parseInt(str1[i]) == Integer.parseInt(str2[i])) {
+                        if(i == str1.length - 1){
+                            for(int j = i+1;j<str2.length;j++){
+                                if(Integer.parseInt(str2[j])>0){
+                                    return -1;
+                                }
+                            }
+                            return 0;
+                        }
+                    }
+                }
+
+            }
+            return -2;
+        }
+    }
+
+
+
+    public static  int generateVersionCode(String versionName) {
+        StringBuffer result = new StringBuffer();
+        String[] temp = versionName.split("\\.");
+        for (int i = 0; i < temp.length; i++) {
+            if (i == 0) {
+                System.out.println(temp[0]);
+                result.append(temp[0]);
+            }else if(i==3) {
+                System.out.println(temp[3]);
+                result.append(temp[3]);
+            }else {
+                if (temp[i].length() == 1) {
+                    result.append("00" + temp[i]);
+                } else if (temp[i].length() == 2) {
+                    result.append("0" + temp[i]);
+                } else if (temp[i].length() == 3) {
+                    result.append(temp[i]);
+                }
+            }
+        }
+        return Integer.parseInt(result.toString());
+    }
+
+
+    private static byte[] createChecksum(String filename) {
+        InputStream fis = null;
+        try {
+            fis = new FileInputStream(filename);
+            byte[] buffer = new byte[1024];
+            MessageDigest complete = MessageDigest.getInstance("MD5");
+            int numRead = -1;
+
+            while ((numRead = fis.read(buffer)) != -1) {
+                complete.update(buffer, 0, numRead);
+            }
+            return complete.digest();
+        } catch (FileNotFoundException e) {
+        } catch (NoSuchAlgorithmException e) {
+        } catch (IOException e) {
+        } finally {
+            try {
+                if (null != fis) {
+                    fis.close();
+                }
+            } catch (IOException e) {
+            }
+        }
+        return null;
+
+    }
+
+
+    public static String getMD5Checksum(String filename) {
+
+        if (!new File(filename).isFile()) {
+
+            return null;
+        }
+        byte[] b = createChecksum(filename);
+        if(null == b){
+            return null;
+        }
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < b.length; i++) {
+            result.append(Integer.toString((b[i] & 0xff) + 0x100, 16)
+                    .substring(1));
+        }
+        return result.toString();
+
+    }
+
+
+
+
+    public static void unzip(){
+
+        String fileurl = "/Users/xuww/DevResCollect/unzip/haha";
+        String resulturl = "/Users/xuww/DevResCollect/unzip";
+
+        ZipUtil.UnZipFolder(fileurl,resulturl);
+
+
+        String zipurl = "/Users/xuww/DevResCollect/unzip/newbee";
+
+
+//        File file = new File(fileurl);
+//        File file1 = new File(resulturl);
+//        System.out.println(file.getName());
+//        System.out.println(file1.getName());
+
+//        try {
+//            ZipUtil.ZipFolder(zipurl,"/Users/xuww/DevResCollect/unzip/haha");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }
+
+
+    public static boolean isSameDay(long newtime,long oldtime){
+//        if(TextUtils.isEmpty(newtime)||TextUtils.isEmpty(oldtime)){
+//            return false;
+//        }
+        SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd");
+        Date old_date = new Date((oldtime));
+        System.out.println(fmt.format(old_date).toString());
+        System.out.println(fmt.format(newtime).toString());
+        if((fmt.format(old_date).toString().equals(fmt.format(new Date(newtime)).toString()))){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public static TestObject testObject;
+
+    public static class TestObject{
+        public String str1;
+        public String str2;
+    }
+
+    static int b = 10;
+    public static void testData(int a){
+        System.out.println("befor="+a);
+        a=2;
+        System.out.println("a="+a);
+        System.out.println("b="+b);
+    }
+
+    public static void testObject12(TestObject o1){
+        o1.str1 ="";
+        o1.str2 ="";
+        System.out.println("befor ="+o1);
+        o1 =null;
+        
+        System.out.println("str1="+o1);
+        System.out.println("区分："+testObject);
     }
 
 

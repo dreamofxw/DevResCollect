@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:text="添加数据"
+        android:layout_marginTop="@dimen/y50"
+        android:gravity="center"
+        android:background="#f00"
+        android:textColor="#fff"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tv_remove"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:text="删除数据"
+        android:layout_marginTop="@dimen/y50"
+        android:gravity="center"
+        android:background="#f00"
+        android:textColor="#fff"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tv_updata"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:text="更新数据"
+        android:layout_marginTop="@dimen/y50"
+        android:gravity="center"
+        android:background="#f00"
+        android:textColor="#fff"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:layout_width="@dimen/x300"
+        android:layout_height="@dimen/x300"
+        android:src="@drawable/zhanweitu03"
+        android:scaleType="fitXY"
+        />
+    <ImageView
+        android:layout_width="@dimen/y600"
+        android:layout_height="@dimen/y600"
+        android:src="@drawable/zhanweitu03"
+        android:scaleType="fitXY"
+
+        />
+    <!--<ImageView-->
+        <!--android:layout_width="@dimen/x500"-->
+        <!--android:layout_height="@dimen/x500"-->
+        <!--/>-->
+</LinearLayout>

@@ -197,13 +197,28 @@
         </activity>
         <activity android:name="com.xwtiger.devrescollect.test.TestAnimationForNineActivity"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+        </activity>
+
+
+
+        <activity android:name="com.xwtiger.devrescollect.test.TestDbActivity"
+            >
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
+
+
+
 
             <service android:name="com.xwtiger.devrescollect.study.androidapi.service.TestService"
                 >

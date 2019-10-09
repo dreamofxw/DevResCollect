@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -40,6 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    app:layout_collapseMode="parallax"
                     >
                     <ImageView
                         android:id="@+id/imageview"
@@ -48,7 +49,9 @@
                         android:contentDescription="test"
                         android:scaleType="centerCrop"
                          />
+
                     <TextView
+                        android:id="@+id/tv_txt"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:text="test123"
@@ -160,10 +163,24 @@
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="56dp"
                 android:layout_gravity="bottom"
-                android:background="#ff0000"
+                android:visibility="visible"
+                android:background="#fff"
                 />
+
+            <TextView
+                android:id="@+id/tv_placehold"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:textSize="@dimen/y30"
+                android:text="占位"
+                android:gravity="center"
+                android:textColor="#fff"
+
+                />
+
+
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -179,5 +196,15 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_showmine"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="show minedddddddddddddd"
+        android:background="#fff"
+        android:gravity="center"
+        android:textSize="@dimen/y30"
+        android:visibility="visible"
+        android:layout_marginTop="56dp"
+        />
+</RelativeLayout>
