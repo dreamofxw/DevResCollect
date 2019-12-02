@@ -7,6 +7,9 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.xwtiger.devrescollect.bean.Study;
+import com.xwtiger.devrescollect.bean.TestConstant;
+import com.xwtiger.devrescollect.queue.AntiDuplicateLinkedBlockingQueue;
 import com.xwtiger.devrescollect.statistics.MD5Util;
 import com.xwtiger.devrescollect.study.javaapi.PatternStudy;
 import com.xwtiger.devrescollect.utils.TimeUtils;
@@ -43,7 +46,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -374,11 +379,146 @@ public class TestJava extends TestUapte{
 //        testindex(temp1);
 //        System.out.println("temp1 ="+temp1);
 //        System.out.println("temp2 ="+temp2);
+//        String url = "http://m.laidan.com/abc/0.0.4/abc.zip";
+//
+//        String substring = url.substring(url.lastIndexOf("/") + 1);
+//
+//        System.out.println(substring);
+        //testduplicate();
 
-        TestParent testChildren = new TestParent();
-        testChildren.test();
-
+//        String temp = TestConstant.Stype1.name();
+//        System.out.println("count ="+TestConstant.Stype1);
+//        System.out.println("count ="+TestConstant.STRING2.name());
+//        System.out.println(TestConstant.STRING2);
         
+//        System.out.println(System.currentTimeMillis()/1000);
+//
+//        System.out.println(1571732928+24*60*60);
+
+//        String url = "http://zaiadev.laidan.com/p/coinshop_h5/coins_goods_goodsTask&path=youshudouMall/index.html&route=#/index";
+//        System.out.println(url.split("&path")[0]);
+//        System.out.println(url.split("&path")[1]);
+
+//        Testobj testobj = Testobj.OBJ1;
+//        System.out.println("obj1="+testobj.equals(Testobj.OBJ1));
+//        System.out.println("obj2="+testobj.equals(Testobj.OBJ2));
+//        System.out.println("obj3="+testobj.equals(Testobj.OBJ3));
+//        System.out.println("obj1.value="+Testobj.OBJ1.ordinal());
+//        System.out.println("obj2.value="+Testobj.OBJ2.ordinal());
+//        System.out.println("obj3.value="+Testobj.OBJ3.ordinal());
+//        System.out.println("obj3.name="+Testobj.OBJ3.name());
+//        System.out.println("obj2.name="+Testobj.OBJ2.name());
+//        System.out.println("obj1.name="+Testobj.OBJ1.name());
+//        System.out.println("----------------");
+//        System.out.println("1="+testobj.equals(Testobj.OBJ1));
+//        System.out.println("2="+testobj.name().equals(Testobj.OBJ1.name()));
+//        System.out.println("2="+(testobj.ordinal()==(Testobj.OBJ1.ordinal())));
+
+
+//        LinkedHashMap linkedHashMap = new LinkedHashMap();
+//
+//        linkedHashMap.put("key3","value3");
+//        linkedHashMap.put("key1","value1");
+//        linkedHashMap.put("key1","value2");
+//
+//
+//        System.out.println(linkedHashMap);
+
+        //0,2,4,8.16,32,64,128  255
+
+
+
+        int i1 = new Random(255).nextInt();
+        String s = Integer.toHexString(i1).substring(2);
+
+
+
+        System.out.println("s="+s);
+
+
+    }
+
+    public static enum Testobj{
+        OBJ1,OBJ2,OBJ3
+    }
+
+
+
+    public static void testduplicate(){
+
+        HashSet<Study> hashSet = new HashSet<Study>();
+        hashSet.add(new Study("test1","女"));
+        hashSet.add(new Study("test2","女"));
+        hashSet.add(new Study("test1","女"));
+        System.out.println("size ="+hashSet.size());
+        System.out.println("tostirng ="+hashSet);
+
+        System.out.println("----------分割线--------");
+        HashMap<String,Study> hashmap = new HashMap<String,Study>();
+        hashmap.put("test1",new Study("test1","女"));
+        hashmap.put("test2",new Study("test2","女"));
+        hashmap.put("test2",new Study("test2","女"));
+        System.out.println("size ="+hashmap.size());
+        System.out.println("tostirng ="+hashmap);
+
+        System.out.println("-------分割线2------");
+        AntiDuplicateLinkedBlockingQueue<String,Study> queue = new AntiDuplicateLinkedBlockingQueue<String,Study>();
+        queue.offer("test1",new Study("test1","女"));
+        queue.offer("test2",new Study("test2","女"));
+        System.out.println(queue.size());
+        System.out.println(queue);
+
+
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("start拿数据");
+                    String take = queuenew.take();
+                    System.out.println("拿完数据 take="+take);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        executorService.execute(new addRunnable());
+
+
+
+    }
+
+    static AntiDuplicateLinkedBlockingQueue<String,String> queuenew = new AntiDuplicateLinkedBlockingQueue<String,String>();
+
+
+    static class addRunnable implements java.lang.Runnable{
+
+        @Override
+        public void run() {
+            System.out.println("save数据");
+            for(int i =0;i<100;i++){
+                int i1 = i % 10;
+                queuenew.offer("test"+i1,"string"+i);
+            }
+            System.out.println("save数据 size="+queuenew.size()+",tostring="+queuenew);
+        }
+    }
+
+
+    /**
+     * X?+	X，一次或一次也没有
+     * X*+	X，零次或多次
+     * X++	X，一次或多次
+     * @param num
+     * @return
+     */
+    public static boolean isDigit(String num){
+        //String telRegex = "^[0-9]++\\.?+[0-9]*+$";
+        String telRegex = "^[-+]?+[0-9]++$";
+        return num.matches(telRegex);
     }
 
 

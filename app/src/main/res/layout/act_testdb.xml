@@ -46,14 +46,42 @@
         android:layout_height="@dimen/x300"
         android:src="@drawable/zhanweitu03"
         android:scaleType="fitXY"
+        android:visibility="gone"
         />
     <ImageView
         android:layout_width="@dimen/y600"
         android:layout_height="@dimen/y600"
         android:src="@drawable/zhanweitu03"
         android:scaleType="fitXY"
-
+        android:visibility="gone"
         />
+    <TextView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y60"
+        android:layout_gravity="center"
+        android:text="开始"
+        android:gravity="center"
+        android:id="@+id/tv_start"
+        />
+    <TextView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y60"
+        android:layout_gravity="center"
+        android:text="暂停"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/y30"
+        android:id="@+id/tv_pause"
+        />
+    <TextView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y60"
+        android:layout_gravity="center"
+        android:text="切换"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/y30"
+        android:id="@+id/tv_change"
+        />
+
     <!--<ImageView-->
         <!--android:layout_width="@dimen/x500"-->
         <!--android:layout_height="@dimen/x500"-->

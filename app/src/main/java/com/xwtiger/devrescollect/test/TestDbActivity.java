@@ -2,6 +2,9 @@ package com.xwtiger.devrescollect.test;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +31,16 @@ public class TestDbActivity extends BaseActivity {
     private TextView tv_remove;
     private TextView tv_updata;
 
+    private TextView tv_start;
+    private TextView tv_pause;
+    private TextView tv_change;
+
+    private HandlerThread handlerThread;
+    private Handler mhandler ;
+    private long num=0;
+    private long total = 20;
+    private boolean isChange= false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +62,31 @@ public class TestDbActivity extends BaseActivity {
 
 //        Log.d("testassetmanager", "onCreate: readjson()="+test());
 //        Log.d("testassetmanager", "onCreate: getFromAssets="+getFromAssets("h5cache/manifest.json"));
+
+
+
+        handlerThread = new HandlerThread("computertime");
+        handlerThread.start();
+        mhandler = new Handler(handlerThread.getLooper()){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                try {
+                    num++;
+                    Log.d("testhandthread", "handleMessage: num="+num+",threadname="+Thread.currentThread().getName());
+                    Thread.sleep(1000);
+                    if(num <total&&!isChange){
+                        mhandler.sendEmptyMessage(0);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+
+
+
     }
 
 
@@ -167,6 +205,9 @@ public class TestDbActivity extends BaseActivity {
         tv_add = findViewById(R.id.tv_add);
         tv_remove = findViewById(R.id.tv_remove);
         tv_updata = findViewById(R.id.tv_updata);
+        tv_start = findViewById(R.id.tv_start);
+        tv_pause = findViewById(R.id.tv_pause);
+        tv_change = findViewById(R.id.tv_change);
     }
 
     @Override
@@ -179,6 +220,9 @@ public class TestDbActivity extends BaseActivity {
         tv_add.setOnClickListener(this);
         tv_remove.setOnClickListener(this);
         tv_updata.setOnClickListener(this);
+        tv_start.setOnClickListener(this);
+        tv_pause.setOnClickListener(this);
+        tv_change.setOnClickListener(this);
     }
 
     @Override
@@ -195,6 +239,21 @@ public class TestDbActivity extends BaseActivity {
             case R.id.tv_updata:
                 //TestDaoManage.getInstance().updataData(makeData1());
 
+                break;
+            case R.id.tv_start:
+                isChange = false;
+                mhandler.sendEmptyMessage(0);
+                break;
+            case R.id.tv_pause:
+                isChange = true;
+                Log.d("testhandthread", "onClick: pause ");
+                mhandler.removeCallbacksAndMessages(null);
+                break;
+            case R.id.tv_change:
+                isChange = false;
+                mhandler.removeCallbacksAndMessages(null);
+                num =0;
+                mhandler.sendEmptyMessage(0);
                 break;
         }
     }

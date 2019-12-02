@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 //import com.bumptech.glide.annotation.GlideModule;
+import com.github.moduth.blockcanary.BlockCanary;
 import com.qiniu.pili.droid.streaming.StreamingEnv;
 import com.xwtiger.devrescollect.statistics.YouShuStatistics;
+import com.xwtiger.devrescollect.view.AppBlockCanaryContext;
 
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
@@ -50,6 +52,10 @@ public class MyApplication extends Application {
                     .penaltyLog()
                     .build());
         }
+
+
+        BlockCanary.install(this, new AppBlockCanaryContext()).start();
+
         //YouShuStatistics.getInstance().startCheck();
         StreamingEnv.init(getApplicationContext());
 
