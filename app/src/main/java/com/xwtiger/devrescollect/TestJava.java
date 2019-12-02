@@ -434,6 +434,8 @@ public class TestJava extends TestUapte{
 
 
         System.out.println("s="+s);
+        
+        System.out.println("test git2");
 
 
     }
