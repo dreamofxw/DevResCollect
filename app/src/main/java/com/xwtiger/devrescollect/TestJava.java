@@ -437,6 +437,7 @@ public class TestJava extends TestUapte{
         
         System.out.println("test git2");
         System.out.println("test git4");
+        System.out.println("test git555");
 
 
         System.out.println("add git branch testgit1");
