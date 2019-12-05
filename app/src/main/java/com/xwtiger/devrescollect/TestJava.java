@@ -445,6 +445,7 @@ public class TestJava extends TestUapte{
         System.out.println("test gitcommit444");
         System.out.println("test gitcommit555");
         System.out.println("test gitcommit666");
+        System.out.println("test gitcommit7");
 
         System.out.println("add git branch testgit1");
     }
