@@ -459,9 +459,9 @@ public class TestJava extends TestUapte{
         System.out.println("add git branch testgit1");
         System.out.println("add git branch testgit1930");
 
-        for(int i=58;i<150;i++){
-            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
-        }
+//        for(int i=58;i<150;i++){
+//            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
+//        }
     }
 
     public static enum Testobj{
