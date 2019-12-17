@@ -19,15 +19,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.silencedut.fpsviewer.FpsViewer;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.study.thread.threadpool.TestThreadPool;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class TestAnimationActivity extends BaseActivity {
 
@@ -46,10 +56,18 @@ public class TestAnimationActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testanimation);
+        FpsViewer.getViewer().appendSection(this.getClass().getSimpleName()+"_Section");
         init();
         addData();
 
         Glide.with(this).load(list.get(0)).placeholder(Color.parseColor("#eeeeee")).into(iv_first);
+
+
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -85,12 +103,127 @@ public class TestAnimationActivity extends BaseActivity {
                 TestThreadPool.test();
                 break;
             case R.id.tv_switch:
-                Message obtain = Message.obtain();
-                obtain.what=what_play;
-                hanler.sendMessage(obtain);
+//                Message obtain = Message.obtain();
+//                obtain.what=what_play;
+//                hanler.sendMessage(obtain)
+                if(localTimer ==null){
+                    localTimer = new LocalTimer("daojishi");
+                    localTimer.setListerTimer(new IListerTimer() {
+                        @Override
+                        public void update(final long time) {
+                            Log.d("testlocaltimer1", "update: time="+time+",threadname="+Thread.currentThread().getName());
+                            tv_switch.post(new Runnable() {
+                                @Override
+                                public void run() {
+//                                    long minutes = (time % ( 60 * 60)) /60;
+//                                    long seconds = time % 60;
+
+
+                                    long minutes = time/60;
+                                    long seconds = time % 60;
+                                    Log.d("testlocaltimer1", "update: minutes="+minutes+",seconds="+seconds);
+
+
+                                    String str_minutes = "";
+                                    String str_seconds = "";
+
+                                    if(minutes ==0){
+                                        str_minutes = "00";
+                                    }else if(minutes >0&&minutes <=9){
+                                        str_minutes = "0"+minutes;
+                                    }else{
+                                        str_minutes = String.valueOf(minutes);
+                                    }
+                                    if(seconds ==0){
+                                        str_seconds = "00";
+                                    }else if(seconds >0&&seconds <=9){
+                                        str_seconds = "0"+seconds;
+                                    }else{
+                                        str_seconds = String.valueOf(seconds);
+                                    }
+                                    tv_switch.setText(str_minutes+":"+str_seconds);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void end() {
+                            Log.d("testlocaltimer1", "end:");
+
+                        }
+
+                        @Override
+                        public void init() {
+                            Log.d("testlocaltimer1", "init:");
+
+                        }
+
+                        @Override
+                        public void pause() {
+                            Log.d("testlocaltimer1", "pause:");
+                        }
+                    });
+                }
+                if(!isTimeing){
+                    isTimeing = true;
+                    localTimer.start();
+                }else{
+                    isTimeing = false;
+                    localTimer.pause();
+                }
                 break;
         }
     }
+
+
+
+
+    private LocalTimer localTimer;
+
+
+
+
+
+
+
+    Subscription subscribe;
+    public long initVaule = 0;
+    Observable<Long> interval;
+
+    boolean isTimeing = false;
+
+    public void timer1(){
+         if(interval ==null){
+             interval = Observable.interval(initVaule, 1, TimeUnit.SECONDS, Schedulers.computation());
+         }
+         subscribe = interval.subscribe(observer);
+    }
+
+
+    Observer observer = new Observer<Long>() {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onNext(Long aLong) {
+            initVaule = aLong;
+            if(aLong >20){
+                Log.d("testtimer1", "取消 call: aLong =" + aLong + ",threadname=" + Thread.currentThread().getName());
+                if(!subscribe.isUnsubscribed()){
+                    subscribe.unsubscribe();
+                }
+            }else{
+                Log.d("testtimer1", "call: aLong =" + aLong + ",threadname=" + Thread.currentThread().getName());
+            }
+        }
+    };
 
 
     public void startAnimation(){
@@ -262,6 +395,14 @@ public class TestAnimationActivity extends BaseActivity {
         super.onDestroy();
         Log.d("testmsg1", "onDestroy: ");
         hanler.removeCallbacksAndMessages(null);
+        FpsViewer.getViewer().removeSection(this.getClass().getSimpleName()+"_Section");
+        if(subscribe !=null&&!subscribe.isUnsubscribed()){
+            subscribe.unsubscribe();
+        }
+
+        if(localTimer !=null){
+            localTimer.destroy();
+        }
     }
 
 

@@ -68,6 +68,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import okhttp3.Request;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Busap-112 on 2017/11/10.
@@ -257,6 +263,36 @@ public class TestActivity extends BaseActivity {
 
         
         testGson();
+
+
+        Log.d("testempty", "onCreate: start 数据转换");
+        Observable.empty().observeOn(Schedulers.io()).flatMap(new Func1<Object, Observable<?>>() {
+
+            @Override
+            public Observable<?> call(Object o) {
+                Log.d("testempty", "onCreate: start flatmap="+Thread.currentThread().getName());
+
+                return Observable.just("");
+            }
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                Log.d("testempty", "onCreate: start onnext=" + Thread.currentThread().getName());
+
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                Log.d("testempty", "onCreate: start onerror=" + Thread.currentThread().getName());
+
+            }
+        }, new Action0() {
+            @Override
+            public void call() {
+                Log.d("testempty", "onCreate: start oncomplete=" + Thread.currentThread().getName());
+
+            }
+        });
     }
 
     @Override
@@ -470,7 +506,8 @@ public class TestActivity extends BaseActivity {
                 break;
             case R.id.btn_jumpmainact:
                 //Intent intent = new Intent(this, TestHandlerActivity.class);
-                Intent intent = new Intent(this, MainActivity.class);
+                //Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, TestAnimationActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_null:
