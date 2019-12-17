@@ -3,6 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
 
 
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '27.1.1' //这里版本自己根据情况改变
+            }
+        }
+    }
+}
+
 android {
     signingConfigs {
 //        config {
@@ -118,6 +129,21 @@ dependencies {
 
     //页面检测
     compile 'com.github.markzhai:blockcanary-android:1.5.0'
+
+//    debugImplementation "com.github.silencedut.fpsviewer:fpsviewer:latestVersion"
+//    releaseImplementation "com.github.silencedut.fpsviewer:fpsviewer-no-op:latestVersion"
+    compile('com.github.silencedut.fpsviewer:fpsviewer:0.8.2') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+//    releaseCompile "com.github.silencedut.fpsviewer:fpsviewer-no-op:latestVersion"
+
+
+
+//    compile('com.github.addappcn:android-pickers:1.0.1') {
+//        exclude group: 'com.android.support', module: 'support-v4'
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//        exclude group: 'com.android.support', module: 'appcompat-v7'
+//    }
 
 
 

@@ -13,6 +13,7 @@ import android.util.Log;
 //import com.bumptech.glide.annotation.GlideModule;
 import com.github.moduth.blockcanary.BlockCanary;
 import com.qiniu.pili.droid.streaming.StreamingEnv;
+import com.silencedut.fpsviewer.FpsViewer;
 import com.xwtiger.devrescollect.statistics.YouShuStatistics;
 import com.xwtiger.devrescollect.view.AppBlockCanaryContext;
 
@@ -71,6 +72,9 @@ public class MyApplication extends Application {
         int a = 4004000;
         Log.d("testversioncode", "onCreate: a="+a);
         Log.d("testversioncode", "onCreate: a="+Integer.MAX_VALUE);
+
+        FpsViewer.getViewer().initViewer(this,null);
+
 
     }
 

@@ -433,7 +433,15 @@ public class TestJava extends TestUapte{
 
 
 
-        System.out.println("s="+s);
+//        System.out.println("s="+s);
+//
+//        System.out.println("test git2");
+//        System.out.println("test git4");
+//
+//        System.out.println("test git3");
+//
+//        System.out.println("add git branch testgit1");
+//        System.out.println("add git branch 暂存testgit1351");
         
         System.out.println("test git2");
         System.out.println("test git4");
@@ -450,6 +458,10 @@ public class TestJava extends TestUapte{
 
         System.out.println("add git branch testgit1");
         System.out.println("add git branch testgit1930");
+
+        for(int i=58;i<150;i++){
+            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
+        }
     }
 
     public static enum Testobj{
