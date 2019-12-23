@@ -458,30 +458,13 @@ public class TestJava extends TestUapte{
 //        System.out.println("test gitcommit88888");
 //
 //        System.out.println("add git branch testgit1");
-//        System.out.println("add git branch testgit1930");
+//        System.out.println("add git branch testgit1930")
 
 //        for(int i=58;i<150;i++){
 //            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
 //        }
 
-         final ConcurrentHashMap map = new ConcurrentHashMap();
-         map.put("str1","value1");
-         map.put("str2","value2");
-         map.put("str3","value3");
-         System.out.println(map);
-         for(int i=1;i<4;i++){
-             final int finalI = i;
-             new Thread(){
-                 @Override
-                 public void run() {
-                     super.run();
-                     System.out.println(map.get("str"+finalI));
-                     System.out.println(map.remove("str"+ finalI));
-                     System.out.println(map);
-                 }
-             }.start();
-         }
-
+        
     }
 
     public static enum Testobj{
