@@ -58,6 +58,7 @@ import java.util.Stack;
 import java.util.TimeZone;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -321,9 +322,9 @@ public class TestJava extends TestUapte{
 
 //        "start_time": "1533571200",
 //                "end_time": "1533657300",
-
-        long start_time = 1533571200;
-        long end_time = 1533657300;
+//
+//        long start_time = 1533571200;
+//        long end_time = 1533657300;
         
 
 //        SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -366,9 +367,9 @@ public class TestJava extends TestUapte{
        // System.out.println(generateVersionCode("15.25"));
         
         
-        String str1 = "4";
-        String str2 = "5.23.1";
-        
+//        String str1 = "4";
+//        String str2 = "5.23.1";
+//        
         //System.out.println(compareVersions(str1,str2));
 
 
@@ -428,8 +429,8 @@ public class TestJava extends TestUapte{
 
 
 
-        int i1 = new Random(255).nextInt();
-        String s = Integer.toHexString(i1).substring(2);
+//        int i1 = new Random(255).nextInt();
+//        String s = Integer.toHexString(i1).substring(2);
 
 
 
@@ -443,25 +444,44 @@ public class TestJava extends TestUapte{
 //        System.out.println("add git branch testgit1");
 //        System.out.println("add git branch 暂存testgit1351");
         
-        System.out.println("test git2");
-        System.out.println("test git4");
+//        System.out.println("test git2");
+//        System.out.println("test git4");
+//
+//        System.out.println("test git3");
+//        System.out.println("test gitcommit111");
+//        System.out.println("test gitcommit222");
+//        System.out.println("test gitcommit333");
+//        System.out.println("test gitcommit444");
+//        System.out.println("test gitcommit555");
+//        System.out.println("test gitcommit666");
+//        System.out.println("test gitcommit7");
+//        System.out.println("test gitcommit88888");
+//
+//        System.out.println("add git branch testgit1");
+//        System.out.println("add git branch testgit1930");
 
-        System.out.println("test git3");
-        System.out.println("test gitcommit111");
-        System.out.println("test gitcommit222");
-        System.out.println("test gitcommit333");
-        System.out.println("test gitcommit444");
-        System.out.println("test gitcommit555");
-        System.out.println("test gitcommit666");
-        System.out.println("test gitcommit7");
-        System.out.println("test gitcommit88888");
+//        for(int i=58;i<150;i++){
+//            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
+//        }
 
-        System.out.println("add git branch testgit1");
-        System.out.println("add git branch testgit1930");
+         final ConcurrentHashMap map = new ConcurrentHashMap();
+         map.put("str1","value1");
+         map.put("str2","value2");
+         map.put("str3","value3");
+         System.out.println(map);
+         for(int i=1;i<4;i++){
+             final int finalI = i;
+             new Thread(){
+                 @Override
+                 public void run() {
+                     super.run();
+                     System.out.println(map.get("str"+finalI));
+                     System.out.println(map.remove("str"+ finalI));
+                     System.out.println(map);
+                 }
+             }.start();
+         }
 
-        for(int i=58;i<150;i++){
-            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
-        }
     }
 
     public static enum Testobj{
