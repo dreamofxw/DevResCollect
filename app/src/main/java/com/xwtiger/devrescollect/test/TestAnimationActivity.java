@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
@@ -11,12 +12,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.silencedut.fpsviewer.FpsViewer;
@@ -24,6 +32,7 @@ import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.study.thread.threadpool.TestThreadPool;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,7 +106,11 @@ public class TestAnimationActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_animation:
-                startAnimation();
+                //startAnimation();
+                //Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_in);
+                //tv_animation.setAnimation(animation);
+                //tv_animation.startAnimation(animation);
+                showToastForImgAndTxt(this,"加入成功");
                 break;
             case R.id.tv_testthread:
                 TestThreadPool.test();
@@ -412,6 +425,49 @@ public class TestAnimationActivity extends BaseActivity {
      *
      *
      */
+
+
+    public static void showToastForImgAndTxt(Context context, String msg){
+        View toastview= LayoutInflater.from(context).inflate(R.layout.item_toast_imgandtxt,null);
+        TextView text = (TextView) toastview.findViewById(R.id.tv_msg);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) text.getLayoutParams();
+        layoutParams.topMargin = (int)(context.getResources().getDimension(R.dimen.y129));
+        layoutParams.bottomMargin = (int)(context.getResources().getDimension(R.dimen.y39));
+        layoutParams.leftMargin = (int)(context.getResources().getDimension(R.dimen.y45));
+        layoutParams.rightMargin = (int)(context.getResources().getDimension(R.dimen.y45));
+        text.setLayoutParams(layoutParams);
+        text.setText(msg);    //要提示的文本
+        Toast toast=new Toast(context);   //上下文
+        toast.setGravity(Gravity.CENTER,0,0);   //位置居中
+        toast.setDuration(Toast.LENGTH_SHORT);  //设置短暂提示
+        toast.setView(toastview);   //把定义好的View布局设置到Toast里面
+
+        //修改动画
+        try{
+            Object mTN = getField(toast, "mTN");
+            Object mParams = getField(mTN, "mParams");
+            if(mParams !=null && mParams instanceof WindowManager.LayoutParams){
+                WindowManager.LayoutParams layoutParams1 = (WindowManager.LayoutParams) mParams;
+                layoutParams1.windowAnimations = R.style.toast_anim_bottom;
+                layoutParams1.width = (int) context.getResources().getDimension(R.dimen.y500);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        toast.show();
+    }
+
+
+    private static Object getField(Object object, String fieldName)
+            throws NoSuchFieldException, IllegalAccessException {
+        Field field = object.getClass().getDeclaredField(fieldName);
+        if (field != null) {
+            field.setAccessible(true);
+            return field.get(object);
+        }
+        return null;
+    }
 
 
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestRelativelayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/testrelativelayout"
+    >
+
+    <com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestTextView1
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/y400"
+        android:text="TestTextView1"
+        android:gravity="center"
+        android:background="#f00"
+        android:id="@+id/textview1"
+        android:layout_alignParentRight="true"
+        >
+    </com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestTextView1>
+
+    <com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestLinearLayout
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/y800"
+        android:orientation="vertical"
+        >
+        <com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestTextView2
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y400"
+            android:text="TestTextView2"
+            android:gravity="center"
+            android:background="#0f0"
+            >
+        </com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestTextView2>
+
+        <com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestTextView3
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y400"
+            android:text="TestTextView3"
+            android:gravity="center"
+            android:background="#00f"
+            >
+        </com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestTextView3>
+    </com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestLinearLayout>
+</com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestRelativelayout>

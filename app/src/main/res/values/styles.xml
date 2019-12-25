@@ -83,6 +83,11 @@
     </style>
 
 
+    <!--toast动画-->
+    <style name="toast_anim_bottom" parent="@android:style/Animation.Toast" >
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
 
 
 </resources>

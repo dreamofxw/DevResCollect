@@ -8,9 +8,9 @@
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y200"
+        android:layout_height="@dimen/y500"
         android:layout_marginTop="@dimen/x100"
-        android:background="#fff"
+        android:background="#00f"
         >
         <TextView
             android:id="@+id/tv_animation"
@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:visibility="gone"
         >
 
 

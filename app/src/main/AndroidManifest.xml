@@ -62,11 +62,11 @@
         <activity android:name="com.xwtiger.devrescollect.test.TestActivity"
             android:theme="@style/Splash"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity android:name="com.xwtiger.devrescollect.test.TestTransitonDitailActivity"
@@ -218,6 +218,25 @@
         </activity>
 
         <activity android:name="com.xwtiger.devrescollect.test.TestAnimationActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.event.TestEventActivity"
+            >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+        </activity>
+
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestDrawActivity"
             >
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
