@@ -463,7 +463,7 @@ public class TestJava extends TestUapte{
 //        for(int i=58;i<150;i++){
 //            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
 //        }
-
+            System.out.println("1822test");
 
     }
 
