@@ -464,7 +464,8 @@ public class TestJava extends TestUapte{
 //            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
 //        }
         System.out.println("test1231_1");
-
+        System.out.println("test1231_2");
+        
     }
 
     public static enum Testobj{
