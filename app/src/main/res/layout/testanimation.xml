@@ -5,12 +5,59 @@
     android:background="#fff"
     >
 
+
+    <com.xwtiger.devrescollect.view.TestView
+        android:id="@+id/rl_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_container1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x300">
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x200"
+                android:background="#f00"
+                android:text="tv1"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x200"
+                android:background="#f00"
+                android:text="tv2"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:textColor="#ffffff"
+                />
+
+        </RelativeLayout>
+
+    </com.xwtiger.devrescollect.view.TestView>
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x200"
+        android:background="#f00"
+        android:text="tv2"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:layout_centerInParent="true"
+        />
+
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y500"
         android:layout_marginTop="@dimen/x100"
         android:background="#00f"
+        android:visibility="gone"
         >
         <TextView
             android:id="@+id/tv_animation"

@@ -7,6 +7,7 @@ import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorSpace;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,6 +32,7 @@ import com.silencedut.fpsviewer.FpsViewer;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.study.thread.threadpool.TestThreadPool;
+import com.xwtiger.devrescollect.view.TestView;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
@@ -61,6 +63,18 @@ public class TestAnimationActivity extends BaseActivity {
 
     private TextView tv_switch;
 
+
+
+    //
+
+    private TestView rl_container;
+    private RelativeLayout rl_container1;
+    private TextView tv1;
+    private TextView tv2;
+    private TextView tv3;
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,13 +84,66 @@ public class TestAnimationActivity extends BaseActivity {
         addData();
 
         Glide.with(this).load(list.get(0)).placeholder(Color.parseColor("#eeeeee")).into(iv_first);
-
+        testclick();
 
         try {
             Thread.sleep(300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        Log.d(TAG, "onCreate: sdkversion ="+Build.VERSION.SDK_INT);
+
+
+
+
+    }
+
+
+    public void testclick(){
+        rl_container = findViewById(R.id.rl_container);
+        rl_container1 = findViewById(R.id.rl_container1);
+        tv1 = findViewById(R.id.tv1);
+        tv2 = findViewById(R.id.tv2);
+        tv3 = findViewById(R.id.tv3);
+        rl_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"rl_container",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        rl_container1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"rl_container11111111",Toast.LENGTH_SHORT).show();
+            }
+        });
+        tv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"tv1111",Toast.LENGTH_SHORT).show();
+            }
+        });
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"tv2222",Toast.LENGTH_SHORT).show();
+            }
+        });
+        tv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rl_container.isSwith()){
+                    rl_container.setSwith(false);
+                }else{
+                    rl_container.setSwith(true);
+                }
+                Toast.makeText(mContext,"isswith ="+rl_container.isSwith(),Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     @Override

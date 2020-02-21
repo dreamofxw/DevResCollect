@@ -49,6 +49,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -72,7 +73,6 @@ import java.util.regex.Pattern;
 
 import jcifs.smb.SmbException;
 import jcifs.smb.SmbFile;
-import okhttp3.internal.Util;
 import retrofit2.http.Url;
 
 /**
@@ -463,8 +463,184 @@ public class TestJava extends TestUapte{
 //        for(int i=58;i<150;i++){
 //            System.out.println("i="+i+",取%"+i%60+",取除 "+i/60);
 //        }
-        System.out.println("test1231_1");
-        System.out.println("test1231_2");
+//        System.out.println("test1231_1");
+//        System.out.println("test1231_2");
+
+//        String res = "<em>哈哈哈1</em>说话的话<em>哈哈哈2</em>3333333<em>哈哈哈3</em>4455";
+//        List<String> list = new ArrayList<>();
+//        int tempposition =0;
+//        String reg = "<em>.+?</em>";
+//        Pattern p = Pattern.compile(reg);
+//        Matcher matcher = p.matcher(res);
+//        while (matcher.find()) {
+//            System.out.println("matched form " + matcher.start() + " to " + matcher.end());
+//            System.out.println(res.substring(matcher.start(),matcher.end()));
+//            if(matcher.start() ==0){
+//                tempposition = matcher.end();
+//                //添加特殊数据
+//                list.add(res.substring(matcher.start(),matcher.end()));
+//            }else{
+//                //添加非特殊数据
+//                list.add(res.substring(tempposition,matcher.start()));
+//                tempposition = matcher.end();
+//                //添加特殊数据
+//                list.add(res.substring(matcher.start(),matcher.end()));
+//            }
+//        }
+//        if(tempposition <res.length()){
+//            list.add(res.substring(tempposition,res.length()));
+//        }
+//        System.out.println(list);
+
+
+
+//        long str = 9844170;
+//        //long day = str/(24*60*60);
+//        long hours = (str)/(60*60);
+//        long minuts = (str%(60*60))/60;
+//        long second = str%60;
+//
+//        //System.out.println("day ="+day);
+//        System.out.println("hours ="+hours);
+//        System.out.println("minuts ="+minuts);
+//        System.out.println("second ="+second);
+//
+//
+//        long total = hours*60*60+minuts*60+second;
+//        System.out.println("total="+total);
+//
+//        System.out.println("1天="+24*60*60);
+//        System.out.println("113天="+113*24*60*60);
+
+        //testlinkHashMap();
+
+        //1049
+
+//        String str = "https://www.baidu.com/s?wd=%E3%80%90%E7%8E%AF%E7%90%83%E6%97%B6%E6%8A%A5%E6%8A%A5%E9%81%93%20%E7%89%B9%E7%BA%A6%E8%AE%B0%E8%80%85%20%E9%AD%8F%E9%BD%90%20%E6%9F%B3%E7%8E%89%E9%B9%8F%20%E8%AE%B0%E8%80%85%20%E5%88%98%E6%89%AC%E3%80%91%E4%BC%8A%E6%9C%97%E5%AF%B9%E7%BE%8E%E5%9B%BD%E9%A9%BB%E4%BC%8A%E6%8B%89%E5%85%8B%E4%B8%A4%E5%A4%84%E5%9F%BA%E5%9C%B0%E5%AE%9E%E6%96%BD%E5%AF%BC%E5%BC%B9%E6%94%BB%E5%87%BB%E5%90%8E%EF%BC%8C%E8%A5%BF%E6%96%B9%E5%AA%92%E4%BD%93%E6%9B%9D%E5%85%89%E5%A4%9A%E5%BC%A0%E9%81%AD%E8%A2%AD%E5%9F%BA%E5%9C%B0%E7%9A%84%E5%8D%AB%E6%98%9F%E7%85%A7%E7%89%87%E3%80%82%E8%BF%99%E4%BA%9B%E7%85%A7%E7%89%87%E5%9C%A8%E6%98%BE%E7%A4%BA%E5%87%BA%E4%BC%8A%E6%9C%97%E5%AF%BC%E5%BC%B9%E5%BE%88%E9%AB%98%E7%9A%84%E5%91%BD%E4%B8%AD%E7%B2%BE%E5%BA%A6%E7%9A%84%E5%90%8C%E6%97%B6%EF%BC%8C%E4%B9%9F%E7%BB%99%E5%A4%96%E7%95%8C%E5%B8%A6%E6%9D%A5%E7%96%91%E6%83%91%E2%80%94%E2%80%94%E4%B8%BA%E4%BB%80&rsv_spt=1&rsv_iqid=0x99c1cd2f00042a2b&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_dl=ib&rsv_sug3=2&inputT=1559&rsv_sug4=1835";
+//        String str1 = "【环球时报报道 特约记者 魏齐 柳玉鹏 记者 刘扬】伊朗对美国驻伊拉克两处基地实施导弹攻击后，西方媒体曝光多张遭袭基地的卫星照片。这些照片在显示出伊朗导弹很高的命中精度的同时，也给外界带来疑惑——为什";
+//        String str2 = "addddddddddddddddd1212121212121212121212121212121212121212121212121212121212121212addddddddddddddddd133333333asdfasdfasdfasdfaadfasdfasdfad;j;j;jzcnanfadda;djfadfanjhdjfhajdf2121212121212121212121212121212addddddddddddddddd21212121212121212addddddddddddddddd1333333d1212121212121212121212adddddddddddddddd212121dddddd133333333asdfasdfasdfasdfaadfasdfasdfad;j;j;jzcnanaddddddddddddddddd1212121212121212121212121212121212121212121212121212121212121212addddddddddddddddd133333333asdfasdfasdfasdfaadfasdfasdfad;j;j;jzcnanfadda;djfadfanjhdjfhajdf2121212121212121212121212121212addddddddddddddddd21212121212121212addddddddddddddddd1333333d1212121212121212121212adddddddddddddddd212121dddddd133333333asdfasdfasdfasdfaadfasdfasdfad;j;j;jzcnan";
+//        String str3 = "addddddddddddddddd1212121212121212121212121212121212121212121212121212121212";
+//        String str4 = "https://www.baidu.com/s?wd=addddddddddddddddd1212121212121212121212121212121212121212121212121212121212&rsv_spt=1&rsv_iqid=0xfd842811000edca0&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_dl=ib&rsv_sug3=2&rsv_sug2=0&inputT=475&rsv_sug4=682";
+//        System.out.println(str.length());
+//        System.out.println(str1.length());
+//        System.out.println(str2.length());
+//        System.out.println(str3.length());
+//        System.out.println(str4.length());
+
+//        long starttime = System.currentTimeMillis();
+//        Test9999 test9999 = new Test9999(""+60*60);
+//        System.out.println("distance ="+test9999.distance);
+//        System.out.println("endtime ="+test9999.endtime);
+//        System.out.println("endtime ="+(test9999.endtime -starttime));
+//        for(int i=0;i<20;i++){
+//            testParams1();
+//        }
+
+//        testlamada(new ITestLamada() {
+//            @Override
+//            public void test(String str) {
+//
+//            }
+//        });
+
+        //testlamada(str);
+//        System.out.println("hello word");
+        //testlamada(str -> str+"aa");
+        //
+        new Thread(helloword).start();
+        System.out.println("test");
+    }
+
+
+    public static Runnable helloword = () -> System.out.println("hah");
+    public static Runnable helloword1 = new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("123");
+        }
+    };
+
+    public static void testlamada(ITestLamada testLamada){
+
+
+    }
+
+
+    public interface ITestLamada{
+        public String test(String str);
+    }
+
+
+
+    public static void testParams(final int i){
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                System.out.println("子线程进入");
+                System.out.println("子线程= i"+i);
+            }
+        }.start();
+
+
+    }
+
+
+    public static void testParams1(){
+        System.out.println("执行开始");
+        testParams(computerCount(2,3));
+        System.out.println("执行完成------------------");
+
+    }
+
+    public static int computerCount(int x,int y){
+        System.out.println("computerCount x="+x+",y="+y);
+        return x+y;
+    }
+
+
+    public static class Test9999{
+
+        public String distance ;
+        public long endtime = System.currentTimeMillis()+Long.parseLong(distance);
+
+        public Test9999(String distance){
+            this.distance = distance;
+        }
+
+    }
+    
+    public static void testlinkHashMap(){
+        LinkedHashMap<String,String> map = new LinkedHashMap<>();
+        List list = new LinkedList();
+
+
+        for(int i=0;i<20;i++){
+            if(!list.contains("str"+i)){
+                list.add(0,"str"+i);
+            }
+            map.put("str"+i,"value"+i);
+        }
+        System.out.println("befor map="+map);
+        System.out.println("befor map.size="+map.size());
+        System.out.println("befor list"+list);
+        System.out.println("befor list.size"+list.size());
+        System.out.println("------");
+        for(int i=10;i<30;i++){
+            if(!list.contains("str"+i)){
+                list.add(0,"str"+i);
+            }
+            map.put("str"+i,"value"+i);
+            System.out.println("ifbefore ="+list.size()+",i="+i);
+            if(list.size()>20){
+                String key = (String) list.remove(list.size()-1);
+                map.remove(key);
+            }
+        }
+        System.out.println("after map="+map);
+        System.out.println("after map.size="+map.size());
+        System.out.println("after list"+list);
+        System.out.println("after list.size()"+list.size());
 
     }
 
