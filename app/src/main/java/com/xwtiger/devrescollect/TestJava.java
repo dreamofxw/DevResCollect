@@ -547,8 +547,16 @@ public class TestJava extends TestUapte{
 //        System.out.println("hello word");
         //testlamada(str -> str+"aa");
         //
-        new Thread(helloword).start();
-        System.out.println("test");
+//        new Thread(helloword).start();
+//        System.out.println("test");
+
+
+
+        
+
+
+
+//        list.stream().filter(artist -> artist.equals("hah"))
     }
 
 

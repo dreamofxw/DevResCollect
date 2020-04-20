@@ -1,14 +1,21 @@
 package com.xwtiger.devrescollect.test;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +23,10 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +34,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -54,6 +65,7 @@ import com.xwtiger.devrescollect.statistics.cache.memory.MemorySizeCalculator;
 import com.xwtiger.devrescollect.study.androidapi.AnmitorStudy;
 import com.xwtiger.devrescollect.study.androidapi.msg.TestHandlerActivity;
 import com.xwtiger.devrescollect.study.androidapi.service.TestService;
+import com.xwtiger.devrescollect.utils.CopressImageUtil;
 import com.xwtiger.devrescollect.utils.PermissionChecker;
 import com.xwtiger.devrescollect.view.TestDialog;
 import com.xwtiger.devrescollect.view.TestPopuwindow;
@@ -61,6 +73,7 @@ import com.xwtiger.devrescollect.view.TestPopuwindow;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Iterator;
@@ -82,7 +95,7 @@ import rx.schedulers.Schedulers;
 
 public class TestActivity extends BaseActivity {
 
-    private LinearLayout container;
+    private RelativeLayout container;
     private Button btn_start;
     private TextView tv;
     private Button btnJump;
@@ -100,6 +113,8 @@ public class TestActivity extends BaseActivity {
     private TextView tv_stop;
 
     private TextView tv_26;
+
+    private ImageView iv_background;
 
     private Handler handler = new Handler(){
         @Override
@@ -119,10 +134,11 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.setTheme(R.style.AppThemeReading);
+        //getWindow().setBackgroundDrawable(new ColorDrawable(0xffffffff));
+        //super.setTheme(R.style.AppThemeReading);
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.testlayout);
-        container = (LinearLayout) findViewById(R.id.container);
+        container = (RelativeLayout) findViewById(R.id.container);
         btn_start = (Button) findViewById(R.id.btn_start);
         btn_start.setOnClickListener(this);
 
@@ -139,6 +155,8 @@ public class TestActivity extends BaseActivity {
         tv_stop = findViewById(R.id.tv_stopservice);
         tv_start.setOnClickListener(this);
         tv_stop.setOnClickListener(this);
+
+        iv_background = findViewById(R.id.iv_background);
 
         iv_progress.setImageResource(R.drawable.ebook_ani);
         AnimationDrawable animationDrawable = (AnimationDrawable) iv_progress.getDrawable();
@@ -293,6 +311,32 @@ public class TestActivity extends BaseActivity {
 
             }
         });
+
+
+
+
+        String str1 = "             ";
+        String str2 = "     hhh";
+        String str3 = "dd    ";
+
+        if(!TextUtils.isEmpty(str1)&&!TextUtils.isEmpty(str1.trim())){
+            Log.d("pringstr", "onCreate: 非空 str1="+str1.length()+",trim ="+str1.trim().length());
+        }else{
+            Log.d("pringstr", "onCreate:空 str1="+str1);
+        }
+
+        if(!TextUtils.isEmpty(str2)&&!TextUtils.isEmpty(str2.trim())){
+            Log.d("pringstr", "onCreate: 非空 str2="+str2.length()+",trim="+str2.trim().length());
+        }else{
+            Log.d("pringstr", "onCreate:空 str2="+str2);
+        }
+
+        if(!TextUtils.isEmpty(str3)&&!TextUtils.isEmpty(str3.trim())){
+            Log.d("pringstr", "onCreate: 非空 str3="+str3.length()+",trim ="+str3.trim().length());
+        }else{
+            Log.d("pringstr", "onCreate:空 str3="+str3);
+        }
+
     }
 
     @Override
@@ -326,6 +370,68 @@ public class TestActivity extends BaseActivity {
         handlerThread.quitSafely();
         //YouShuStatistics.getInstance().destroy();
         Log.d("actvitylifecycle", "onDestroy: ");
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case PHOTO_REQUEST_GALLERY:
+                if (data != null && data.getData() != null) {
+                    Uri selectedImage = data.getData();
+                    String picturePath = null;
+                    if (selectedImage.toString().contains("content")) {
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                        Cursor cursor = this.getContentResolver().query(selectedImage,
+                                filePathColumn, null, null, null);
+
+                        if (cursor != null) {
+                            cursor.moveToFirst();
+                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                            picturePath = cursor.getString(columnIndex);
+                            cursor.close();
+                        }
+                    } else {
+                        picturePath = selectedImage.getPath();
+                    }
+
+                    if (picturePath == null) {
+                        return;
+                    }
+                    File f = new File(picturePath);
+
+                    Log.d("testcompressUtils", "onActivityResult: "+f.getAbsolutePath());
+                    Log.d("testcompressUtils", "exists=: "+f.exists());
+                    //CopressImageUtil.getimage1(f.getAbsolutePath());
+
+
+                    Bitmap bitmap = BitmapFactory.decodeFile(f.getAbsolutePath());
+//                    Bitmap bitmap1 = CopressImageUtil.zoomImg(bitmap, 768, 1024);
+//
+//                    Bitmap bitmap2 = CopressImageUtil.compressImage1(bitmap1);
+                    Log.d("testcompressUtils", "onActivityResult: 压缩之前getWidth ="+bitmap.getWidth());
+                    Log.d("testcompressUtils", "onActivityResult: 压缩之前 ="+bitmap.getHeight());
+
+                    new AsyncTask<String,String,Bitmap>(){
+
+                        @Override
+                        protected Bitmap doInBackground(String[] objects) {
+                            return CopressImageUtil.compressImage1(bitmap);
+                        }
+
+                        @Override
+                        protected void onPostExecute(Bitmap o) {
+                            super.onPostExecute(o);
+                            iv_background.setImageBitmap(o);
+                        }
+                    }.execute(new String[]{});
+
+                    break;
+                }
+
+        }
     }
 
 
@@ -406,6 +512,9 @@ public class TestActivity extends BaseActivity {
     }
 
     private TestDialog1 testDialog;
+
+    private static final int PHOTO_REQUEST_GALLERY = 3021;// 从相册中选择
+
 
     @Override
     public void onClick(View v) {
@@ -507,8 +616,24 @@ public class TestActivity extends BaseActivity {
             case R.id.btn_jumpmainact:
                 //Intent intent = new Intent(this, TestHandlerActivity.class);
                 //Intent intent = new Intent(this, MainActivity.class);
-                Intent intent = new Intent(this, TestAnimationActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(this, TestAnimationActivity.class);
+//                startActivity(intent);
+
+                //压缩大小
+
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        // 显示给用户的解释
+                    } else {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1111);
+                    }
+                } else {
+
+                    Intent intent = new Intent(Intent.ACTION_PICK, null);
+                    intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                    startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+                }
                 break;
             case R.id.tv_null:
                 DBPresenter.deleteObj();
@@ -557,6 +682,8 @@ public class TestActivity extends BaseActivity {
             Log.d(TestService.tag,"onServiceDisconnected");
         }
     };
+
+
 
 
     public class TestView extends View{

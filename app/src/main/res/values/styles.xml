@@ -65,14 +65,32 @@
         <item name="android:taskToBackExitAnimation">@anim/exit_right</item>
     </style>
 
-    <style name="FullScreenAndNoEnterAnimStyle" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+<!--    <style name="FullScreenAndNoEnterAnimStyle" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">-->
+    <style name="FullScreenAndNoEnterAnimStyle" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/transparent</item>
-        <item name="android:windowAnimationStyle">@style/EnterNullAnimationStyle</item>
+<!--        <item name="android:windowAnimationStyle">@style/EnterNullAnimationStyle</item>-->
+
     </style>
 
 
-    <style name="Splash" parent="@style/FullScreenAndNoEnterAnimStyle">
+<!--
+
+ <item name="windowFullscreen">true</item>
+        <item name="windowContentOverlay">@null</item>
+
+-->
+
+
+     <!--  Theme.AppCompat.Light.NoActionBar parent="@android:style/Theme.Black.NoTitleBar.Fullscreen" -->
+    <style name="Splash" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/welcome_layler_drawable</item>
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+
+        <!--        <item name="android:windowDrawsSystemBarBackgrounds">false</item>&lt;!&ndash;显示虚拟按键，并腾出空间&ndash;&gt;-->
+<!--        <item name="android:windowAnimationStyle">@style/EnterNullAnimationStyle</item>-->
+<!--        -->
     </style>
 
 

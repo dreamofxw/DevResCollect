@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
-    android:background="#fff"
+    android:background="@drawable/welcome_layler_drawable"
     >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y100"
+        android:background="#0fff"
+        android:orientation="vertical"
+        >
     <Button
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -131,5 +140,14 @@
         android:text="put"
         android:gravity="center"
         />
+    </LinearLayout>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+    </ImageView>
+</RelativeLayout>

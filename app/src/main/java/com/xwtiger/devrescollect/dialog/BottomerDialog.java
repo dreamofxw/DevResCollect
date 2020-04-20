@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -28,6 +29,8 @@ public class BottomerDialog extends Dialog implements View.OnClickListener {
 
     public BottomerDialog(Context context) {
         this(context, R.style.CommonDialogStyle);
+        Log.d("testdialog2", "BottomerDialog: 构造函数");
+
     }
 
     @Override
@@ -38,6 +41,8 @@ public class BottomerDialog extends Dialog implements View.OnClickListener {
         initView();
         initValues();
         setListener();
+        Log.d("testdialog2", "BottomerDialog: onCreate 初始化");
+
     }
 
     private void initView() {
@@ -70,6 +75,10 @@ public class BottomerDialog extends Dialog implements View.OnClickListener {
     }
 
 
+    @Override
+    public void show() {
+        super.show();
+        Log.d("testdialog2", "BottomerDialog: show ");
 
-    
+    }
 }

@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 import rx.Observable;
 import rx.Observer;
@@ -78,8 +79,15 @@ public class TestAnimationActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         setContentView(R.layout.testanimation);
-        FpsViewer.getViewer().appendSection(this.getClass().getSimpleName()+"_Section");
+        //FpsViewer.getViewer().appendSection(this.getClass().getSimpleName()+"_Section");
         init();
         addData();
 
@@ -96,6 +104,18 @@ public class TestAnimationActivity extends BaseActivity {
 
 
 
+
+        if(Build.VERSION.SDK_INT >=24){
+            List<String> list = new ArrayList();
+            list.stream().filter(new Predicate<String>() {
+                @Override
+                public boolean test(String s) {
+                    return false;
+                }
+            });
+
+//            list.stream().filter(s -> s.equals("hha")).
+        }
 
     }
 
@@ -475,7 +495,7 @@ public class TestAnimationActivity extends BaseActivity {
         super.onDestroy();
         Log.d("testmsg1", "onDestroy: ");
         hanler.removeCallbacksAndMessages(null);
-        FpsViewer.getViewer().removeSection(this.getClass().getSimpleName()+"_Section");
+        //FpsViewer.getViewer().removeSection(this.getClass().getSimpleName()+"_Section");
         if(subscribe !=null&&!subscribe.isUnsubscribed()){
             subscribe.unsubscribe();
         }
@@ -492,8 +512,6 @@ public class TestAnimationActivity extends BaseActivity {
      *
      *
      */
-
-
     public static void showToastForImgAndTxt(Context context, String msg){
         View toastview= LayoutInflater.from(context).inflate(R.layout.item_toast_imgandtxt,null);
         TextView text = (TextView) toastview.findViewById(R.id.tv_msg);
@@ -535,8 +553,5 @@ public class TestAnimationActivity extends BaseActivity {
         }
         return null;
     }
-
-
-
 
 }
