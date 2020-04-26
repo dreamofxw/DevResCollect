@@ -18,6 +18,8 @@ git tag tagname 创建tag
 git tag -d tagname 删除tag
 git push origin [tagName]
 
+给指定的commit打标签
+git tag -a tagname commitid
 
 有时候需要删除GitHub上打的tag，GitHub删除tag需要在命令行操作
 git tag -d [tag];删除本地

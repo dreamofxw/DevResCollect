@@ -1,0 +1,57 @@
+常用adb命令
+可以查看系统属性 比如应用分配给进程的内存大小
+adb shell cat /system/build.prop
+
+[dalvik.vm.heapstartsize]: [8m]:给进程分配的起始heap=8m
+
+[dalvik.vm.heapgrowthlimit]: [64m]:进程最大可分配到64m
+
+[dalvik.vm.heapsize]: [256m]:单个虚拟机可分配的最大内存=256m
+
+2 adb命令截屏
+  adb shell screencap -p /sdcard/screenshot.png
+  adb pull /sdcard/screenshot.png
+  adb shell rm /sdcard/screen.png
+
+3 ctrl+c组合键或enter 退出dos
+
+4,查看内存使用情况
+adb shell dumpsys meminfo com.tencent.mm
+adb shell dumpsys meminfo com.fengwo.reading
+
+adb kill-server // 杀掉adb
+adb start-server // 启动adb
+
+
+
+monkey指令
+adb shell monkey -p com.fengwo.reading 100
+
+安装apk
+在cmd中1，进入的apk的目,2，输入adb install -r 后，将apk直接拖到到cmd界面光标处
+
+查看acitvity的栈
+adb shell
+dumpsys activity activities
+
+
+查看deeplink状态
+adb shell dumpsys package d
+
+导入文件到手机
+adb push 电脑文件地址 手机文件地址
+eg:adb push /User/xww/123.txt /sdcard
+
+导出手机文件到电脑
+adb pull 手机文件地址  电脑文件地址
+eg:adb pull /sdcard/123.txt /User/xuww
+
+
+应用启动前debug
+adb shell am set-debug-app -w com.fengwo.reading
+
+db shell am clear-debug-app
+
+-w 启动时等待Debugger Attacth
+--persistent 每次启动都开启调试模式，没有这个标志则表示一次性的
+
