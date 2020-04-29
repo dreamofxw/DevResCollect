@@ -1,38 +1,63 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-println "build.gradle"
 buildscript {
     ext.kotlin_version = '1.3.20'
     repositories {
         google()
-        jcenter()
+        jcenter(){url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         mavenCentral()
     }
     dependencies {
         //classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.android.tools.build:gradle:3.1.0'
+        //classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.android.tools.build:gradle:3.4.0'
+        //classpath 'com.android.tools.build:gradle:2.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
         //classpath 'com.android.tools.build:gradle:2.2.2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
         //配置LeakCanary
-
+        //配置lambda gradle升级到3.4.0之后需要注掉
+        //classpath 'me.tatarka:gradle-retrolambda:3.2.5'
     }
 }
 
 allprojects {
+
     repositories {
-        jcenter()
+        jcenter(){url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         //配置LeakCanary时添加的
         //mavenCentral()
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven{ url'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven{ url'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
     }
 }
 
+
+
+println "rootname = ${this.getName()}"
+
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext{}
+
+task test333{
+
+
+
+}
+
+class Person{
+    private  name23;
 }
 
 

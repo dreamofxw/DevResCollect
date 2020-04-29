@@ -1,0 +1,85 @@
+git使用
+git命令
+git status 查看当前状态
+git branch 查看本地分支
+git branch -a 查看所有分支
+git branch -r 查看远程分支 
+
+git checkout 分支名：切换分支
+
+git branch 分支名：如果分支不存在则创建
+删除本地的bug_xzx分支
+git branch -d bug_xzx
+it branch -D bug_xzx(没有合并的分支强行删除)
+删除远程的bug_xzx分支
+git push origin --delete bug_xzx
+
+git tag tagname 创建tag
+git tag -d tagname 删除tag
+git push origin [tagName]
+
+给指定的commit打标签
+git tag -a tagname commitid
+
+有时候需要删除GitHub上打的tag，GitHub删除tag需要在命令行操作
+git tag -d [tag];删除本地
+git push origin :[tag] 删除远程
+
+git pull origin 本地分支名
+git push origin 本地分支名
+git commit -m "提交的消息"
+git add . 添加到暂存区
+git commit -a -m "提交消息" 提交消息
+git commit -a -t <消息模版> 按模版文件来提交代码
+
+
+
+修改还未push的注释： 
+git commit --amend 
+修改后保存退出。
+刚刚push到远端还没有人其他人下载或改动的：
+
+git commit --amend
+进入修改页面修改注释信息，修改后:wq保存退出。 
+再使用git push --force-with-lease origin master
+
+如果其他人已经下载或改动：
+git fetch origin
+git reset --hard origin/master
+
+
+
+git add -A  提交所有变化
+
+git add -u  提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
+
+git add .  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
+
+只有没有版本跟踪过的过的问题件，才能在ignore文件起效
+如果之前有版本跟踪，需要删除之前的跟踪文件，ignore才能起效
+
+合并请求的指令
+git push origin HEAD:refs/for/mybranch
+
+分支路径意义
+remote branch: origin/git_int(=refs/remotes/origin/git_int)
+local tag: v2.0(=refs/tags/v2.0)
+local branch: git_int(=refs/heads/git_int)…
+
+git stash暂存的操作
+#暂存操作
+git stash save '本次暂存的标识名字'
+#查看记录
+git stash list
+
+pop命令恢复,恢复后,暂存区域会 删除当前的记录’
+git stash pop stash@{index}
+
+apply命令恢复,恢复后,暂存区域会 保留当前的记录’
+git stash apply stash@{index}
+
+删除暂存
+#删除某个暂存, 暂存记录保存在list内,需要通过list索引index取出恢复
+git stash drop stash@{index}
+#删除全部暂存
+git stash clear

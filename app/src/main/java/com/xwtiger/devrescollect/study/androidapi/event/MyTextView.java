@@ -41,6 +41,9 @@ public class MyTextView extends TextView {
             case MotionEvent.ACTION_CANCEL:
                 bo = false;
                 break;
+            case MotionEvent.ACTION_MOVE:
+                bo = false;
+                break;
             case MotionEvent.ACTION_DOWN:
                 bo = true;
                 break;

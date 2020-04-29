@@ -36,7 +36,11 @@ public class BehaviorActivity extends Activity {
 
     private AppBarLayout appbarlayout;
     private TextView tv1;
+    private TextView tv_placehold;
     private CollapsingToolbarLayout collapsingtoolbarlayout;
+    float dimensionPixelSize = 0;
+    float dimensionPixelSize1 = 0;
+    private TextView tv_showmine;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,22 +52,46 @@ public class BehaviorActivity extends Activity {
         recyclerview = findViewById(R.id.recyclerview);
         appbarlayout = findViewById(R.id.appbarlayout);
         tv1 = findViewById(R.id.tv1);
+        tv_placehold = findViewById(R.id.tv_placehold);
+        tv_showmine = findViewById(R.id.tv_showmine);
         collapsingtoolbarlayout = findViewById(R.id.collapsingtoolbarlayout);
 
         Log.d("testoffset", "onCreate: testheight"+getResources().getDimensionPixelSize(R.dimen.testheight1));
 
-        final float dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.testheight1);
         appbarlayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if(verticalOffset ==0){
-                    Log.d("testoffset", "onOffsetChanged: height="+collapsingtoolbarlayout.getHeight());
-                    Log.d("testoffset", "onOffsetChanged: appbar height="+appBarLayout.getHeight());
+                    Log.d("testoffset1", "onOffsetChanged: height="+collapsingtoolbarlayout.getHeight());
+                    Log.d("testoffset1", "onOffsetChanged: appbar height="+appBarLayout.getHeight());
+//                    Log.d("testoffset1", "onOffsetChanged: tv1 height="+tv1.getHeight());
+//                    Log.d("testoffset1", "onOffsetChanged: tabLayout height="+tabLayout.getHeight());
+                    dimensionPixelSize = appBarLayout.getHeight()-tv1.getHeight()-tabLayout.getHeight()-tv_placehold.getHeight();
+                    dimensionPixelSize1 =appBarLayout.getHeight()-tv1.getHeight();
+//                    Log.d("testoffset", "onOffsetChanged: dimensionPixelSize="+dimensionPixelSize--);
+//                    Log.d("testoffset", "onOffsetChanged: dimensionPixelSize1="+dimensionPixelSize1);
+
                 }
                 Log.d("testoffset", "onOffsetChanged: verticalOffset="+verticalOffset);
 
                 int i = (int)((Math.abs((float)verticalOffset) / dimensionPixelSize)*255);
                 Log.d("testoffset", "onOffsetChanged: i="+i);
+
+                int abs = (int) (Math.abs(verticalOffset));
+                if(abs >=dimensionPixelSize){
+                    Log.d("testoffset", "onOffsetChanged: visible===============");
+
+                    tv_showmine.setVisibility(View.VISIBLE);
+
+                }else{
+                    tv_showmine.setVisibility(View.GONE);
+                    Log.d("testoffset", "onOffsetChanged: gone===============");
+
+                }
+
+                if(i>255){
+                    i =255;
+                }
 
                 tv1.setBackgroundColor(Color.argb(i,255,255,255));
             }

@@ -8,6 +8,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -18,7 +19,9 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"></uses-permission>
 
 
-    //魔窗
+
+
+    <!--    魔窗-->
     <!-- 连接互联网Internet权限 -->
     <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -62,11 +65,32 @@
         <activity android:name="com.xwtiger.devrescollect.test.TestActivity"
             android:theme="@style/Splash"
             >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity android:name="com.xwtiger.devrescollect.test.TestLiveActivity"
+            >
+<!--                <intent-filter>-->
+<!--                    <action android:name="android.intent.action.MAIN" />-->
+
+<!--                    <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                </intent-filter>-->
+        </activity>
+
+
+        <activity android:name="com.xwtiger.devrescollect.view.TestLayoutAnmationActivity"
+            >
+<!--                <intent-filter>-->
+<!--                    <action android:name="android.intent.action.MAIN" />-->
+
+<!--                    <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                </intent-filter>-->
         </activity>
 
         <activity android:name="com.xwtiger.devrescollect.test.TestTransitonDitailActivity"
@@ -197,13 +221,55 @@
         </activity>
         <activity android:name="com.xwtiger.devrescollect.test.TestAnimationForNineActivity"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
 
         </activity>
+
+
+
+        <activity android:name="com.xwtiger.devrescollect.test.TestDbActivity"
+            >
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+        </activity>
+
+        <activity android:name="com.xwtiger.devrescollect.test.TestAnimationActivity"
+            >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.event.TestEventActivity"
+            >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+        </activity>
+
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.draw.testdraw.TestDrawActivity"
+            >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+        </activity>
+
 
             <service android:name="com.xwtiger.devrescollect.study.androidapi.service.TestService"
                 >

@@ -1,0 +1,9 @@
+1，class生成目录：
+/Users/xuww/DevResCollect/app/build/intermediates/javac
+
+2，
+gradle默认的依赖存放地址是：
+Windows系统默认下载到：C:\Users\(用户名)\.gradle\caches\modules-2\files-2.1
+
+Mac系统默认下载到：/Users/(用户名)/.gradle/caches/modules-2/files-2.1
+另外，在这个目录下，需要将依赖库对应上，比如上面的

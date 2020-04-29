@@ -1,6 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'org.greenrobot.greendao'
+//apply plugin: 'me.tatarka.retrolambda'
 
+println "subprojectname path= ${this.getPath()},projectname =${this.getProject().getName()}"
+
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '27.1.1' //这里版本自己根据情况改变
+            }
+        }
+    }
+}
 
 android {
     signingConfigs {
@@ -11,7 +26,7 @@ android {
 //        }
     }
     compileSdkVersion 27
-    buildToolsVersion "27.0.2"
+    buildToolsVersion '27.0.2'
     defaultConfig {
         applicationId "com.xwtiger.devrescollect"
         minSdkVersion 21
@@ -21,32 +36,58 @@ android {
         resValue "string","app_name","DevResCollect"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        testApplicationId ""
+        multiDexEnabled true
+
     }
     buildTypes {
-        // debug
+//        debug{
+//            minifyEnabled false
+//        }
+//        release{
+//            minifyEnabled false
+//        }
         /* release {
              minifyEnabled false
              proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
          }*/
     }
-    flavorDimensions "versionCode"
+    flavorDimensions "versionCode","arm"
     productFlavors {
-        kuan {
-            applicationId "com.test"
-            resValue "string","app_name","testPush"
-            // manifestPlaceholders = [app_icon : "@mipmap/ic_launcher1"]
+//        kuan {
+//            dimension 'versionCode'
+//            applicationId "com.test"
+//            resValue "string","app_name","testPush"
+//            // manifestPlaceholders = [app_icon : "@mipmap/ic_launcher1"]
+//        }
+        xiaomi {
+            dimension 'versionCode'
         }
-        xiaomi {}
-        qh360 {}
-        baidu {}
-        wandoujia {}
+        qh360 {
+            dimension 'arm'
+        }
+        baidu {
+            dimension 'arm'
+        }
+        wandoujia {
+            dimension 'arm'
+        }
         qq {
+            dimension 'versionCode'
         }
     }
 
     productFlavors.all {
         flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
     }
+
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
 
 
 }
@@ -66,9 +107,9 @@ ext {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
     compile "com.android.support:appcompat-v7:${android_need_version}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     //testCompile 'junit:junit:4.12'
@@ -88,7 +129,7 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit-mock:${retrofit_need_version}"
     //添加glide
 
-        compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 
 
 //    compile 'com.github.bumptech.glide:glide:4.6.1'
@@ -98,7 +139,7 @@ dependencies {
     compile 'com.esotericsoftware.kryo:kryo:2.24.0'
     //七牛推流
     compile files('libs/pldroid-media-streaming-2.3.0.jar')
-    compile 'com.qiniu:happy-dns:0.2.+'
+    compile 'com.qiniu:happy-dns:0.2.0'
     //compile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
     // releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
     //compile 'com.squareup.leakcanary:leakcanary-android:1.5'
@@ -108,12 +149,39 @@ dependencies {
                         * https://developer.android.google.cn/topic/libraries/support-library/rev-archive.html
                         * */
     compile 'com.google.code.gson:gson:2.8.5'
-    implementation files('libs/jcifs-1.3.19.jar')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compile files('libs/jcifs-1.3.19.jar')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     compile 'cn.magicwindow:MagicWindowSDK:4.2.181130'
 
+    compile 'org.greenrobot:greendao:3.2.2'
 
+    //页面检测
+    compile 'com.github.markzhai:blockcanary-android:1.5.0'
+
+//    debugImplementation "com.github.silencedut.fpsviewer:fpsviewer:latestVersion"
+//    releaseImplementation "com.github.silencedut.fpsviewer:fpsviewer-no-op:latestVersion"
+    compile('com.github.silencedut.fpsviewer:fpsviewer:0.8.2') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+//    releaseCompile "com.github.silencedut.fpsviewer:fpsviewer-no-op:latestVersion"
+
+
+
+//    compile('com.github.addappcn:android-pickers:1.0.1') {
+//        exclude group: 'com.android.support', module: 'support-v4'
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//        exclude group: 'com.android.support', module: 'appcompat-v7'
+//    }
+    compile 'com.android.support:multidex:1.0.0'
+//    testImplementation 'junit:junit:4.12'
+//
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+
+    //键盘
+    compile 'com.github.HelloVass:LeaveMessageBoardDemo:v0.1'
 }
 repositories {
     mavenCentral()

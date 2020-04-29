@@ -23,3 +23,16 @@ getRawY();:触摸点到屏幕的顶部的距离
 View中的x,y,tanslationX,tanslationY
 其中x,y是view的左上角坐标，traslationX,translationY是view左上角相对于父容器的偏移量
 其中view.getx() = left
+
+
+事件传递
+down事件
+从activity的dispatchTouchEvent传递给子类的dispatchTouchEvent，onInterceptTouchEvent
+如果dispatchTouchEvent,onInterceptTouchEvent都不拦截，一直传递到最下面一层
+如果最下面一层到onTouchEvent没有处理，则通过向上一层的onTouchEvent传递依此类推一直传递到最上面
+在activity中处理，之后的的move和up事件就不都是activity处理不往下传
+
+
+
+
+

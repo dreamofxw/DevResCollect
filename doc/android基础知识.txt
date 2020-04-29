@@ -123,7 +123,7 @@
 9 ActivityManagerService
 
 10 ANR
-    不需要root手机到处trace.txt的步骤
+    不需要root手机导出trace.txt的步骤
     $:adb shell
 	$:cd data/anr(此处不要直接cd data，因为有些目录没有权限，会报permission deny)
 	$:ls

@@ -12,8 +12,8 @@
         android:background="#ff0000"
         />
     <com.xwtiger.devrescollect.study.androidapi.event.MyLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="100dp"
+        android:layout_height="400dp"
         android:orientation="vertical"
         android:background="#50000000"
         >

@@ -2,13 +2,32 @@
 <layer-list
   xmlns:android="http://schemas.android.com/apk/res/android">
     <!--<item  android:drawable="@drawable/welcome_android" />-->
-    <item  android:drawable="@drawable/splash_fff" />
+<!--    <item  android:drawable="@drawable/splash_fff" />-->
+
+    <item
+        >
+        <shape>
+            <solid android:color="#fff"></solid>
+
+        </shape>
+
+    </item>
     <!--<item  android:height="900px" android:gravity="bottom">-->
         <!--<bitmap android:gravity="center_horizontal" android:src="@mipmap/slogan" />-->
     <!--</item>-->
 
-    <item   android:gravity="top" android:top="50dp">
-        <bitmap android:gravity="top" android:src="@drawable/slogan" />
+<!--    <item   android:height="@dimen/y190" android:gravity="bottom"-->
+<!--        >-->
+<!--        <shape-->
+<!--            android:shape="rectangle">-->
+<!--            <solid android:color="#0f0"></solid>-->
+
+<!--        </shape>-->
+<!--    </item>-->
+
+    <item   android:height="@dimen/y190" android:gravity="bottom"
+        >
+        <bitmap android:gravity="center" android:src="@drawable/slogan" />
     </item>
     <!--<item android:top="200px">-->
         <!--<bitmap android:gravity="center|top" android:src="@mipmap/welcome_android_slogan" />-->

@@ -7,19 +7,33 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.StrictMode;
+import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 //import com.bumptech.glide.annotation.GlideModule;
+import com.github.moduth.blockcanary.BlockCanary;
 import com.qiniu.pili.droid.streaming.StreamingEnv;
+import com.silencedut.fpsviewer.FpsViewer;
 import com.xwtiger.devrescollect.statistics.YouShuStatistics;
+import com.xwtiger.devrescollect.view.AppBlockCanaryContext;
+
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 
 /**
  * Created by Busap-112 on 2018/1/9.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
     public String tag = "MyApplicationLog";
 
@@ -40,6 +54,10 @@ public class MyApplication extends Application {
                     .penaltyLog()
                     .build());
         }
+
+
+        BlockCanary.install(this, new AppBlockCanaryContext()).start();
+
         //YouShuStatistics.getInstance().startCheck();
         StreamingEnv.init(getApplicationContext());
 
@@ -55,6 +73,9 @@ public class MyApplication extends Application {
         int a = 4004000;
         Log.d("testversioncode", "onCreate: a="+a);
         Log.d("testversioncode", "onCreate: a="+Integer.MAX_VALUE);
+
+        FpsViewer.getViewer().initViewer(this,null);
+
 
     }
 
@@ -88,6 +109,37 @@ public class MyApplication extends Application {
         SharedPreferences savecode = context.getSharedPreferences("savecode", Context.MODE_PRIVATE);
         int versioncode = savecode.getInt("versioncode",0);
         return versioncode;
+    }
+
+
+    public static void handleSSLHandshake() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+
+                @Override
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
+            }};
+
+            SSLContext sc = SSLContext.getInstance("TLS");
+            // trustAllCerts信任所有的证书
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+        } catch (Exception ignored) {
+        }
     }
 
 

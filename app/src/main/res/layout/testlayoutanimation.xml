@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.xwtiger.devrescollect.view.MarqueeText
+        android:id="@+id/tv_livepullstream_notice"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y60"
+        android:textSize="@dimen/y26"
+        android:textColor="#FFCF8B1B"
+        android:layout_marginLeft="@dimen/x58"
+        android:text="系统消息：欢迎来到有书直播间，欢迎来到有书直播间欢迎来到有书直播间欢迎来到有书直播间"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+
+        >
+    </com.xwtiger.devrescollect.view.MarqueeText>
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+
+
+        ></EditText>
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/tv_testdialog"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="testdialog"
+        android:background="#f00"
+        android:gravity="center"
+        android:visibility="gone"
+        ></TextView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview"
+        android:layoutAnimation="@anim/testlayoutanmation"
+        android:visibility="gone"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

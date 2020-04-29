@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    >
+
+
+    <com.xwtiger.devrescollect.view.TestView
+        android:id="@+id/rl_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_container1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x300">
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x200"
+                android:background="#f00"
+                android:text="tv1"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x200"
+                android:background="#f00"
+                android:text="tv2"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:textColor="#ffffff"
+                />
+
+        </RelativeLayout>
+
+    </com.xwtiger.devrescollect.view.TestView>
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x200"
+        android:background="#f00"
+        android:text="tv2"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:layout_centerInParent="true"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y500"
+        android:layout_marginTop="@dimen/x100"
+        android:background="#00f"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/tv_animation"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:text="动画"
+            android:gravity="center"
+            android:background="#f00"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_testthread"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x200"
+        android:text="testthread"
+        android:gravity="center"
+        android:background="#f00"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rl_top"
+        android:layout_marginTop="@dimen/y100"
+        android:visibility="gone"
+        />
+    
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        >
+
+
+        <ImageView
+            android:id="@+id/iv_third"
+            android:layout_width="@dimen/x263"
+            android:layout_height="@dimen/y377"
+            android:background="#00f"
+            android:visibility="gone"
+            >
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/iv_second"
+            android:layout_width="@dimen/x263"
+            android:layout_height="@dimen/y377"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            >
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/iv_first"
+            android:layout_width="@dimen/x263"
+            android:layout_height="@dimen/y377"
+            android:visibility="visible"
+            android:scaleType="fitXY"
+            >
+        </ImageView>
+
+    </RelativeLayout>
+    
+
+
+
+    <TextView
+        android:id="@+id/tv_switch"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/y100"
+        android:text="开关"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y100"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        >
+
+    </TextView>
+    
+</RelativeLayout>

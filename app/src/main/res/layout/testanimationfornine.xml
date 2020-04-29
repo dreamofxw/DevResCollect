@@ -21,7 +21,7 @@
             <ImageView
                 android:layout_width="@dimen/x150"
                 android:layout_height="@dimen/x150"
-                android:background="#f00"
+                android:background="@drawable/tag_qinzi"
                 android:id="@+id/iv1"
                 />
             <ImageView
