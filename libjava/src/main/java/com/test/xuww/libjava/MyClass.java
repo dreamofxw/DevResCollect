@@ -3,6 +3,7 @@ package com.test.xuww.libjava;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.regex.Matcher;
 
 public class MyClass {
 
@@ -10,8 +11,12 @@ public class MyClass {
 
 
     public static void main(String[] args) {
-        String str = "5.09.0";
-        System.out.println(str.replaceAll("\\.",""));
+//        String str = "5.09.0";
+//        System.out.println(str.replaceAll("\\.",""));
+
+
+
+
     }
 
 

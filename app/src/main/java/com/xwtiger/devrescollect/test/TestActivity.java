@@ -1,6 +1,8 @@
 package com.xwtiger.devrescollect.test;
 
 import android.Manifest;
+import android.accessibilityservice.AccessibilityService;
+import android.accounts.Account;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +31,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -70,6 +73,8 @@ import com.xwtiger.devrescollect.utils.PermissionChecker;
 import com.xwtiger.devrescollect.view.TestDialog;
 import com.xwtiger.devrescollect.view.TestPopuwindow;
 
+import junit.framework.Test;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,6 +84,8 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.Request;
 import rx.Observable;
@@ -336,6 +343,28 @@ public class TestActivity extends BaseActivity {
         }else{
             Log.d("pringstr", "onCreate:空 str3="+str3);
         }
+
+
+
+        String data = "#在抖音，记录美好生活#这大概就是冰http://jira.youshu.cc:9080/secure/Dashboard.jspa 复制此链接，打开【抖音短视频】，直接观看视频！";
+        Log.d("testurl", "onCreate: data="+data);
+//        Matcher matcher = TestRegexForUrl.WEB_URL.matcher(data);
+//        if (matcher.find()){
+//            Log.d("testurl", "onCreate: url="+matcher.group());
+//        }
+
+
+        Pattern pattern = Pattern.compile("https?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
+        Matcher matcher = pattern.matcher(data);
+        if (matcher.find()) {
+            Log.d("testurl", "onCreate: 位置="+"matched form " + matcher.start() + " to " + matcher.end());
+            Log.d("testurl", "onCreate:substring "+data.substring(matcher.start(),matcher.end()));
+
+            String group = matcher.group();
+            Log.d("testurl", "onCreate: group="+group);
+        }
+
+
 
     }
 
