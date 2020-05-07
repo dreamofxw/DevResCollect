@@ -97,28 +97,7 @@ public class ApiFramework {
     }
 
 
-    /**
-     *
-     * @param context
-     */
-    public void get(Context context){
-
-        //
-        context.getResources().get
-        NotificationManager notificationManager= (NotificationManager) context.getSystemService();
-
-    }
-
-    /**
-     *
-     * @param context
-     */
-    public void get(Context context){
-
-        //
-        NotificationManager notificationManager= (NotificationManager) context.getSystemService();
-
-    }
+    
 
 
 
