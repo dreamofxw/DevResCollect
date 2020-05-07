@@ -665,7 +665,7 @@ public class TestActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_null:
-                DBPresenter.deleteObj();
+                //DBPresenter.deleteObj();
                 break;
             case R.id.tv_get:
                 DBPresenter.get();
