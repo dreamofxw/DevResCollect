@@ -24,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         mContext = this;
         TAG = this.getClass().getSimpleName();
         com.xwtiger.devrescollect.ActivityManager.getInstance().addActivity(this);
+
     }
 
     protected void init(){

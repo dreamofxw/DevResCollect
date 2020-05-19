@@ -7,3 +7,15 @@ Windows系统默认下载到：C:\Users\(用户名)\.gradle\caches\modules-2\fil
 
 Mac系统默认下载到：/Users/(用户名)/.gradle/caches/modules-2/files-2.1
 另外，在这个目录下，需要将依赖库对应上，比如上面的
+
+3，内置存储：
+  Context.getFileDir()：/data/data/应用包名/files/
+  Context.getCacheDir()：/data/data/应用包名/cache/
+  内置存储读写不需要配置任何权限。
+
+  外置sd卡：
+  Context.getExternalFilesDir()：SDCard/Android/data/应用包名/files/
+  Context.getExternalCacheDir()：SDCard/Android/data/应用包名/cache/
+  API<19需要配置权限，API>=19不需要配置权限
+  即对于配置了读写权限的app，使用"SDCard/Android/data/应用包名/"读写操作时，4.4系统以下因为配置了权限而能正常读写，4.4及以上系统因为不需要权限亦能正常读写。但是为了不配置多余的权限，建议如下写：
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"

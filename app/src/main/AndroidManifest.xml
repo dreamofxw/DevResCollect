@@ -21,6 +21,7 @@
 
 
 
+
     <!--    魔窗-->
     <!-- 连接互联网Internet权限 -->
     <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
@@ -41,7 +42,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppThemeReading"
         tools:replace="android:allowBackup,icon,theme,label"
-
         >
 
         <activity android:name="com.xwtiger.devrescollect.act.ActivityFromWeb">
@@ -156,7 +156,9 @@
             <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name="com.xwtiger.devrescollect.test.TestTextViewActivity">
+        <activity android:name="com.xwtiger.devrescollect.test.TestTextViewActivity"
+            android:exported="true"
+            >
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
 

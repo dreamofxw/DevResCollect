@@ -1,0 +1,5 @@
+
+1，dos默认编码：gbk
+2,android 默认编码：utf-8
+3,sublime 默认设置为：utf-8
+4,notepad++:utf-8

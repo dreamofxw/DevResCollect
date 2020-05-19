@@ -11,16 +11,13 @@ import android.view.WindowManager;
 
 public class ApiFramework {
 
-
     /**
      * activitymanager相关
      * @param context
      */
     public void getActivityManager(Context context){
-
         //ActivityManager
         ActivityManager systemService = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-
 
     }
 
@@ -34,7 +31,6 @@ public class ApiFramework {
         //
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 
-
     }
 
 
@@ -46,7 +42,6 @@ public class ApiFramework {
 
         //
         LayoutInflater windowManager = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
 
 
@@ -55,7 +50,6 @@ public class ApiFramework {
      * @param context
      */
     public void getLocationManager(Context context){
-
         //
         LocationManager locationManager= (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
@@ -67,7 +61,6 @@ public class ApiFramework {
      * @param context
      */
     public void getNotificationManager(Context context){
-
         //
         NotificationManager notificationManager= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -79,7 +72,6 @@ public class ApiFramework {
      * @param context
      */
     public void getTelephonyManager(Context context){
-
         //
         TelephonyManager telephonyManager= (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
@@ -91,9 +83,9 @@ public class ApiFramework {
      * @param context
      */
     public void getPackageManager(Context context){
-
         //
         PackageManager packageManager = context.getPackageManager();
+
     }
 
 
