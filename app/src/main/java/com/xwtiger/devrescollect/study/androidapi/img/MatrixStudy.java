@@ -1,5 +1,6 @@
 package com.xwtiger.devrescollect.study.androidapi.img;
 
+import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -12,6 +13,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.xwtiger.devrescollect.R;
@@ -59,7 +61,7 @@ public class MatrixStudy {
                 (int) (baseBitmap.getWidth() * x), baseBitmap.getConfig());
         Canvas canvas = new Canvas(afterBitmap);
 
-        canvas.drawColor(Color.parseColor("#ff0000"));
+        //canvas.drawColor(Color.parseColor("#ff0000"));
         // 初始化Matrix对象
         Matrix matrix = new Matrix();
         // 根据传入的参数设置缩放比例
@@ -123,6 +125,36 @@ public class MatrixStudy {
     }
 
 
+
+    public static void testMatix(ImageView iv,float x,float y){
+        Bitmap baseBitmap = BitmapFactory.decodeResource(iv.getResources(), R.mipmap.icon_exchangegold_bg);
+        iv.setImageBitmap(baseBitmap);
+
+         Matrix matrix = new Matrix();
+        matrix.postScale(0.5f,0.5f);
+        iv.setImageMatrix(matrix);
+        int new_width = baseBitmap.getWidth() ;
+        int new_height = baseBitmap.getHeight() ;
+        Log.d("testmatrix", "testMatix: baseBitmap.getWidth()="+new_width);
+        Log.d("testmatrix", "testMatix: baseBitmap.getHeight()="+new_height);
+        Bitmap bitmapnew = Bitmap.createBitmap(baseBitmap, 0, 0, new_width, new_height, matrix, false);
+        iv.setImageBitmap(bitmapnew);
+
+//        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0.2f,1f);
+//        valueAnimator.setDuration(30000);
+//        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animation) {
+//                Log.d("testmatrix", "onAnimationUpdate: "+animation.getAnimatedValue());
+//                Matrix matrix = new Matrix();
+//                matrix.reset();
+//                matrix.setTranslate((float)animation.getAnimatedValue(),(float)animation.getAnimatedValue());
+//                iv.setImageMatrix(matrix);
+//            }
+//        });
+//        valueAnimator.start();
+
+    }
 
 
 

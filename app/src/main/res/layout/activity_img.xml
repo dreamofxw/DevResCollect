@@ -31,12 +31,14 @@
         android:layout_below="@id/ll_option"
         />
 
-    <ImageView
+    <!--icon_exchangegold_bg-->
+    <com.xwtiger.devrescollect.study.androidapi.img.view.MovingImageView
         android:id="@+id/iv_zi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/x300"
+        android:layout_height="@dimen/x300"
         android:layout_below="@id/iv_fu"
         android:layout_marginTop="10dp"
+        android:src="@mipmap/ic_launcher"
         />
 
 

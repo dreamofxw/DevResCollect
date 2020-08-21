@@ -1,5 +1,6 @@
 package com.test.xuww.libjava;
 
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -7,17 +8,25 @@ import java.util.regex.Matcher;
 
 public class MyClass {
 
-
-
-
     public static void main(String[] args) {
-//        String str = "5.09.0";
-//        System.out.println(str.replaceAll("\\.",""));
-
-
+        try {
+            TestBean testBean = new TestBean();
+            testBean.setAge(12);
+            Field age = TestBean.class.getDeclaredField("age");
+            age.setAccessible(true);
+            int anInt = age.getInt(testBean);
+            System.out.println("anint ="+anInt);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
 
     }
+
+
+
 
 
     @Override

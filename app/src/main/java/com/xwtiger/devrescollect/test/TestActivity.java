@@ -365,7 +365,7 @@ public class TestActivity extends BaseActivity {
         }
 
 
-        getResources().getConfiguration().screenLayout
+
 
 
     }

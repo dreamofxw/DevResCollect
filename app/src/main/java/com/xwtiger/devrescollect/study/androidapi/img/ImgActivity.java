@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.xwtiger.devrescollect.R;
+import com.xwtiger.devrescollect.study.androidapi.img.view.MovingImageView;
 
 /**
  *
@@ -20,7 +21,7 @@ public class ImgActivity extends Activity implements View.OnClickListener{
 
     private Button btn_translate;
     private Button btn_scale;
-    private ImageView iv_dest;
+    private MovingImageView iv_dest;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class ImgActivity extends Activity implements View.OnClickListener{
 
         btn_translate = (Button) findViewById(R.id.btn_translate);
         btn_scale = (Button) findViewById(R.id.btn_scale);
-        iv_dest = (ImageView) findViewById(R.id.iv_zi);
+        iv_dest = (MovingImageView) findViewById(R.id.iv_zi);
 
         btn_translate.setOnClickListener(this);
         btn_scale.setOnClickListener(this);
@@ -40,7 +41,9 @@ public class ImgActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_translate:
-                MatrixStudy.bitmapScale(iv_dest,0.5f,0.5f);
+                //MatrixStudy.bitmapScale(iv_dest,2f,2f);
+                //MatrixStudy.testMatix(iv_dest,2f,2f);
+                iv_dest.start();
                 break;
             case R.id.btn_scale:
 

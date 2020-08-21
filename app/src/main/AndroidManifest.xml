@@ -65,11 +65,11 @@
         <activity android:name="com.xwtiger.devrescollect.test.TestActivity"
             android:theme="@style/Splash"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
 
@@ -272,6 +272,26 @@
 
         </activity>
 
+        <activity android:name="com.xwtiger.devrescollect.TestRxActivity"
+            >
+<!--            <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
+
+
+        <activity android:name="com.xwtiger.devrescollect.study.androidapi.img.ImgActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
             <service android:name="com.xwtiger.devrescollect.study.androidapi.service.TestService"
                 >
