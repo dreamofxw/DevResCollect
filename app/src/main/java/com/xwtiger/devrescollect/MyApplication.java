@@ -55,8 +55,8 @@ public class MyApplication extends MultiDexApplication {
                     .build());
         }
 
-
-        BlockCanary.install(this, new AppBlockCanaryContext()).start();
+        //检查卡顿
+        //BlockCanary.install(this, new AppBlockCanaryContext()).start();
 
         //YouShuStatistics.getInstance().startCheck();
         StreamingEnv.init(getApplicationContext());
@@ -74,7 +74,7 @@ public class MyApplication extends MultiDexApplication {
         Log.d("testversioncode", "onCreate: a="+a);
         Log.d("testversioncode", "onCreate: a="+Integer.MAX_VALUE);
 
-        FpsViewer.getViewer().initViewer(this,null);
+        //FpsViewer.getViewer().initViewer(this,null);
 
 
     }

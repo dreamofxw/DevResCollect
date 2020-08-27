@@ -9,20 +9,46 @@ import java.util.regex.Matcher;
 public class MyClass {
 
     public static void main(String[] args) {
-        try {
-            TestBean testBean = new TestBean();
-            testBean.setAge(12);
-            Field age = TestBean.class.getDeclaredField("age");
-            age.setAccessible(true);
-            int anInt = age.getInt(testBean);
-            System.out.println("anint ="+anInt);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+//        try {
+//            TestBean testBean = new TestBean();
+//            testBean.setAge(12);
+//            Field age = TestBean.class.getDeclaredField("age");
+//            age.setAccessible(true);
+//            int anInt = age.getInt(testBean);
+//            System.out.println("anint ="+anInt);
+//        } catch (NoSuchFieldException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+            testYu();
+
+    }
+    
+    
+    public static void testYu(){
+        
+        if(test1()&&test2()){
+            System.out.println("&&");
         }
+        System.out.println("-----------------------");
+        if(test1()||test2()){
+            System.out.println("||");
+        }
+        
+    }
+    
+    public static boolean test1(){
+        TestBean testBean =null;
+        System.out.println("test1");
+        return (testBean !=null&&testBean.age==10);
+    }
 
+    public static boolean test2(){
 
+        System.out.println("test2");
+
+        return true;
     }
 
 

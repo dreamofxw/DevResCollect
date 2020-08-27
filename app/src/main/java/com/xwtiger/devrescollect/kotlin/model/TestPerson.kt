@@ -7,4 +7,13 @@ package com.xwtiger.devrescollect.kotlin.model
  */
 
 object TestPerson {
+
+    public fun test():String{
+        System.out.println("test kotlin")
+        return "haha"
+    }
+
+    public fun test2():String?{
+       return "test222"
+    }
 }

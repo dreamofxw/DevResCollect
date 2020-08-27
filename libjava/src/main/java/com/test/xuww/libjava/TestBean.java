@@ -8,7 +8,7 @@ package com.test.xuww.libjava;
 
 public class TestBean {
 
-    private int age = 10;
+    public int age = 10;
     private String name = "xww";
 
 
