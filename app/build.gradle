@@ -182,6 +182,9 @@ dependencies {
 
     //键盘
     compile 'com.github.HelloVass:LeaveMessageBoardDemo:v0.1'
+
+
+    compile 'com.github.iammert:ProgressLayout:a2ac196500'
 }
 repositories {
     mavenCentral()

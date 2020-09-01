@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<!--    android:background="@drawable/bg_progress"-->
+    <com.xwtiger.devrescollect.view.progressview.ProgressLayout
+        android:id="@+id/progressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100"
+        app:maxProgress="10"
+        app:autoProgress="true"
+        app:emptyColor="#888888"
+        app:loadedColor ="#55ff0000"
+        android:layout_centerVertical="true"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hahah"
+            android:textColor="@android:color/white"
+            android:layout_centerVertical="true"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="121212"
+            android:textColor="@android:color/white"
+            android:layout_centerInParent="true"
+            >
+        </TextView>
+    </com.xwtiger.devrescollect.view.progressview.ProgressLayout>>
+
+</RelativeLayout>

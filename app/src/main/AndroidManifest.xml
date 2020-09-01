@@ -294,6 +294,16 @@
 
         <activity android:name="com.xwtiger.devrescollect.kotlin.TestKotlinActivity"
             >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
+
+        <activity android:name="com.xwtiger.devrescollect.test.TestProgressActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
