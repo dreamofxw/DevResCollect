@@ -1,16 +1,21 @@
 package com.xwtiger.devrescollect.test;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.xwtiger.devrescollect.MainActivity;
 import com.xwtiger.devrescollect.R;
 import com.xwtiger.devrescollect.base.BaseActivity;
 import com.xwtiger.devrescollect.db.TestDaoManage;
@@ -132,7 +137,25 @@ public class TestDbActivity extends BaseActivity {
     }
 
 
-
+//    private void requestMyPermissions() {
+//
+//        if (ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            //没有授权，编写申请权限代码
+//            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+//        } else {
+//            Log.d(TAG, "requestMyPermissions: 有写SD权限");
+//        }
+//        if (ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.READ_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            //没有授权，编写申请权限代码
+//            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+//        } else {
+//            Log.d(TAG, "requestMyPermissions: 有读SD权限");
+//        }
+//    }
 
 
 

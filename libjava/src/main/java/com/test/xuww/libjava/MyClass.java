@@ -3,8 +3,11 @@ package com.test.xuww.libjava;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MyClass {
 
@@ -21,8 +24,55 @@ public class MyClass {
 //        } catch (IllegalAccessException e) {
 //            e.printStackTrace();
 //        }
-            testYu();
+            //testYu();
 
+//        Map<String,Object> map = new HashMap<>();
+//        map.put("str1",true);
+//        map.put("2",null);
+//        System.out.println(map);
+//
+//        System.out.println("result="+map.get("str1"));
+//        System.out.println("result="+map.get("str2"));
+
+//        String src = "   ad     \r\n  \t  asdfasdf      123      0000      v ";
+//        String s = removeBlanks(src);
+//        System.out.println("s="+s);
+//        System.out.println("src="+src);
+        boolean b1 = false;
+        boolean b2 = true;
+
+        System.out.println(b1==b2);
+
+
+
+
+    }
+
+
+    public static String removeBlanks(String content) {
+        if (content == null) {
+            return null;
+        }
+        StringBuilder buff = new StringBuilder();
+        buff.append(content);
+        for (int i = buff.length() - 1; i >= 0; i--) {
+            if (' ' == buff.charAt(i) || ('\n' == buff.charAt(i)) || ('\t' == buff.charAt(i))
+                    || ('\r' == buff.charAt(i))) {
+                buff.deleteCharAt(i);
+            }
+        }
+        return buff.toString();
+    }
+
+    public static String replaceBlank(String src) {
+        String dest = "";
+        if (src != null) {
+            Pattern pattern = Pattern.compile("\t|\r|\n|\\s*");
+            //Pattern pattern = Pattern.compile("\t|\r|\n\\\\s*");
+            Matcher matcher = pattern.matcher(src);
+            dest = matcher.replaceAll("");
+        }
+        return dest;
     }
     
     

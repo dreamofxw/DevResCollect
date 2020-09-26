@@ -22,18 +22,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Animatable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.xwtiger.devrescollect.R;
@@ -115,9 +109,10 @@ public class ProgressLayout extends RelativeLayout implements Animatable {
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
     int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.x30);
+    int strokewidth = getResources().getDimensionPixelSize(R.dimen.x5);
     float progressPercent = currentProgress / (maxProgress + 0f);
     LinearGradient mProgressBgGradient = new LinearGradient(0, 0, mWidth, 0,
-            new int[]{ Color.parseColor("#ff0000"),  Color.parseColor("#0000ff")},
+            new int[]{ Color.parseColor("#00ff0000"),  Color.parseColor("#0000ff")},
             new float[]{progressPercent, progressPercent + 0.001f},
             Shader.TileMode.CLAMP
     );
@@ -126,7 +121,8 @@ public class ProgressLayout extends RelativeLayout implements Animatable {
 
     //canvas.drawRoundRect(0, 0, mWidth, mHeight,dimensionPixelSize,dimensionPixelSize,paintProgressEmpty);//drawRect
 //    Log.d("testdraw", "onDraw: mWidth="+mWidth+",mHeight="+mHeight+",currentProgress="+currentProgress+",maxProgress="+maxProgress+",progressPercent="+progressPercent);
-    canvas.drawRoundRect(0, 0, mWidth, mHeight, dimensionPixelSize, dimensionPixelSize, paintProgressEmpty);
+    //canvas.drawRoundRect(0, 0, mWidth, mHeight, dimensionPixelSize, dimensionPixelSize, paintProgressEmpty);
+    canvas.drawRoundRect(strokewidth, strokewidth, mWidth-strokewidth, mHeight-strokewidth, dimensionPixelSize, dimensionPixelSize, paintProgressEmpty);
 
 
 
@@ -139,32 +135,11 @@ public class ProgressLayout extends RelativeLayout implements Animatable {
   }
 
 
-  @Override
-  protected void dispatchDraw(Canvas canvas) {
-    Log.d("testprogresslayout", "dispatchDraw: ------------");
-//    int width = getWidth();
-//    int height = getHeight();
-//    int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.x30);
-//    int topLeftRadius = dimensionPixelSize;
-//    int topRightRadius = dimensionPixelSize;
-//    int bottomLeftRadius = dimensionPixelSize;
-//    int bottomRightRadius = dimensionPixelSize;
-//    Path path = new Path();
-//    path.moveTo(0, dimensionPixelSize);
-//    path.arcTo(new RectF(0, 0, topLeftRadius * 2, topLeftRadius * 2), -180, 90);
-//    path.lineTo(width - topRightRadius, 0);
-//    path.arcTo(new RectF(width - 2 * topRightRadius, 0, width, topRightRadius * 2), -90, 90);
-//    path.lineTo(width, height - bottomRightRadius);
-//    path.arcTo(new RectF(width - 2 * bottomRightRadius, height - 2 * bottomRightRadius, width, height), 0, 90);
-//    path.lineTo(bottomLeftRadius, height);
-//    path.arcTo(new RectF(0, height - 2 * bottomLeftRadius, bottomLeftRadius * 2, height), 90, 90);
-//    path.close();
-//    canvas.clipPath(path);
-    super.dispatchDraw(canvas);
-
-
-
-  }
+//  @Override
+//  protected void dispatchDraw(Canvas canvas) {
+//    super.dispatchDraw(canvas);
+//
+//  }
 
   private void init(Context context, AttributeSet attrs) {
     setWillNotDraw(false);
@@ -235,7 +210,7 @@ public class ProgressLayout extends RelativeLayout implements Animatable {
           stop();
         } else {
           postInvalidate();
-          currentProgress += 1;
+          currentProgress += 10;
           if (progressLayoutListener != null) {
             progressLayoutListener.onProgressChanged(currentProgress / 10);
           }
