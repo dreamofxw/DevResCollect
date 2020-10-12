@@ -1,5 +1,7 @@
 package com.xwtiger.devrescollect;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +47,14 @@ public class DEMO {
 			}
 		}
 
-		
+
 	}
-	
+
+	public static void logd(String tag,String content){
+		if(BuildConfig.DEBUG){
+			Log.d(tag, content);
+		}
+	}
 	
 	static void p(){
 		for (int i = 0; i < configs.size(); i++) {

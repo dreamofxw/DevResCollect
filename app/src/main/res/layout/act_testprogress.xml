@@ -50,7 +50,7 @@
         android:layout_height="@dimen/y100"
         android:layout_marginLeft="@dimen/x100"
         android:layout_marginRight="@dimen/x100"
-        app:maxProgress="100"
+        app:maxProgress="10"
         app:autoProgress="true"
         app:emptyColor="#888888"
         app:loadedColor ="#0000ff"

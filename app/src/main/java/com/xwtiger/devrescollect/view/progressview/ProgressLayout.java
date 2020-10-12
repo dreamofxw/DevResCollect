@@ -111,11 +111,20 @@ public class ProgressLayout extends RelativeLayout implements Animatable {
     int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.x30);
     int strokewidth = getResources().getDimensionPixelSize(R.dimen.x5);
     float progressPercent = currentProgress / (maxProgress + 0f);
+//    LinearGradient mProgressBgGradient = new LinearGradient(0, 0, mWidth, 0,
+//            new int[]{ Color.parseColor("#00ff0000"),  Color.parseColor("#ff0000")},
+//            new float[]{progressPercent, progressPercent + 0.001f},
+//            Shader.TileMode.CLAMP
+//    );
+
     LinearGradient mProgressBgGradient = new LinearGradient(0, 0, mWidth, 0,
-            new int[]{ Color.parseColor("#00ff0000"),  Color.parseColor("#0000ff")},
+            new int[]{ Color.parseColor("#00ff0000"),  Color.parseColor("#ff0000")},
             new float[]{progressPercent, progressPercent + 0.001f},
             Shader.TileMode.CLAMP
     );
+
+
+
     //paintProgressEmpty.setColor(0xff0000);
     paintProgressEmpty.setShader(mProgressBgGradient);
 

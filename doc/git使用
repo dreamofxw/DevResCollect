@@ -5,9 +5,9 @@ git branch 查看本地分支
 git branch -a 查看所有分支
 git branch -r 查看远程分支 
 
-git checkout 分支名：切换分支
+git checkout 分支名  (      ：切换分支)
 
-git branch 分支名：如果分支不存在则创建
+git branch 分支名    ：如果分支不存在则创建
 删除本地的bug_xzx分支
 git branch -d bug_xzx
 it branch -D bug_xzx(没有合并的分支强行删除)

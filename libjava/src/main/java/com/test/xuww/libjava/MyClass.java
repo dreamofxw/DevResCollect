@@ -1,10 +1,11 @@
 package com.test.xuww.libjava;
 
-import java.lang.reflect.Field;
+import com.test.xuww.libjava.testannotation.HelloServiceCgLib;
+import com.test.xuww.libjava.testannotation.IListener;
+import com.test.xuww.libjava.testannotation.LogUtils;
+
+import java.lang.reflect.Proxy;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +31,6 @@ public class MyClass {
 //        map.put("str1",true);
 //        map.put("2",null);
 //        System.out.println(map);
-//
 //        System.out.println("result="+map.get("str1"));
 //        System.out.println("result="+map.get("str2"));
 
@@ -38,14 +38,30 @@ public class MyClass {
 //        String s = removeBlanks(src);
 //        System.out.println("s="+s);
 //        System.out.println("src="+src);
-        boolean b1 = false;
-        boolean b2 = true;
 
-        System.out.println(b1==b2);
+//        List<String>  list = new ArrayList<>();
+//        list.add("str1");
+//        list.add("str2");
+//        System.out.println(list);
+//        list.set(list.size()-1,"strnew");
+//        System.out.println(list);
+//        test1(null);
+        LogUtils logUtils = new LogUtils();
+        HelloServiceCgLib  helloServiceCgLib = new HelloServiceCgLib(logUtils);
+
+        IListener proxyHello = (IListener) Proxy.newProxyInstance(LogUtils.class.getClassLoader(), LogUtils.class.getInterfaces(), helloServiceCgLib);
+        proxyHello.logd(test42());
+
+    }
 
 
+    public static void test1( String params){
+        System.out.println("test1");
+    }
 
-
+    public static String test42(){
+        System.out.println("test2");
+        return "test2";
     }
 
 
