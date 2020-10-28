@@ -1,0 +1,288 @@
+kotlin常用语法
+1，判断是一个对象 用is
+eg:if(obj is String)
+
+2,var 定义可以修改的变量，val 定义不能修改的变量（类似java中的final）
+
+
+3, var a int? 表示a变量可以为空 
+   var p = Person(name,age)
+   var tempName = p?.name
+   var tempAge = p?.age
+
+
+4,?:类似三元表达式
+ var p = Person(name,page)
+ p?:
+
+
+5,使用 in 运算符来检测某个数字是否在指定区间内：
+
+
+6循环：
+倒叙
+fun testDown(){
+        for (x in 9 downTo 0 step 2) {
+        println(x)
+    }
+}
+
+顺序：
+fun teststep(){
+    for (x in 1..10 step 2) {
+    println(x)
+}
+
+
+7，
+eg:
+a?.run()
+ 
+//与java相同:
+if(a!=null){
+ a.run();
+}
+
+a!!.run()
+ 
+//与java相同: 
+if(a!=null){
+ a.run();
+}else{
+ throw new KotlinNullPointException();
+}
+
+8,? 可空类型
+
+9,?. 安全调用运算符
+
+10,?: Elvis运算符（null合并运算符 )   
+     如果?:左边的值不为空返回左边的值，如果为空返回右边的
+
+
+11,as? 安全转换运算符
+尝试把值转换成给定的类型，如果类型不合适就返回null
+
+println(test1 as? Test ?:"null obj")
+println(str as? Test ?:"null str")
+
+
+
+12,!! 非空断言
+"?"加在变量名后，系统在任何情况不会报它的空指针异常。
+"!!"加在变量名后，如果对象为null，那么系统一定会报异常！
+
+
+13,:: Kotlin 中 双冒号操作符 表示把一个方法当做一个参数，传递到另一个方法中进行使用，通俗的来讲就是引用一个方法。先来看一下例子：
+
+
+14,lateinit变量 :它告诉编译器，这个变量会被初始化，并且不会为null，但是在声明这里，我暂时还不知道什么时候会被初始化。
+
+
+15,lamada表达式
+
+1. 无参数的情况 ：
+    val/var 变量名 = { 操作的代码 }
+
+2. 有参数的情况
+val/var 变量名 : (参数的类型，参数类型，...) -> 返回值类型 = {参数1，参数2，... -> 操作参数的代码 }
+
+可等价于
+// 此种写法：即表达式的返回值类型会根据操作的代码自推导出来。
+val/var 变量名 = { 参数1 ： 类型，参数2 : 类型, ... -> 操作参数的代码 }
+
+3. lambda表达式作为函数中的参数的时候，这里举一个例子：
+fun test(a : Int, 参数名 : (参数1 ： 类型，参数2 : 类型, ... ) -> 表达式返回类型){
+    ...
+}
+
+
+16，kotlin基本数据类型
+	位宽度
+Double	64
+Float	32
+Long	64
+Int	32
+Short	16
+Byte	8
+
+ // 二进制类型，以0b开头
+ val b: Byte = 0b00001011
+
+ // 十六进制以0x开头
+  val h = 0xFF
+
+  在Kotlin中，是没有像Java中的int、float这样的基本数据类型的，所有的类型都是封装类型。在Java中，int的封装类型为Integer，而Kotlin中，只有Int。
+  在Kotlin中，==表示表值的大小，===表示比较对象地址
+
+  在Kotlin中，较小的类型并不是较大类型的子类型，所以不能直接隐式地将较小类型转换成较大类型。同样的，较大类型也不能隐式地转换为较小类型。
+
+
+17，
+
+return when (score) {
+       in 90..100 -> "A"
+       in 75 until 90 -> "B"
+       in 60 until 75 -> "C"
+       else -> "D"
+  }
+}
+
+..表示在某个区间，比如90..100表示90 到 100，包含 90 也包含 100。until也表示区间，但是包含起始不包含结尾，比如 75 until 90表示包含 75 但不包含 90
+
+打印角标
+fun main() {
+   val scores = arrayOf(97, 56, 49, 65, 75, 89, 66, 83, 77, 99)
+   for (index in scores.indices) {
+       println("第${index + 1}位的成绩为${scores[index]}")
+  }
+}
+
+
+18.
+函数的可用修饰符一般有internal、open、private、abstract，需要注意的是abstract为抽象方法声明，需要类也是抽象类，才可以使用，open一般在继承关系的父类中使用。
+
+19，内部类用关键字inner声明在另一个类的内部
+
+20
+class Anonymous {
+   fun testAnon() {
+       val a = object : Anon() {
+           override fun anony() {
+               println("This is a function of anonymous class")
+          }
+      }
+  }
+
+   abstract class Anon {
+       open abstract fun anony()
+  }
+}
+
+object : Anon() {}就称作匿名内部类
+
+
+21
+感觉是不是和内部类很像，但是，还是有区别的。在内部类中，我们可以直接访问外部类的变量和函数，在嵌套类中，我们访问外部类和访问其他类的方式一样，必须先创建一个外部类的对象，才能够访问外部类。但是有一点，我们可以访问外部类的私有变量。
+
+fun main() {
+   val nested = Outer.Nested()
+   nested.nested()
+}
+在外部创建嵌套类对象时，也和内部类是不一样的，使用的是Out.Nested()。
+
+
+22
+在Kotlin中，函数和类一样，默认是final型的，使用open关键字修饰的函数，是可以被重写（Override）的。
+
+23，
+接口默认是open的，因此不需要再open关键字修饰。
+
+interface KotlinIface {
+}
+
+24
+Kotlin中定义了一个仅包含数据的类，被称作数据类。
+数据类的声明方式为：
+data class ClassName(var/val param, ...)
+
+数据类型的copy()，顾名思义，就是对象拷贝，和克隆不一样的是，数据类的copy()可以拷贝并修改部分数据
+
+
+密封类其实比较简单，它的声明为：
+sealed class ClassName(val/var param
+
+
+25
+Kotlin枚举类
+枚举类的声明格式为：enum class ENUM_NAME{OBJ1, OBJ2, OBJ3, ...}
+
+
+26，
+对象是和类一个层级的，其语法声明为
+object ObjectName {}
+object修饰的对象声明，默认是单例的，也就是说，当你需要一个单例时，使用object是最优的选择，不需要再使用其他的单例生成模式，而且它的初始化是线程安全的。
+和类不同的是，对象声明是不需要和类一样创建它的对象，而且对象声明中是不能有伴生对象的，它的成员函数默认都是静态的，可以通过类.function()的方式直接调用。
+
+
+27
+伴生对象，它是Kotlin类中的一个对象声明，它和对象不同的是，它的使用需要借助类对象，顾名思义，创建类对象时，伴生对象也会被创建
+
+
+class KtCompObj {
+    companion object {
+    }
+}
+class KtCompObj {
+    companion object Com{
+        const val TAG = "KtCompObj"
+        fun print() {
+            println("This is companion object Com.")
+        }
+    }
+
+
+28
+ 对象表达式
+
+interface onClickEvent {
+	fun onClick()
+}
+ 
+val a = object : OnClickEvent {
+	override fun onClick() {
+    println("onclick event.")
+}
+
+
+29。
+
+高阶函数
+
+
+内联函数
+
+
+扩展函数：
+扩展函数可以在已有类中添加新的方法，不会对原类做修改，扩展函数定义形式：
+
+若扩展函数和成员函数一致，则使用该函数时，会优先使用成员函数。
+扩展属性只能被声明为 val。
+
+扩展的作用域
+通常扩展函数或属性定义在顶级包下:
+
+
+扩展属性允许定义在类或者kotlin文件中，不允许定义在函数中。初始化属性因为属性没有后端字段（backing field），所以不允许被初始化，只能由显式提供的 getter/setter 定义。
+
+当函数的最后一个参数是Lambda表达式时，可以将Lambda表达式放在函数参数括弧外面
+
+成员函数
+
+
+30
+在Kotlin中函数不仅可以作为变量，而且可以作为参数或返回值。
+
+
+Lambda表达式是函数类型的一个实例
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
