@@ -83,3 +83,6 @@ git stash apply stash@{index}
 git stash drop stash@{index}
 #删除全部暂存
 git stash clear
+
+查看日志
+git log --oneline --graph
