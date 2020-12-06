@@ -80,6 +80,7 @@ public class MyClass {
         return buff.toString();
     }
 
+
     public static String replaceBlank(String src) {
         String dest = "";
         if (src != null) {
@@ -111,8 +112,12 @@ public class MyClass {
     }
 
     public static boolean test2(){
-
         System.out.println("test2");
+        String str = "EA9891F9DD87CCA1363900BFF03E5B5467D7E8FCFE121E91639546C5C74E4C5B";
+
+        System.out.println(str.length());
+
+        System.out.print("hah");
 
         return true;
     }

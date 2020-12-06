@@ -550,7 +550,7 @@ public class TestJava extends TestUapte{
 //        new Thread(helloword).start();
 //        System.out.println("test");
 
-
+        System.out.println("print a message ........");
 
         
 

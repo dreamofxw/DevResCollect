@@ -33,6 +33,7 @@ public class MyFrameLayout extends FrameLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.d("testevent", "【省长】任务<" + Utils.actionToString(ev.getAction()) + "> : 需要分派");
         return super.dispatchTouchEvent(ev);
+
     }
 
     @Override
@@ -48,4 +49,7 @@ public class MyFrameLayout extends FrameLayout {
         Log.d("testevent", "【省长】任务<" + Utils.actionToString(ev.getAction()) + "> : 市长是个废物，下次再也不找你了，我自己来尝试一下。能解决？" + bo);
         return bo;
     }
+
+
+
 }
