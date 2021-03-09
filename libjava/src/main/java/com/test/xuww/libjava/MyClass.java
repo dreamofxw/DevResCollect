@@ -51,7 +51,7 @@ public class MyClass {
 
         IListener proxyHello = (IListener) Proxy.newProxyInstance(LogUtils.class.getClassLoader(), LogUtils.class.getInterfaces(), helloServiceCgLib);
         proxyHello.logd(test42());
-
+        System.out.println("hah");
     }
 
 
