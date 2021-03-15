@@ -204,7 +204,7 @@ class TestMain {
                 int num =0;
                 if(i-1>0){
                     //上面的行，左上，右上
-                    if()
+                    //if()
                 }
                 if(i+1<board.length){
                     //下面的行，左下，右下
@@ -241,7 +241,6 @@ class TestMain {
      *
      */
     public static void computerAround(int[][] arr,int position){
-        int row = arr.l
 
     }
 

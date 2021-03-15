@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +25,16 @@ public class MainClass {
 
 
 
-        test1();
+        //test1();
+
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNext()){
+            String next = scanner.next();
+            System.out.println("next ="+next);
+            if("eof".equals(next)){
+                break;
+            }
+        }
 
     }
 
