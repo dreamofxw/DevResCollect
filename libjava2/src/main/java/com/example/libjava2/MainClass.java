@@ -34,6 +34,7 @@ public class MainClass {
             if("eof".equals(next)){
                 break;
             }
+            scanner.next();
         }
 
     }
