@@ -4,9 +4,12 @@ import android.Manifest;
 import android.accessibilityservice.AccessibilityService;
 import android.accounts.Account;
 import android.content.ComponentName;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.UriMatcher;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -25,10 +28,15 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.os.SystemClock;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -81,7 +89,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
@@ -353,7 +365,6 @@ public class TestActivity extends BaseActivity {
 //            Log.d("testurl", "onCreate: url="+matcher.group());
 //        }
 
-
         Pattern pattern = Pattern.compile("https?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
         Matcher matcher = pattern.matcher(data);
         if (matcher.find()) {
@@ -367,7 +378,27 @@ public class TestActivity extends BaseActivity {
 
 
 
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode ==201 &&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+            for(int i=0;i<grantResults.length;i++){
+                if(grantResults[i] !=PackageManager.PERMISSION_GRANTED){
+                    Log.d("testphonenum", "onRequestPermissionsResult: 没有权限 i="+i);
+                    return;
+                }
+            }
+            String number = ContactsContract.CommonDataKinds.Phone.NUMBER;
+            Uri contentUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+            Cursor query = getContentResolver().query(contentUri, new String[]{number}, null, null, null);
+            while(query.moveToNext()){
+                String phonenum = query.getString(query.getColumnIndex(number));
+                Log.d("testphonenum", "onCreate:phonenum ="+phonenum);
+            }
+            query.close();
+        }
     }
 
     @Override
@@ -650,21 +681,27 @@ public class TestActivity extends BaseActivity {
 //                Intent intent = new Intent(this, TestAnimationActivity.class);
 //                startActivity(intent);
 
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+                        != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.READ_CONTACTS},201);
+                }else{
+
+                }
                 //压缩大小
 
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                            Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                        // 显示给用户的解释
-                    } else {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1111);
-                    }
-                } else {
-
-                    Intent intent = new Intent(Intent.ACTION_PICK, null);
-                    intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                    startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
-                }
+//                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                            Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//                        // 显示给用户的解释
+//                    } else {
+//                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1111);
+//                    }
+//                } else {
+//
+//                    Intent intent = new Intent(Intent.ACTION_PICK, null);
+//                    intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+//                    startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+//                }
                 break;
             case R.id.tv_null:
                 //DBPresenter.deleteObj();

@@ -55,7 +55,6 @@ public class MyLinearLayout extends LinearLayout {
         boolean bo = false;
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN :
-
                 bo = true;
               break;
             case MotionEvent.ACTION_MOVE:

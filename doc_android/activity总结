@@ -1,0 +1,30 @@
+
+1,生命周期
+
+
+2，启动流程
+
+4,launchMode
+a,standard标准
+b,singleTop,栈顶复用,栈顶有就复用，没有就创建新的
+c,SingleTask:栈内复用，会清除复用的栈的顶部
+d,SingleInstance:具有该模式的acitivity只能单独位于一个栈中
+
+5,activity所需的栈
+  a,默认情况activity所需要的栈为应用的包名；
+  b,activity在清单文件中通过参数TaskAffinity来设置所需要的栈
+  c,一般TaskAffinity和SingleTask模式一起使用
+
+6,Intent flag标记
+FLAG_ACTIVITY_NEW_TASK == SingleTask
+FLAG_ACTIVITY_SINGLE_TOP == singleTop
+FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS :这个标记的activity不会出现在历史activity列表中
+
+7，IntentFilter匹配规则
+  过滤信息有action,category,data
+  对于隐式Intent：
+  a,actiion必须设置
+  b,category可以设置也可以不设置
+  c,data,如果过滤规则中定义了
+  d,不含有Default这个category的activity是无法接收隐式Intent的
+  e,系统在调用startactivity的时候默认会在Intent上加上android.intent.category.DEFAULT这个category

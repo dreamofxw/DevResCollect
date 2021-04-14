@@ -1,0 +1,12 @@
+diff a/app/src/main/java/com/xwtiger/devrescollect/test/TestActivity.java b/app/src/main/java/com/xwtiger/devrescollect/test/TestActivity.java	(rejected hunks)
+@@ -376,7 +376,10 @@
+          }
+  
+  
+++<<<<<<< Updated upstream
+ +
+++=======
+++>>>>>>> Stashed changes
+  
+  
+      }

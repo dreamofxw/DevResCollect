@@ -83,6 +83,8 @@
     sleep :释放cpu执行权，不释放锁
 	wait:释放cpu执行权，释放锁；（和notify一起使用）；必需和同步代码块一起执行
 	yield:释放cpu执行权，不释放锁
+	如果能够帮助你记忆的话，可以简单认为和锁相关的方法都定义在Object类中
+	比如wait是object中的,sleep,yield是Thread中的
 	
 	线程池执行任务大致规则：
 	首先线程池中的线程没有达到核心线程的数量，就创建线程
@@ -154,5 +156,15 @@
    <? super B> 能对这个泛型做插入操作，而无法读
    <? extends B> 禁止做插入操作，只做读取
   
- 18
+ 18,java中classpath设置问题
+    用法: javac <options> <source files>
+     javac 类名的全路径+类名.java  (编译成class文件)
+     eg:javac  D:\code\DevResCollect\libjava2\src\main\jav
+    a\com\example\libjava2\AESUtils.java  :class生成和.java一个目录
+      或者cd到类在的目录然后javac 类名.java
+
+     java 包名+类名 （执行类的main函数）
+     eg: java com.example.libjava2.AESUtils ,在包名的上一个目录
+     ps:查找class文件路径是在当前目录+包名+class文件
+     所以这个当前目录就是包名的上个目录，然后执行上面的指令。
   

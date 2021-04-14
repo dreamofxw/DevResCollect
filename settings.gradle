@@ -1,1 +1,2 @@
 include ':app', ':testaarlibrary', ':libjava', ':lib'
+include ':libjava2'
